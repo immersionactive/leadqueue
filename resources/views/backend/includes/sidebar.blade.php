@@ -13,6 +13,17 @@
                 </a>
             </li>
 
+            <li class="nav-title">
+                TODO
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.client.index') }}">
+                    <i class="nav-icon far fa-user-circle"></i>
+                    Clients
+                </a>
+            </li>
+
             @if ($logged_in_user->isAdmin())
                 <li class="nav-title">
                     @lang('menus.backend.sidebar.system')
