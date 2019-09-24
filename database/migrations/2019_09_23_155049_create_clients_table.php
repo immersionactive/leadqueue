@@ -20,6 +20,7 @@ class CreateClientsTable extends Migration
             $table->text('notes');
             $table->boolean('is_active')->default(true);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

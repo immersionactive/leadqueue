@@ -45,7 +45,7 @@ class ClientController extends Controller
         $client = new Client();
         $client->name = $request->input('name');
         $client->is_active = !!$request->input('is_active');
-        $client->notes = $request->input('notes');
+        $client->notes = mb_strlen($request->input('notes')) ? $request->input('notes') : ''; // because the ConvertEmptyStringsToNull middleware breaks this otherwise
         
         $client->save();
 
@@ -76,7 +76,7 @@ class ClientController extends Controller
 
         $client->name = $request->input('name');
         $client->is_active = !!$request->input('is_active');
-        $client->notes = $request->input('notes');
+        $client->notes = mb_strlen($request->input('notes')) ? $request->input('notes') : ''; // because the ConvertEmptyStringsToNull middleware breaks this otherwise
 
         $client->save();
         
