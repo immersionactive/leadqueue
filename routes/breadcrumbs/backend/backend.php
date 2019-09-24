@@ -33,15 +33,18 @@ Breadcrumbs::for('admin.client.lead_source.index', function ($trail, Client $cli
 });
 
 Breadcrumbs::for('admin.client.lead_source.show', function ($trail, Client $client, LeadSource $lead_source) {
-    $trail->parent('admin.client.show', $client);
-    $trail->push('Lead Sources', route('admin.client.lead_source.index', $client));
-    $trail->push($lead_source->name, route('admin.client.lead_source.create', $client));
+    $trail->parent('admin.client.lead_source.index', $client);
+    $trail->push($lead_source->name, route('admin.client.lead_source.create', [$client, $lead_source]));
 });
 
 Breadcrumbs::for('admin.client.lead_source.create', function ($trail, Client $client) {
-    $trail->parent('admin.client.show', $client);
-    $trail->push('Lead Sources', route('admin.client.lead_source.index', $client));
+    $trail->parent('admin.client.lead_sources.index', $client);
     $trail->push('Create Lead Source', route('admin.client.lead_source.create', $client));
+});
+
+Breadcrumbs::for('admin.client.lead_source.edit', function ($trail, Client $client, LeadSource $lead_source) {
+    $trail->parent('admin.client.lead_source.show', $client, $lead_source);
+    $trail->push('Edit Lead Source', route('admin.client.lead_source.create', $client));
 });
 
 require __DIR__.'/auth.php';

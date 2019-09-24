@@ -8,8 +8,9 @@ use App\Http\Requests\Backend\StoreClientLeadSourceRequest;
 use App\Models\Client;
 use App\Models\LeadSource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
-class ClientLeadSourceController extends Controller
+class LeadSourceController extends Controller
 {
 
     // https://laravel.io/forum/how-to-properly-use-controller-middleware
@@ -54,6 +55,9 @@ class ClientLeadSourceController extends Controller
         
         $lead_source->save();
 
+        $user = auth()->user();
+        Log::info('User ' . $user->id . ' (' . $user->email . ') created lead source ' . $lead_source->id . ' (' . $lead_source->name . ') for client ' . $client->id . ' (' . $client->name . ')');
+
         return redirect()->route('admin.client.lead_source.show', [$client, $lead_source])->withFlashSuccess('Lead source created.');
 
     }
@@ -81,9 +85,16 @@ class ClientLeadSourceController extends Controller
     public function update(Request $request, Client $client, LeadSource $lead_source)
     {
 
-        // TODO
+        $lead_source->name = $request->input('name');
+        $lead_source->is_active = !!$request->input('is_active');
+        $lead_source->notes = mb_strlen($request->input('notes')) ? $request->input('notes') : ''; // because the ConvertEmptyStringsToNull middleware breaks this otherwise
+
+        $lead_source->save();
+
+        $user = auth()->user();
+        Log::info('User ' . $user->id . ' (' . $user->email . ') updated lead source ' . $lead_source->id . ' (' . $lead_source->name . ') for client ' . $client->id . ' (' . $client->name . ')');
         
-        return redirect()->route('admin.client.lead_source.show', $client, $lead_source)->withFlashSuccess('Lead source updated.');
+        return redirect()->route('admin.client.lead_source.show', [$client, $lead_source])->withFlashSuccess('Lead source updated.');
 
     }
 
@@ -91,6 +102,9 @@ class ClientLeadSourceController extends Controller
     {
         
         $lead_source->delete();
+
+        $user = auth()->user();
+        Log::info('User ' . $user->id . ' (' . $user->email . ') deleted lead source ' . $lead_source->id . ' (' . $lead_source->name . ') for client ' . $client->id . ' (' . $client->name . ')');
             
         return redirect()->route('admin.client.lead_source.index', $client)->withFlashSuccess('Lead source deleted.');
 

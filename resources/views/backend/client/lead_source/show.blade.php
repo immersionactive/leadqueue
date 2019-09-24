@@ -20,6 +20,16 @@
                     </h4>
                 </div>
 
+                <div class="col-sm-7 pull-right">
+                    
+                    <div class="btn-toolbar float-right" role="toolbar" aria-label="@lang('labels.general.toolbar_btn_groups')">
+                        @can('client.lead_source.edit', $client)
+                            <a href="{{ route('admin.client.lead_source.edit', [$client, $lead_source]) }}" class="btn btn-success ml-1" data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
+                        @endcan
+                    </div>
+
+                </div>
+
             </div>
 
             <div class="row mt-4">
@@ -30,7 +40,36 @@
                     <div class="tab-content">
                         <div class="tab-pane active" role="tabpanel" aria-expanded="true">
 
-                            <h1>TODO &ndash; show.blade.php</h1>
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <tbody>
+
+                                        {{-- Name --}}
+
+                                        <tr>
+                                            <th>Name</th>
+                                            <td>{{ $lead_source->name }}</td>
+                                        </tr>
+
+                                        {{-- Active --}}
+
+                                        <tr>
+                                            <th>Active</th>
+                                            <td>
+                                                @include('backend.includes.partials.yn-badge', ['active' => $lead_source->is_active])
+                                            </td>
+                                        </tr>
+
+                                        {{-- Notes --}}
+
+                                        <tr>
+                                            <th>Notes</th>
+                                            <td>{!! nl2br(e($lead_source->notes)) !!}</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
 
                         </div>
                     </div> <!-- .tab-content -->

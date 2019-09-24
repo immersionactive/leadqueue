@@ -8,4 +8,6 @@ Route::redirect('/', '/admin/dashboard', 301);
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::resource('client', 'ClientController');
-Route::resource('client.lead_source', 'ClientLeadSourceController');
+Route::resource('client.lead_source', 'LeadSourceController');
+
+Route::resource('client.lead_source.config', 'SourceConfigController')->only('edit');

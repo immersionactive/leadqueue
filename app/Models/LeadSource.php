@@ -15,4 +15,9 @@ class LeadSource extends Model
         return $this->belongsTo('App\Models\Client');
     }
 
+    public function source_config()
+    {
+        return $this->morphTo();
+    }
+
 }

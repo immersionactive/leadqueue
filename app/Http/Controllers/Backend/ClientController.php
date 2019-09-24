@@ -7,6 +7,7 @@ use App\Http\Requests\Backend\StoreClientRequest;
 use App\Http\Requests\Backend\UpdateClientRequest;
 use App\Models\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ClientController extends Controller
 {
@@ -49,6 +50,9 @@ class ClientController extends Controller
         
         $client->save();
 
+        $user = auth()->user();
+        Log::info('User ' . $user->id . ' (' . $user->email . ') created client ' . $client->id . ' (' . $client->name . ')');
+
         return redirect()->route('admin.client.show', $client)->withFlashSuccess('The client was successfully created.');
 
     }
@@ -79,6 +83,9 @@ class ClientController extends Controller
         $client->notes = mb_strlen($request->input('notes')) ? $request->input('notes') : ''; // because the ConvertEmptyStringsToNull middleware breaks this otherwise
 
         $client->save();
+
+        $user = auth()->user();
+        Log::info('User ' . $user->id . ' (' . $user->email . ') updated client ' . $client->id . ' (' . $client->name . ')');
         
         return redirect()->route('admin.client.show', $client)->withFlashSuccess('Client updated.');
 
@@ -87,7 +94,10 @@ class ClientController extends Controller
     public function destroy(Client $client)
     {
         
-        $client->delete();    
+        $client->delete();
+
+        $user = auth()->user();
+        Log::info('User ' . $user->id . ' (' . $user->email . ') deleted client ' . $client->id . ' (' . $client->name . ')');
             
         return redirect()->route('admin.client.index')->withFlashSuccess('Client deleted.');        
 
