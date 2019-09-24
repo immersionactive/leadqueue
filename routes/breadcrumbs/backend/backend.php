@@ -13,6 +13,11 @@ Breadcrumbs::for('admin.client.create', function ($trail) {
     $trail->push('Create Client', route('admin.client.create'));
 });
 
+Breadcrumbs::for('admin.client.show', function ($trail, $id) {
+    $trail->parent('admin.client.index');
+    $trail->push('View Client', route('admin.client.show', $id));
+});
+
 Breadcrumbs::for('admin.client.edit', function ($trail, $id) {
     $trail->parent('admin.client.index');
     $trail->push('Edit Client', route('admin.client.edit', $id));
