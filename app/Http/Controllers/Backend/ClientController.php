@@ -45,7 +45,8 @@ class ClientController extends Controller
         $client = new Client();
         $client->name = $request->input('name');
         $client->is_active = !!$request->input('is_active');
-        // $client->notes = $request->input('notes');
+        $client->notes = $request->input('notes');
+        
         $client->save();
 
         return redirect()->route('admin.client.index')->withFlashSuccess('The client was successfully created.');
@@ -75,7 +76,7 @@ class ClientController extends Controller
 
         $client->name = $request->input('name');
         $client->is_active = !!$request->input('is_active');
-        // $client->notes = $request->input('notes');
+        $client->notes = $request->input('notes');
 
         $client->save();
         

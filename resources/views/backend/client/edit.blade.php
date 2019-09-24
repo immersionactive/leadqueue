@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 
-@section('title', 'TODO')
+@section('title', 'Edit Client: ' . $client->name)
 
 @section('breadcrumb-links')
     {{-- @include('backend.client.includes.breadcrumb-links') --}}
@@ -55,7 +55,8 @@
 
                             {{ html()->label('Active')
                                 ->class('col-md-2 form-control-label')
-                                ->for('is_active') }}
+                                ->for('is_active')
+                            }}
 
                             <div class="col-md-10">
 
@@ -73,7 +74,24 @@
 
                             </div>
 
-                        </div>                        
+                        </div>
+
+                        {{-- Notes --}}
+
+                        <div class="form-group row">
+
+                            {{ html()->label('Notes')->class('col-md-2 form-control-label')->for('notes') }}
+
+                            <div class="col-md-10">
+
+                                {{ html()->textarea('notes')
+                                    ->class('form-control')
+                                    ->placeholder('Notes')
+                                }}
+
+                            </div>
+
+                        </div>
 
                     </div>
                 </div>

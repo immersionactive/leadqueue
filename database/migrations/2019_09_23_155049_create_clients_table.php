@@ -17,6 +17,7 @@ class CreateClientsTable extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->unique();
+            $table->text('notes');
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
