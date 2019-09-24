@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateWebflowSourceConfigsTable extends Migration
 {
+    
     /**
      * Run the migrations.
      *
@@ -34,4 +35,5 @@ class CreateWebflowSourceConfigsTable extends Migration
     {
         Schema::dropIfExists('webflow_source_configs');
     }
+
 }

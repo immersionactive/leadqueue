@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\LeadSourceTypeRegistry;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
@@ -26,6 +27,9 @@ class AppServiceProvider extends ServiceProvider
             // Load third party local aliases
             $loader->alias('Debugbar', \Barryvdh\Debugbar\Facade::class);
         }
+
+        $this->app->singleton(LeadSourceTypeRegistry::class);
+
     }
 
     /**
@@ -83,5 +87,8 @@ class AppServiceProvider extends ServiceProvider
         Blade::if('langrtl', function ($session_identifier = 'lang-rtl') {
             return session()->has($session_identifier);
         });
+
+        $this->app->make(LeadSourceTypeRegistry::class);
+
     }
 }

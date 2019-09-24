@@ -88,10 +88,11 @@
                                                                     Configure
                                                                 </button>
                                                                 <div class="dropdown-menu" aria-labelledby="userActions">
+                                                                    {{--
                                                                     @foreach (config('lead-drivers.sources') as $source)
                                                                         <a class="dropdown-item" href="#TODO">{{ $source['name'] }}</a>
-                                                                        {{-- <a href="{{ route('admin.auth.user.change-password', $user) }}" class="dropdown-item">@lang('buttons.backend.access.users.change_password')</a> --}}
                                                                     @endforeach
+                                                                    --}}
                                                                 </div>
                                                             </div>
                                                         {{-- @endcan --}}
