@@ -9,26 +9,51 @@ use Spatie\Permission\Models\Permission;
  */
 class PermissionRoleTableSeeder extends Seeder
 {
+
     use DisableForeignKeys;
 
-    /**
-     * Run the database seed.
-     */
     public function run()
     {
+
         $this->disableForeignKeys();
 
-        // Create Roles
-        Role::create(['name' => config('access.users.admin_role')]);
-        Role::create(['name' => config('access.users.default_role')]);
+        /**
+         * Create permissions
+         */
 
-        // Create Permissions
         Permission::create(['name' => 'view backend']);
+
+        Permission::create(['name' => 'client.index']);
+        Permission::create(['name' => 'client.show']);
+        Permission::create(['name' => 'client.create']);
+        Permission::create(['name' => 'client.update']);
+        Permission::create(['name' => 'client.destroy']);
+
+        /**
+         * Create roles and assign corresponding permissions
+         */
+
+        // Superuser
+
+        $admin_role = Role::create(['name' => config('access.users.admin_role')]);
+        // There's no need to assign individual permissions to the superuser
+        // role - the admin role automatically has permission to do everything
+
+        // Strategist
+
+        $strategist_role = Role::create(['name' => 'strategist']);
+
+        $strategist_role->givePermissionTo('view backend');
+
+        $strategist_role->givePermissionTo('client.index');
+        $strategist_role->givePermissionTo('client.show');
 
         // Assign Permissions to other Roles
         // Note: Admin (User 1) Has all permissions via a gate in the AuthServiceProvider
         // $user->givePermissionTo('view backend');
 
         $this->enableForeignKeys();
+
     }
+
 }

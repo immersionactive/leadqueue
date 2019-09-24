@@ -8,5 +8,15 @@ Breadcrumbs::for('admin.client.index', function ($trail) {
     $trail->push('Clients', route('admin.client.index'));
 });
 
+Breadcrumbs::for('admin.client.create', function ($trail) {
+    $trail->parent('admin.client.index');
+    $trail->push('Create Client', route('admin.client.create'));
+});
+
+Breadcrumbs::for('admin.client.edit', function ($trail, $id) {
+    $trail->parent('admin.client.index');
+    $trail->push('Edit Client', route('admin.client.edit', $id));
+});
+
 require __DIR__.'/auth.php';
 require __DIR__.'/log-viewer.php';

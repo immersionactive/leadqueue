@@ -3,86 +3,93 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-
+use App\Http\Requests\Backend\StoreClientRequest;
+use App\Http\Requests\Backend\UpdateClientRequest;
+use App\Models\Client;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // https://laravel.io/forum/how-to-properly-use-controller-middleware
+    public function __construct()
+    {
+        $this->middleware('permission:client.index', ['only' => ['index']]);
+        $this->middleware('permission:client.show', ['only' => ['show']]);
+        $this->middleware('permission:client.create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:client.update', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:client.destroy', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
-        return view('backend.client.index');
+
+        $clients = Client::paginate(20);
+
+        return view('backend.client.index', [
+            'clients' => $clients
+        ]);
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+       
+        return view('backend.client.create');
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(StoreClientRequest $request)
     {
-        //
+
+        $client = new Client();
+        $client->name = $request->input('name');
+        $client->is_active = !!$request->input('is_active');
+        // $client->notes = $request->input('notes');
+        $client->save();
+
+        return redirect()->route('admin.client.index')->withFlashSuccess('The client was successfully created.');
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function show(Client $client)
     {
-        //
+        
+        return view('backend.client.show', [
+            'client' => $client
+        ]);
+
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit(Client $client)
     {
-        //
+        
+        return view('backend.client.edit', [
+            'client' => $client
+        ]);
+
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(UpdateClientRequest $request, Client $client)
     {
-        //
+
+        $client->name = $request->input('name');
+        $client->is_active = !!$request->input('is_active');
+        // $client->notes = $request->input('notes');
+
+        $client->save();
+        
+        return redirect()->route('admin.client.index')->withFlashSuccess('Client updated.');
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy(Client $client)
     {
-        //
+        
+        $client->delete();    
+            
+        return redirect()->route('admin.client.index')->withFlashSuccess('Client deleted.');        
+
     }
 
 }

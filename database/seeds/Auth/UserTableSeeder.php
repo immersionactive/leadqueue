@@ -8,6 +8,7 @@ use Illuminate\Database\Seeder;
  */
 class UserTableSeeder extends Seeder
 {
+    
     use DisableForeignKeys;
 
     /**
@@ -15,6 +16,7 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
+
         $this->disableForeignKeys();
 
         // Add the master administrator, user id of 1
@@ -28,14 +30,16 @@ class UserTableSeeder extends Seeder
         ]);
 
         User::create([
-            'first_name' => 'Default',
-            'last_name' => 'User',
-            'email' => 'user@user.com',
-            'password' => 'secret',
+            'first_name' => 'Strategist',
+            'last_name' => 'Admin',
+            'email' => 'travis+strategist@immersionactive.com',
+            'password' => 'password',
             'confirmation_code' => md5(uniqid(mt_rand(), true)),
             'confirmed' => true,
         ]);
 
         $this->enableForeignKeys();
+
     }
+
 }

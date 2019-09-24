@@ -7,4 +7,4 @@ use App\Http\Controllers\Backend\DashboardController;
 Route::redirect('/', '/admin/dashboard', 301);
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::resource('client', 'ClientController')->only(['index']);
+Route::resource('client', 'ClientController');

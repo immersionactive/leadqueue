@@ -14,15 +14,17 @@
             </li>
 
             <li class="nav-title">
-                TODO
+                Data Appends
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.client.index') }}">
-                    <i class="nav-icon far fa-user-circle"></i>
-                    Clients
-                </a>
-            </li>
+            @can('client.index')
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.client.index') }}">
+                        <i class="nav-icon far fa-user-circle"></i>
+                        Clients
+                    </a>
+                </li>
+            @endcan
 
             @if ($logged_in_user->isAdmin())
                 <li class="nav-title">
