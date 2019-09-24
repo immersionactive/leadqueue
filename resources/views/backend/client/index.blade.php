@@ -12,7 +12,7 @@
                     <h4 class="card-title mb-0">
                         Clients
                     </h4>
-                </div><!--col-->
+                </div>
 
                 <div class="col-sm-7">
                     <div class="btn-toolbar float-right" role="toolbar" aria-label="@lang('labels.general.toolbar_btn_groups')">
@@ -27,6 +27,23 @@
             <div class="row mt-4">
                 <div class="col">
 
+                    {{-- Filters (TODO: finish implementing this) --}}
+
+                    {{--
+                    <form method="get" action="{{ route('admin.client.index') }}">
+
+                        <label for="status">Status</label>
+                        <select id="status" name="status" class="form-control">
+                            <option value="active">Active Only</option>
+                            <option value="inactive">Inactive Only</option>
+                            <option value="all">All</option>
+                        </select>
+
+                        <button type="submit" class="btn btn-primary">Apply Filters</button>
+
+                    </form>
+                    --}}
+
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -39,7 +56,13 @@
                             <tbody>
                                 @foreach ($clients as $client)
                                     <tr>
-                                        <td>{{ $client->name }}</td>
+                                        <td>
+                                            @if ($client->trashed())
+                                                <strike>{{ $client->name }}</strike>
+                                            @else
+                                                {{ $client->name }}
+                                            @endif
+                                        </td>
                                         <td>
                                             @if ($client->is_active)
                                                 <span class="badge badge-success">@lang('labels.general.yes')</span>
@@ -82,6 +105,8 @@
                             </tbody>
                         </table>
                     </div>
+
+                    {{ $clients->links() }}
 
                 </div>
             </div>

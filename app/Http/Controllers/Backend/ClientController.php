@@ -49,7 +49,7 @@ class ClientController extends Controller
         
         $client->save();
 
-        return redirect()->route('admin.client.index')->withFlashSuccess('The client was successfully created.');
+        return redirect()->route('admin.client.show', $client)->withFlashSuccess('The client was successfully created.');
 
     }
 
@@ -80,7 +80,7 @@ class ClientController extends Controller
 
         $client->save();
         
-        return redirect()->route('admin.client.index')->withFlashSuccess('Client updated.');
+        return redirect()->route('admin.client.show', $client)->withFlashSuccess('Client updated.');
 
     }
 
