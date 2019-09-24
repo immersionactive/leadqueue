@@ -18,8 +18,7 @@
 
                     <div class="col-sm-5">
                         <h4 class="card-title mb-0">
-                            Clients
-                            <small class="text-muted">View Client</small>
+                            {{ $client->name }}
                         </h4>
                     </div>
 
@@ -35,45 +34,48 @@
 
                 </div>
 
-                <hr>
-
                 <div class="row mt-4">
                     <div class="col">
 
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <tbody>
+                        @include('backend.client.includes.tabs', ['active_tab' => 'overview', 'client' => $client])
 
-                                    {{-- Name --}}
+                        <div class="tab-content">
+                            <div class="tab-pane active" role="tabpanel" aria-expanded="true">
 
-                                    <tr>
-                                        <th>Name</th>
-                                        <td>{{ $client->name }}</td>
-                                    </tr>
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <tbody>
 
-                                    {{-- Active --}}
+                                            {{-- Name --}}
 
-                                    <tr>
-                                        <th>Active</th>
-                                        <td>
-                                            @if ($client->is_active)
-                                                <span class="badge badge-success">@lang('labels.general.yes')</span>
-                                            @else
-                                                <span class="badge badge-danger">@lang('labels.general.no')</span>
-                                            @endif
-                                        </td>
-                                    </tr>
+                                            <tr>
+                                                <th>Name</th>
+                                                <td>{{ $client->name }}</td>
+                                            </tr>
 
-                                    {{-- Notes --}}
+                                            {{-- Active --}}
 
-                                    <tr>
-                                        <th>Notes</th>
-                                        <td>{!! nl2br(e($client->notes)) !!}</td>
-                                    </tr>
+                                            <tr>
+                                                <th>Active</th>
+                                                <td>
+                                                    @include('backend.includes.partials.yn-badge', ['active' => $client->is_active])
+                                                </td>
+                                            </tr>
 
-                                </tbody>
-                            </table>
-                        </div>
+                                            {{-- Notes --}}
+
+                                            <tr>
+                                                <th>Notes</th>
+                                                <td>{!! nl2br(e($client->notes)) !!}</td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+
+                        </div> <!-- .tab-content -->
 
                     </div>
                 </div>
@@ -90,9 +92,9 @@
                                 <strong>Deleted At:</strong> {{ timezone()->convertToLocal($client->deleted_at) }} ({{ $client->deleted_at->diffForHumans() }})
                             @endif
                         </small>
-                    </div><!--col-->
-                </div><!--row-->
-            </div><!--card-footer-->
+                    </div>
+                </div>
+            </div> <!--. card-footer -->
 
         </div> <!-- .card -->
 

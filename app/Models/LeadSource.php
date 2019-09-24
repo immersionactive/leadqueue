@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Client extends Model
+class LeadSource extends Model
 {
     
     use SoftDeletes;
 
-    public function lead_sources()
+    public function client()
     {
-        return $this->hasMany('App\Models\LeadSource');
+        return $this->belongsTo('App\Models\Client');
     }
 
 }

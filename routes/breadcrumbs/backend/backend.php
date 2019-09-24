@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Client;
+use App\Models\LeadSource;
+
 Breadcrumbs::for('admin.dashboard', function ($trail) {
     $trail->push(__('strings.backend.dashboard.title'), route('admin.dashboard'));
 });
@@ -13,14 +16,32 @@ Breadcrumbs::for('admin.client.create', function ($trail) {
     $trail->push('Create Client', route('admin.client.create'));
 });
 
-Breadcrumbs::for('admin.client.show', function ($trail, $id) {
+Breadcrumbs::for('admin.client.show', function ($trail, Client $client) {
     $trail->parent('admin.client.index');
-    $trail->push('View Client', route('admin.client.show', $id));
+    $trail->push($client->name, route('admin.client.show', $client));
 });
 
-Breadcrumbs::for('admin.client.edit', function ($trail, $id) {
+Breadcrumbs::for('admin.client.edit', function ($trail, Client $client) {
     $trail->parent('admin.client.index');
-    $trail->push('Edit Client', route('admin.client.edit', $id));
+    $trail->push($client->name, route('admin.client.show', $client));
+    $trail->push('Edit Client', route('admin.client.edit', $client));
+});
+
+Breadcrumbs::for('admin.client.lead_source.index', function ($trail, Client $client) {
+    $trail->parent('admin.client.show', $client);
+    $trail->push('Lead Sources', route('admin.client.lead_source.index', $client));
+});
+
+Breadcrumbs::for('admin.client.lead_source.show', function ($trail, Client $client, LeadSource $lead_source) {
+    $trail->parent('admin.client.show', $client);
+    $trail->push('Lead Sources', route('admin.client.lead_source.index', $client));
+    $trail->push($lead_source->name, route('admin.client.lead_source.create', $client));
+});
+
+Breadcrumbs::for('admin.client.lead_source.create', function ($trail, Client $client) {
+    $trail->parent('admin.client.show', $client);
+    $trail->push('Lead Sources', route('admin.client.lead_source.index', $client));
+    $trail->push('Create Lead Source', route('admin.client.lead_source.create', $client));
 });
 
 require __DIR__.'/auth.php';

@@ -1,0 +1,50 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateLeadSourcesTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('lead_sources', function (Blueprint $table) {
+
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('client_id');
+            $table->string('name', 255);
+            $table->boolean('is_active');
+            $table->text('notes');
+            $table->unsignedBigInteger('lead_source_config_id')->nullable();
+            $table->string('lead_source_config_type', 255)->nullable();
+            $table->timestamps();
+            $table->softDeletes();
+
+            $table->index('client_id');
+            // $table->index('lead_source_config_id');
+
+            $table->foreign('client_id')
+                ->references('id')->on('clients')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            // TODO: add index and foreign key to lead_source_config_id, once that table exists
+
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('lead_sources');
+    }
+}

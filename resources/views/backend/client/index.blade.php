@@ -64,11 +64,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            @if ($client->is_active)
-                                                <span class="badge badge-success">@lang('labels.general.yes')</span>
-                                            @else
-                                                <span class="badge badge-danger">@lang('labels.general.no')</span>
-                                            @endif
+                                            @include('backend.includes.partials.yn-badge', ['active' => $client->is_active])
                                         </td>
                                         <td>
 
