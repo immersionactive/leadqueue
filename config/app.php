@@ -202,7 +202,7 @@ return [
         App\Providers\ObserverServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        ImmersionActive\WebflowLeadSource\WebflowLeadSourceServiceProvider::class,
+        ImmersionActive\LeadQueueWebflowSource\LeadQueueWebflowSourceServiceProvider::class,
 
     ],
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace ImmersionActive\WebflowLeadSource\Http\Controllers;
+namespace ImmersionActive\LeadQueueWebflowSource\Http\Controllers;
 
 use Illuminate\Http\Request;
-use ImmersionActive\WebflowLeadSource\Models\WebflowSourceConfig;
+use ImmersionActive\LeadQueueWebflowSource\Models\WebflowSourceConfig;
 
 class InsertLeadController
 {

@@ -5,28 +5,27 @@ namespace App\Http\Controllers\Backend;
 use DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\StoreClientLeadSourceRequest;
-// use App\Http\Requests\Backend\UpdateClientLeadSourceRequest;
-use App\LeadSourceTypeRegistry;
+use App\Http\Requests\Backend\UpdateClientLeadSourceRequest;
+use App\SourceConfigTypeRegistry;
 use App\Models\Client;
 use App\Models\LeadSource;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Validator;
 
 class LeadSourceController extends Controller
 {
 
-    protected $lead_source_type_registry;
+    protected $source_config_type_registry;
 
     // https://laravel.io/forum/how-to-properly-use-controller-middleware
-    public function __construct(LeadSourceTypeRegistry $lead_source_type_registry)
+    public function __construct(SourceConfigTypeRegistry $source_config_type_registry)
     {
 
-        $this->lead_source_type_registry = $lead_source_type_registry;
+        $this->source_config_type_registry = $source_config_type_registry;
 
         $this->middleware('permission:client.lead_source.index', ['only' => ['index']]);
         $this->middleware('permission:client.lead_source.show', ['only' => ['show']]);
-        $this->middleware('permission:client.lead_source.create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:client.lead_source.store', ['only' => ['create', 'store']]);
         $this->middleware('permission:client.lead_source.update', ['only' => ['edit', 'update']]);
         $this->middleware('permission:client.lead_source.destroy', ['only' => ['destroy']]);
 
@@ -40,50 +39,50 @@ class LeadSourceController extends Controller
         return view('backend.client.lead_source.index', [
             'client' => $client,
             'lead_sources' => $lead_sources,
-            'lead_source_type_classnames' => $this->lead_source_type_registry->getRegisteredTypes()
+            'source_config_type_classnames' => $this->source_config_type_registry->getRegisteredTypes()
         ]);
 
     }
 
-    public function create(Client $client, $lead_source_type_slug)
+    public function create(Client $client, $source_config_type_slug)
     {
 
-        $lead_source_type_classname = $this->lead_source_type_registry->getBySlug($lead_source_type_slug);
+        $source_config_type_classname = $this->source_config_type_registry->getBySlug($source_config_type_slug);
 
-        if ($lead_source_type_classname === false) {
+        if ($source_config_type_classname === false) {
             // TODO: Should this be a more specific kind of exception?
-            throw new \Exception('"' . $lead_source_type_slug . '" is not a recognized lead source type slug.');
+            throw new \Exception('"' . $source_config_type_slug . '" is not a recognized lead source type slug.');
         }
        
         return view('backend.client.lead_source.create', [
             'client' => $client,
-            'lead_source_type_classname' => $lead_source_type_classname
+            'source_config_type_classname' => $source_config_type_classname
         ]);
 
     }
 
     /**
      * Because we're adding validation rules dynamically, the FormRequest
-     * doesn't do any validation. Instead, it's handled here in the
+     * doesn't do any validation. Instead, validation is handled here in the
      * controller.
      */
-    public function store(StoreClientLeadSourceRequest $request, Client $client, $lead_source_type_slug)
+    public function store(StoreClientLeadSourceRequest $request, Client $client, $source_config_type_slug)
     {
 
-        $lead_source_type_classname = $this->lead_source_type_registry->getBySlug($lead_source_type_slug);
+        $source_config_type_classname = $this->source_config_type_registry->getBySlug($source_config_type_slug);
 
-        if ($lead_source_type_classname === false) {
+        if ($source_config_type_classname === false) {
             // TODO: Should this be a more specific kind of exception?
-            throw new \Exception('"' . $lead_source_type_slug . '" is not a recognized lead source type slug.');
+            throw new \Exception('"' . $source_config_type_slug . '" is not a recognized lead source type slug.');
         }
 
         $rules = $this->getValidationRules();
-        $rules += $lead_source_type_classname::getStoreRules();
+        $rules += $source_config_type_classname::getStoreRules();
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
             return redirect()
-                ->route('admin.client.lead_source.create', [$client, $lead_source_type_slug])
+                ->route('admin.client.lead_source.create', [$client, $source_config_type_slug])
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -98,7 +97,7 @@ class LeadSourceController extends Controller
 
         // Create the source config (but don't save it yet)
 
-        $source_config = $lead_source_type_classname::buildConfig($request, $lead_source);
+        $source_config = $source_config_type_classname::buildConfig($request, $lead_source);
 
         // Now save both.
         // This might not be the best way to save a morphTo relation.
@@ -127,6 +126,9 @@ class LeadSourceController extends Controller
 
     public function edit(Client $client, LeadSource $lead_source)
     {
+
+        // TODO: how to get the $lead_source_type_classname from $lead_source?
+        var_dump($lead_source->source_config_type); exit;
         
         return view('backend.client.lead_source.edit', [
             'client' => $client,
@@ -135,7 +137,12 @@ class LeadSourceController extends Controller
 
     }
 
-    public function update(Request $request, Client $client, LeadSource $lead_source)
+    /**
+     * Because we're adding validation rules dynamically, the FormRequest
+     * doesn't do any validation. Instead, validation is handled here in the
+     * controller.
+     */
+    public function update(UpdateClientLeadSourceRequest $request, Client $client, LeadSource $lead_source)
     {
 
         $lead_source->name = $request->input('name');

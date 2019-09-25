@@ -1,12 +1,12 @@
 <?php
 
-namespace ImmersionActive\WebflowLeadSource;
+namespace ImmersionActive\LeadQueueWebflowSource;
 
-use App\LeadSourceTypeRegistry;
+use App\SourceConfigTypeRegistry;
 use Illuminate\Support\ServiceProvider;
-use ImmersionActive\WebflowLeadSource\WebflowLeadSourceType;
+use ImmersionActive\LeadQueueWebflowSource\WebflowSourceConfigType;
 
-class WebflowLeadSourceServiceProvider extends ServiceProvider
+class LeadQueueWebflowSourceServiceProvider extends ServiceProvider
 {
 
     /**
@@ -24,20 +24,20 @@ class WebflowLeadSourceServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(LeadSourceTypeRegistry $lead_source_type_registry)
+    public function boot(SourceConfigTypeRegistry $source_config_type_registry)
     {
 
         // The Laravel package development docs say to call loadViewsFrom() in the boot() method:
         // https://laravel.com/docs/5.0/packages#views
         // ...but laravel/cashier (an official package) does it in the registerResources() method:
         // https://github.com/laravel/cashier/blob/10.0/src/CashierServiceProvider.php
-        $this->loadViewsFrom(__DIR__ . '/../resources/views/', 'webflowleadsource');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views/', 'lead-queue-webflow-source');
 
         $this->loadRoutesFrom(__DIR__ . '/../routes/api.php');
 
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations/');
 
-        $lead_source_type_registry->register(WebflowLeadSourceType::class);
+        $source_config_type_registry->register(WebflowSourceConfigType::class);
 
     }
 

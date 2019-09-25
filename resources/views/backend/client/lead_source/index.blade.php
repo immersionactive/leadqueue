@@ -29,8 +29,8 @@
                                     <i class="fas fa-plus-circle"></i>
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="TODO">
-                                    @foreach ($lead_source_type_classnames as $lead_source_type_classname)
-                                        <a class="dropdown-item" href="{{ route('admin.client.lead_source.create', [$client, $lead_source_type_classname::getSlug()]) }}">{{ $lead_source_type_classname::getName() }}</a>
+                                    @foreach ($source_config_type_classnames as $source_config_type_classname)
+                                        <a class="dropdown-item" href="{{ route('admin.client.lead_source.create', [$client, $source_config_type_classname::getSlug()]) }}">{{ $source_config_type_classname::getName() }}</a>
                                     @endforeach
                                 </div>
                             </div>

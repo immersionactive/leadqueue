@@ -9,7 +9,7 @@ class StoreClientRequest extends FormRequest
 
     public function authorize()
     {
-        return $this->user()->can('client.create');
+        return $this->user()->can('client.store');
     }
 
     public function rules()

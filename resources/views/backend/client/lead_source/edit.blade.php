@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 
-@section('title', $client->name . ': Create Lead Source')
+@section('title', $client->name . ': Edit Lead Source')
 
 @section('breadcrumb-links')
     {{-- @include('backend.client.includes.breadcrumb-links') --}}
@@ -35,6 +35,8 @@
                                 <div class="card">
 
                                     <div class="card-body">
+
+                                        <h2 class="h5">General Fields</h2>
 
                                         {{-- Name --}}
 
@@ -92,7 +94,7 @@
 
                                             <div class="col-md-10">
 
-                                                {{ html()->textarea('notes', old('notes'))
+                                                {{ html()->textarea('notes')
                                                     ->class('form-control')
                                                     ->placeholder('Notes')
                                                 }}
@@ -100,6 +102,12 @@
                                             </div>
 
                                         </div>
+
+                                        {{-- Additional type-specific fields --}}
+
+                                        <h2 class="h5">{{ $lead_source_type_classname::getName() }} Fields</h2>
+
+                                        @include($lead_source_type_classname::getEditView())
                         
                                     </div> <!-- .card-body -->
 

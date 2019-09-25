@@ -1,34 +1,34 @@
 <?php
 
-namespace ImmersionActive\WebflowLeadSource;
+namespace ImmersionActive\LeadQueueWebflowSource;
 
-use App\LeadSourceType;
+use App\SourceConfigType;
 use App\Http\Requests\Backend\StoreClientLeadSourceRequest;
 use App\Models\LeadSource;
 use App\Models\SourceConfig;
-use ImmersionActive\WebflowLeadSource\Models\WebflowSourceConfig;
+use ImmersionActive\LeadQueueWebflowSource\Models\WebflowSourceConfig;
 
-class WebflowLeadSourceType extends LeadSourceType
+class WebflowSourceConfigType extends SourceConfigType
 {
 
     public static function getName(): string
     {
-        return 'Webflow Form';
+        return 'Webflow Webhook';
     }
 
     public static function getSlug(): string
     {
-        return 'webflow-form';
+        return 'webflow-webhook';
     }
 
     public static function getCreateView(): string
     {
-        return 'webflowleadsource::partials.create';
+        return 'lead-queue-webflow-source::partials.create';
     }
 
     public static function getEditView(): string
     {
-        return 'webflowleadsource::partials.edit';
+        return 'lead-queue-webflow-source::partials.edit';
     }
 
     public static function getStoreRules(): array

@@ -44,7 +44,7 @@ Breadcrumbs::for('admin.client.lead_source.create', function ($trail, Client $cl
 
 Breadcrumbs::for('admin.client.lead_source.edit', function ($trail, Client $client, LeadSource $lead_source) {
     $trail->parent('admin.client.lead_source.show', $client, $lead_source);
-    $trail->push('Edit Lead Source', route('admin.client.lead_source.create', $client));
+    $trail->push('Edit Lead Source', route('admin.client.lead_source.edit', [$client, $lead_source]));
 });
 
 require __DIR__.'/auth.php';

@@ -17,7 +17,7 @@ class ClientController extends Controller
     {
         $this->middleware('permission:client.index', ['only' => ['index']]);
         $this->middleware('permission:client.show', ['only' => ['show']]);
-        $this->middleware('permission:client.create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:client.store', ['only' => ['create', 'store']]);
         $this->middleware('permission:client.update', ['only' => ['edit', 'update']]);
         $this->middleware('permission:client.destroy', ['only' => ['destroy']]);
     }

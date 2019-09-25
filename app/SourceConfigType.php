@@ -6,18 +6,18 @@ use App\Http\Requests\Backend\StoreClientLeadSourceRequest;
 use App\Models\LeadSource;
 use App\Models\SourceConfig;
 
-abstract class LeadSourceType
+abstract class SourceConfigType
 {
 
     /**
-     * Should return the human-readable name of the lead source type (e.g.,
+     * Should return the human-readable name of the source config type (e.g.,
      * "Webflow Form").
      * @return string
      */
     abstract public static function getName(): string;
 
     /**
-     * Should return the name of the lead source type as a slug, suitable for
+     * Should return the name of the source config type as a slug, suitable for
      * use in URLs and similar contexts (e.g., "webflow-form").
      * @return string
      */

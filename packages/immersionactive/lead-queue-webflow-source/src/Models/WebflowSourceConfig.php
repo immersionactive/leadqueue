@@ -1,6 +1,6 @@
 <?php
 
-namespace ImmersionActive\WebflowLeadSource\Models;
+namespace ImmersionActive\LeadQueueWebflowSource\Models;
 
 use App\Models\SourceConfig;
 use Illuminate\Database\Eloquent\Model;

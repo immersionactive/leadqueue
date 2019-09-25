@@ -2,9 +2,7 @@
 
 namespace App;
 
-use App\LeadSourceType;
-
-class LeadSourceTypeRegistry
+class SourceConfigTypeRegistry
 {
 
     protected $type_classnames = [];

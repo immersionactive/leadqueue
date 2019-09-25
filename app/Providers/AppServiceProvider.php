@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\LeadSourceTypeRegistry;
+use App\SourceConfigTypeRegistry;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
             $loader->alias('Debugbar', \Barryvdh\Debugbar\Facade::class);
         }
 
-        $this->app->singleton(LeadSourceTypeRegistry::class);
+        $this->app->singleton(SourceConfigTypeRegistry::class);
 
     }
 
@@ -88,7 +88,7 @@ class AppServiceProvider extends ServiceProvider
             return session()->has($session_identifier);
         });
 
-        $this->app->make(LeadSourceTypeRegistry::class);
+        $this->app->make(SourceConfigTypeRegistry::class);
 
     }
 }

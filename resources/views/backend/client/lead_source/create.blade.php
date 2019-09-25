@@ -30,8 +30,7 @@
                     <div class="tab-content">
                         <div class="tab-pane active" role="tabpanel" aria-expanded="true">
 
-                            {{-- TODO: remove novalidate() --}}
-                            {{ html()->form('POST', route('admin.client.lead_source.store', [$client, $lead_source_type_classname::getSlug()]))->class('form-horizontal')->novalidate()->open() }}
+                            {{ html()->form('POST', route('admin.client.lead_source.store', [$client, $source_config_type_classname::getSlug()]))->class('form-horizontal')->open() }}
 
                                 <div class="card">
 
@@ -106,9 +105,9 @@
 
                                         {{-- Additional type-specific fields --}}
 
-                                        <h2 class="h5">{{ $lead_source_type_classname::getName() }} Fields</h2>
+                                        <h2 class="h5">{{ $source_config_type_classname::getName() }} Fields</h2>
 
-                                        @include($lead_source_type_classname::getCreateView())
+                                        @include($source_config_type_classname::getCreateView())
                         
                                     </div> <!-- .card-body -->
 
