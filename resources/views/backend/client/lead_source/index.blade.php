@@ -24,7 +24,16 @@
                     
                     <div class="btn-toolbar float-right" role="toolbar" aria-label="@lang('labels.general.toolbar_btn_groups')">
                         @can('admin.client.lead_source.create')
-                            <a href="{{ route('admin.client.lead_source.create', $client) }}" class="btn btn-success ml-1" data-toggle="tooltip" title="@lang('labels.general.create_new')"><i class="fas fa-plus-circle"></i></a>
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button" id="TODO" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-plus-circle"></i>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="TODO">
+                                    @foreach ($lead_source_type_classnames as $lead_source_type_classname)
+                                        <a class="dropdown-item" href="{{ route('admin.client.lead_source.create', [$client, $lead_source_type_classname::getSlug()]) }}">{{ $lead_source_type_classname::getName() }}</a>
+                                    @endforeach
+                                </div>
+                            </div>
                         @endcan
                     </div>
 
@@ -45,8 +54,8 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">Lead Source</th>
+                                            <th scope="col">Type</th>
                                             <th scope="col">Active</th>
-                                            <th scope="col">Configured</th>
                                             <th scope="col">@lang('labels.general.actions')</th>
                                         </tr>
                                     </thead>
@@ -60,11 +69,9 @@
                                                         {{ $lead_source->name }}
                                                     @endif
                                                 </td>
+                                                <td>TODO</td>
                                                 <td>
                                                     @include('backend.includes.partials.yn-badge', ['active' => $lead_source->is_active])
-                                                </td>
-                                                <td>
-                                                    @include('backend.includes.partials.yn-badge', ['active' => !!$lead_source->source_config])
                                                 </td>
                                                 <td>
 
@@ -81,21 +88,6 @@
                                                                 <i class="fas fa-edit"></i>
                                                             </a>
                                                         @endcan
-
-                                                        {{-- @can('TODO') --}}
-                                                            <div class="btn-group btn-group-sm" role="group">
-                                                                <button id="userActions" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                    Configure
-                                                                </button>
-                                                                <div class="dropdown-menu" aria-labelledby="userActions">
-                                                                    {{--
-                                                                    @foreach (config('lead-drivers.sources') as $source)
-                                                                        <a class="dropdown-item" href="#TODO">{{ $source['name'] }}</a>
-                                                                    @endforeach
-                                                                    --}}
-                                                                </div>
-                                                            </div>
-                                                        {{-- @endcan --}}
 
                                                         @can('client.lead_source.delete')
                                                             <a href="{{ route('admin.client.lead_source.destroy', [$client, $lead_source]) }}"

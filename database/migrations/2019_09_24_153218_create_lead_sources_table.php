@@ -26,14 +26,12 @@ class CreateLeadSourcesTable extends Migration
             $table->softDeletes();
 
             $table->index('client_id');
-            // $table->index('lead_source_config_id');
+            $table->index('lead_source_config_id');
 
             $table->foreign('client_id')
                 ->references('id')->on('clients')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-
-            // TODO: add index and foreign key to lead_source_config_id, once that table exists
 
         });
     }

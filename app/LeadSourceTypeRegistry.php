@@ -2,14 +2,21 @@
 
 namespace App;
 
+use App\LeadSourceType;
+
 class LeadSourceTypeRegistry
 {
 
-    protected $types = [];
+    protected $type_classnames = [];
 
-    public function register($something)
+    public function register(string $type_classname)
     {
-        echo '%%%' . $something . '%%%';
+        $this->type_classnames[] = $type_classname;
+    }
+
+    public function getRegisteredTypes(): array
+    {
+        return $this->type_classnames;
     }
 
 }

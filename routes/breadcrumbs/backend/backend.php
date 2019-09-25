@@ -37,9 +37,9 @@ Breadcrumbs::for('admin.client.lead_source.show', function ($trail, Client $clie
     $trail->push($lead_source->name, route('admin.client.lead_source.create', [$client, $lead_source]));
 });
 
-Breadcrumbs::for('admin.client.lead_source.create', function ($trail, Client $client) {
-    $trail->parent('admin.client.lead_sources.index', $client);
-    $trail->push('Create Lead Source', route('admin.client.lead_source.create', $client));
+Breadcrumbs::for('admin.client.lead_source.create', function ($trail, Client $client, $lead_source_type_slug) {
+    $trail->parent('admin.client.lead_source.index', $client);
+    $trail->push('Create Lead Source', route('admin.client.lead_source.create', [$client, $lead_source_type_slug]));
 });
 
 Breadcrumbs::for('admin.client.lead_source.edit', function ($trail, Client $client, LeadSource $lead_source) {

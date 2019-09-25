@@ -4,6 +4,7 @@ namespace ImmersionActive\WebflowLeadSource;
 
 use App\LeadSourceTypeRegistry;
 use Illuminate\Support\ServiceProvider;
+use ImmersionActive\WebflowLeadSource\WebflowLeadSourceType;
 
 class WebflowLeadSourceServiceProvider extends ServiceProvider
 {
@@ -36,7 +37,7 @@ class WebflowLeadSourceServiceProvider extends ServiceProvider
 
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations/');
 
-        // $lead_source_type_registry->register('ZCXVXCVRFDSG');
+        $lead_source_type_registry->register(WebflowLeadSourceType::class);
 
     }
 

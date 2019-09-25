@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\StoreClientLeadSourceRequest;
 // use App\Http\Requests\Backend\UpdateClientLeadSourceRequest;
+use App\LeadSourceTypeRegistry;
 use App\Models\Client;
 use App\Models\LeadSource;
 use Illuminate\Http\Request;
@@ -13,14 +14,20 @@ use Illuminate\Support\Facades\Log;
 class LeadSourceController extends Controller
 {
 
+    protected $lead_source_type_registry;
+
     // https://laravel.io/forum/how-to-properly-use-controller-middleware
-    public function __construct()
+    public function __construct(LeadSourceTypeRegistry $lead_source_type_registry)
     {
+
+        $this->lead_source_type_registry = $lead_source_type_registry;
+
         $this->middleware('permission:client.lead_source.index', ['only' => ['index']]);
         $this->middleware('permission:client.lead_source.show', ['only' => ['show']]);
         $this->middleware('permission:client.lead_source.create', ['only' => ['create', 'store']]);
         $this->middleware('permission:client.lead_source.update', ['only' => ['edit', 'update']]);
         $this->middleware('permission:client.lead_source.destroy', ['only' => ['destroy']]);
+
     }
 
     public function index(Client $client)
@@ -30,13 +37,16 @@ class LeadSourceController extends Controller
 
         return view('backend.client.lead_source.index', [
             'client' => $client,
-            'lead_sources' => $lead_sources
+            'lead_sources' => $lead_sources,
+            'lead_source_type_classnames' => $this->lead_source_type_registry->getRegisteredTypes()
         ]);
 
     }
 
-    public function create(Client $client)
+    public function create(Client $client, $lead_source_type_slug)
     {
+
+        // die('in LeadSourceController->create(): ' . $lead_source_type_slug);
        
         return view('backend.client.lead_source.create', [
             'client' => $client

@@ -8,6 +8,9 @@ Route::redirect('/', '/admin/dashboard', 301);
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::resource('client', 'ClientController');
-Route::resource('client.lead_source', 'LeadSourceController');
 
-Route::resource('client.lead_source.config', 'SourceConfigController')->only('edit');
+// We define these routes separately, because we want them to support an additional /:type/ segment
+Route::get('/client/{client}/lead_source/create/{lead_source_type}', 'LeadSourceController@create')->name('client.lead_source.create');
+Route::post('/client/{client}/lead_source')->name('client.lead_source.store');
+
+Route::resource('client.lead_source', 'LeadSourceController')->except(['create', 'store']);
