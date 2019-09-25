@@ -12,15 +12,13 @@ class StoreClientLeadSourceRequest extends FormRequest
         return $this->user()->can('client.lead_source.create');
     }
 
+    /**
+     * This form request is only used for authorization. All validation is handled
+     * in the controller.
+     */
     public function rules()
     {
-        return [
-            'name' => [
-                'required',
-                'max:255',
-                'unique:lead_sources' // TODO: only require this to be unique in the scope of the owning client
-            ]
-        ];
+        return [];
     }
 
 }

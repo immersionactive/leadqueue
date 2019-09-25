@@ -33,7 +33,7 @@ class WebflowLeadSourceServiceProvider extends ServiceProvider
         // https://github.com/laravel/cashier/blob/10.0/src/CashierServiceProvider.php
         $this->loadViewsFrom(__DIR__ . '/../resources/views/', 'webflowleadsource');
 
-        // $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+        $this->loadRoutesFrom(__DIR__ . '/../routes/api.php');
 
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations/');
 

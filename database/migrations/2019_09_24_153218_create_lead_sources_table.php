@@ -20,13 +20,13 @@ class CreateLeadSourcesTable extends Migration
             $table->string('name', 255);
             $table->boolean('is_active');
             $table->text('notes');
-            $table->unsignedBigInteger('lead_source_config_id')->nullable();
-            $table->string('lead_source_config_type', 255)->nullable();
+            $table->unsignedBigInteger('source_config_id')->nullable();
+            $table->string('source_config_type', 255)->nullable();
             $table->timestamps();
             $table->softDeletes();
 
             $table->index('client_id');
-            $table->index('lead_source_config_id');
+            $table->index('source_config_id');
 
             $table->foreign('client_id')
                 ->references('id')->on('clients')

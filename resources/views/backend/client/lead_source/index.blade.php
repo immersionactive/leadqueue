@@ -55,6 +55,7 @@
                                         <tr>
                                             <th scope="col">Lead Source</th>
                                             <th scope="col">Type</th>
+                                            <th scope="col">URL</th>
                                             <th scope="col">Active</th>
                                             <th scope="col">@lang('labels.general.actions')</th>
                                         </tr>
@@ -70,6 +71,13 @@
                                                     @endif
                                                 </td>
                                                 <td>TODO</td>
+                                                <td>
+                                                    @if ($lead_source->source_config)
+                                                        {{ $lead_source->source_config->getURL() }}
+                                                    @else
+                                                        <span class="badge badge-danger">Config Not Found</span>
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     @include('backend.includes.partials.yn-badge', ['active' => $lead_source->is_active])
                                                 </td>

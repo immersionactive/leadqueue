@@ -2,6 +2,10 @@
 
 namespace App;
 
+use App\Http\Requests\Backend\StoreClientLeadSourceRequest;
+use App\Models\LeadSource;
+use App\Models\SourceConfig;
+
 abstract class LeadSourceType
 {
 
@@ -18,5 +22,44 @@ abstract class LeadSourceType
      * @return string
      */
     abstract public static function getSlug(): string;
+
+    /**
+     * @todo Document this method.     
+     * @todo Does this approach allow the main app to override views?
+     * @return string
+     */
+    abstract public static function getCreateView(): string;
+
+    /**
+     * @todo Document this method.
+     * @return string
+     */
+    abstract public static function getEditView(): string;
+
+    /**
+     * @todo Document this method.
+     * @todo Should we pass the Validator instance to the get*Rules() methods
+     *       instead? Would that be more flexible?
+     * @return array
+     */
+    abstract public static function getStoreRules(): array;
+
+    /**
+     * @todo Document this method.
+     * @return array
+     */
+    abstract public static function getUpdateRules(): array;
+
+    /**
+     * @todo Document this method.
+     * @return SourceConfig
+     */
+    abstract public static function buildConfig(StoreClientLeadSourceRequest $request, LeadSource $lead_source): SourceConfig;
+
+    /**
+     * @todo Document this method.
+     * @return SourceConfig
+     */
+    // abstract public static function patchConfig(StoreClientLeadSourceRequest $request, LeadSource $lead_source, SourceConfig $config): SourceConfig;
 
 }

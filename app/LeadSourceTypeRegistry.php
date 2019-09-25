@@ -19,4 +19,16 @@ class LeadSourceTypeRegistry
         return $this->type_classnames;
     }
 
+    public function getBySlug(string $slug)
+    {
+        $rv = false;
+        foreach ($this->type_classnames as $type_classname) {
+            if ($slug === $type_classname::getSlug()) {
+                $rv = $type_classname;
+                break;
+            }
+        }
+        return $rv;
+    }
+
 }

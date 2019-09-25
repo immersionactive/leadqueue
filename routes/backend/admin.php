@@ -11,6 +11,6 @@ Route::resource('client', 'ClientController');
 
 // We define these routes separately, because we want them to support an additional /:type/ segment
 Route::get('/client/{client}/lead_source/create/{lead_source_type}', 'LeadSourceController@create')->name('client.lead_source.create');
-Route::post('/client/{client}/lead_source')->name('client.lead_source.store');
+Route::post('/client/{client}/lead_source/{lead_source_type}', 'LeadSourceController@store')->name('client.lead_source.store');
 
 Route::resource('client.lead_source', 'LeadSourceController')->except(['create', 'store']);
