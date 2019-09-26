@@ -216,7 +216,7 @@ class LeadSourceController extends Controller
         return [
             'name' => [
                 'required',
-                'max:255',
+                'size:255',
                 $unique_name_rule,
             ],
         ];

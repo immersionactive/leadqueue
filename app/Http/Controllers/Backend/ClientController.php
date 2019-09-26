@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\StoreClientRequest;
 use App\Http\Requests\Backend\UpdateClientRequest;
 use App\Models\Client;
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class ClientController extends Controller
@@ -35,8 +35,12 @@ class ClientController extends Controller
 
     public function create()
     {
-       
-        return view('backend.client.create');
+        
+        $client = new Client();
+
+        return view('backend.client.create-edit', [
+            'client' => $client
+        ]);
 
     }
 
@@ -69,7 +73,7 @@ class ClientController extends Controller
     public function edit(Client $client)
     {
         
-        return view('backend.client.edit', [
+        return view('backend.client.create-edit', [
             'client' => $client
         ]);
 
