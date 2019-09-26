@@ -29,12 +29,12 @@ class WebflowSourceConfigType extends SourceConfigType
 
     public static function getCreateView(): string
     {
-        return 'lead-queue-webflow-source::partials.create';
+        return 'lead-queue-webflow-source::partials.create-edit';
     }
 
     public static function getEditView(): string
     {
-        return 'lead-queue-webflow-source::partials.edit';
+        return 'lead-queue-webflow-source::partials.create-edit';
     }
 
     public static function getStoreRules(): array

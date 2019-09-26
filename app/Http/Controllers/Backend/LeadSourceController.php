@@ -49,9 +49,12 @@ class LeadSourceController extends Controller
     {
 
         $source_config_type_classname = $this->getSourceConfigTypeClassnameBySlug($source_config_type_slug);
+
+        $lead_source = new LeadSource();
        
-        return view('backend.client.lead_source.create', [
+        return view('backend.client.lead_source.create-edit', [
             'client' => $client,
+            'lead_source' => $lead_source,
             'source_config_type_classname' => $source_config_type_classname
         ]);
 
@@ -126,7 +129,7 @@ class LeadSourceController extends Controller
             throw new \Exception('"' . $lead_source->source_config_type . '" is not a recognized source config type classname.');
         }
 
-        return view('backend.client.lead_source.edit', [
+        return view('backend.client.lead_source.create-edit', [
             'client' => $client,
             'lead_source' => $lead_source,
             'source_config_type_classname' => $source_config_type_classname
@@ -216,7 +219,7 @@ class LeadSourceController extends Controller
         return [
             'name' => [
                 'required',
-                'size:255',
+                'max:255',
                 $unique_name_rule,
             ],
         ];

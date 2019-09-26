@@ -25,7 +25,6 @@
 
 ## TODO
 
-* Refactor: merge create and edit form views (may want to use null coalesce operator for input values)
 * Refactor: Lead source create routes should probably pass the config type in the querystring, not as a route segment (to avoid potential route collisions)
 * Refactor: merge StoreClientRequest and UpdateClientRequest?
 * Refactor/bugfix: Figure out a viable way to default is_active checkboxes to true (I can't believe this is so difficult...)
