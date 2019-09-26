@@ -30,7 +30,8 @@
                     <div class="tab-content">
                         <div class="tab-pane active" role="tabpanel" aria-expanded="true">
 
-                            {{ html()->modelForm($lead_source, 'PATCH', route('admin.client.lead_source.update', [$client, $lead_source]))->class('form-horizontal')->open() }}
+                            {{-- TODO: remove novalidate --}}
+                            {{ html()->modelForm($lead_source, 'PATCH', route('admin.client.lead_source.update', [$client, $lead_source]))->class('form-horizontal')->novalidate()->open() }}
 
                                 <div class="card">
 
@@ -105,9 +106,9 @@
 
                                         {{-- Additional type-specific fields --}}
 
-                                        <h2 class="h5">{{ $lead_source_type_classname::getName() }} Fields</h2>
+                                        <h2 class="h5">{{ $source_config_type_classname::getName() }} Fields</h2>
 
-                                        @include($lead_source_type_classname::getEditView())
+                                        @include($source_config_type_classname::getEditView())
                         
                                     </div> <!-- .card-body -->
 

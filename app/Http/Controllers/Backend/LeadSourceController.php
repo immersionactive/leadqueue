@@ -51,7 +51,7 @@ class LeadSourceController extends Controller
 
         if ($source_config_type_classname === false) {
             // TODO: Should this be a more specific kind of exception?
-            throw new \Exception('"' . $source_config_type_slug . '" is not a recognized lead source type slug.');
+            throw new \Exception('"' . $source_config_type_slug . '" is not a recognized source config type slug.');
         }
        
         return view('backend.client.lead_source.create', [
@@ -76,7 +76,9 @@ class LeadSourceController extends Controller
             throw new \Exception('"' . $source_config_type_slug . '" is not a recognized lead source type slug.');
         }
 
-        $rules = $this->getValidationRules();
+        // Validate the request
+
+        $rules = $this->getValidationRules(null);
         $rules += $source_config_type_classname::getStoreRules();
         $validator = Validator::make($request->all(), $rules);
 
@@ -127,12 +129,17 @@ class LeadSourceController extends Controller
     public function edit(Client $client, LeadSource $lead_source)
     {
 
-        // TODO: how to get the $lead_source_type_classname from $lead_source?
-        var_dump($lead_source->source_config_type); exit;
-        
+        // TODO: abstract into shared method
+        $source_config_type_classname = $this->source_config_type_registry->getByModelClassname($lead_source->source_config_type);
+
+        if (!$source_config_type_classname) {
+            throw new \Exception('"' . $lead_source->source_config_type . '" is not a recognized source config type classname.');
+        }
+
         return view('backend.client.lead_source.edit', [
             'client' => $client,
-            'lead_source' => $lead_source
+            'lead_source' => $lead_source,
+            'source_config_type_classname' => $source_config_type_classname
         ]);
 
     }
@@ -145,11 +152,41 @@ class LeadSourceController extends Controller
     public function update(UpdateClientLeadSourceRequest $request, Client $client, LeadSource $lead_source)
     {
 
+        // TODO: abstract into shared method
+        $source_config_type_classname = $this->source_config_type_registry->getByModelClassname($lead_source->source_config_type);
+
+        if (!$source_config_type_classname) {
+            throw new \Exception('"' . $lead_source->source_config_type . '" is not a recognized source config type classname.');
+        }
+
+        // Validate the request
+
+        $rules = $this->getValidationRules($lead_source->id);
+        $rules += $source_config_type_classname::getUpdateRules($lead_source);
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->route('admin.client.lead_source.edit', [$client, $lead_source])
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        // Update the lead source (but don't save it yet)
+
         $lead_source->name = $request->input('name');
         $lead_source->is_active = !!$request->input('is_active');
         $lead_source->notes = mb_strlen($request->input('notes')) ? $request->input('notes') : ''; // because the ConvertEmptyStringsToNull middleware breaks this otherwise
 
-        $lead_source->save();
+        // Update the source config (but don't save it yet)
+
+        $source_config_type_classname::patchConfig($request, $lead_source, $lead_source->source_config);
+
+        // Save both the lead source and the source config
+
+        $lead_source->push();
+
+        // Log the action
 
         $user = auth()->user();
         Log::info('User ' . $user->id . ' (' . $user->email . ') updated lead source ' . $lead_source->id . ' (' . $lead_source->name . ') for client ' . $client->id . ' (' . $client->name . ')');
@@ -170,16 +207,21 @@ class LeadSourceController extends Controller
 
     }
 
-    protected function getValidationRules()
+    /**
+     * @param string $mode Either "store" or "update"
+     * @return array
+     */
+    protected function getValidationRules($lead_source_id): array
     {
+
+        // TODO: honor $mode
 
         return [
             'name' => [
                 'required',
                 'max:255',
                 // TODO: only require this to be unique in the scope of the owning client
-                // TODO: exclude the current ID when editing an existing record
-                'unique:lead_sources',
+                'unique:lead_sources' . ($lead_source_id ? ',name,' . $lead_source_id : ''),
             ]
         ];
 

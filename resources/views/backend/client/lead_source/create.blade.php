@@ -30,7 +30,8 @@
                     <div class="tab-content">
                         <div class="tab-pane active" role="tabpanel" aria-expanded="true">
 
-                            {{ html()->form('POST', route('admin.client.lead_source.store', [$client, $source_config_type_classname::getSlug()]))->class('form-horizontal')->open() }}
+                            {{-- TODO: remove novalidate --}}
+                            {{ html()->form('POST', route('admin.client.lead_source.store', [$client, $source_config_type_classname::getSlug()]))->class('form-horizontal')->novalidate()->open() }}
 
                                 <div class="card">
 

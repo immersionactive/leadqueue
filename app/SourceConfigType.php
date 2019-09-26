@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Http\Requests\Backend\StoreClientLeadSourceRequest;
+use App\Http\Requests\Backend\UpdateClientLeadSourceRequest;
 use App\Models\LeadSource;
 use App\Models\SourceConfig;
 
@@ -15,6 +16,12 @@ abstract class SourceConfigType
      * @return string
      */
     abstract public static function getName(): string;
+
+    /**
+     * @todo Document this method.     
+     * @return string
+     */
+    abstract public static function getModelClassname(): string;
 
     /**
      * Should return the name of the source config type as a slug, suitable for
@@ -48,7 +55,7 @@ abstract class SourceConfigType
      * @todo Document this method.
      * @return array
      */
-    abstract public static function getUpdateRules(): array;
+    abstract public static function getUpdateRules(LeadSource $lead_source): array;
 
     /**
      * @todo Document this method.
@@ -60,6 +67,6 @@ abstract class SourceConfigType
      * @todo Document this method.
      * @return SourceConfig
      */
-    // abstract public static function patchConfig(StoreClientLeadSourceRequest $request, LeadSource $lead_source, SourceConfig $config): SourceConfig;
+    abstract public static function patchConfig(UpdateClientLeadSourceRequest $request, LeadSource $lead_source, SourceConfig $config): void;
 
 }
