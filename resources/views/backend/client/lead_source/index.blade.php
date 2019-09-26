@@ -97,6 +97,12 @@
                                                             </a>
                                                         @endcan
 
+                                                        @can('client.lead_source.lead.index')
+                                                            <a href="{{ route('admin.client.lead_source.lead.index', [$client, $lead_source]) }}" data-toggle="tooltip" data-placement="top" title="View Leads" class="btn btn-info">
+                                                                <i class="fas fa-list"></i>
+                                                            </a>
+                                                        @endcan
+
                                                         @can('client.lead_source.delete')
                                                             <a href="{{ route('admin.client.lead_source.destroy', [$client, $lead_source]) }}"
                                                                data-method="delete"

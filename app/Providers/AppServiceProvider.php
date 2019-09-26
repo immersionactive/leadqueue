@@ -90,5 +90,15 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->make(SourceConfigTypeRegistry::class);
 
+        Blade::directive('request_headers_json', function ($expression) {
+
+            return '<?php
+                $request_headers_json = ' . $expression . ';
+                $request_headers = json_decode($request_headers_json);
+                echo "<pre>" . json_encode($request_headers, JSON_PRETTY_PRINT) . "</pre>";
+                ?>';
+
+        });
+
     }
 }

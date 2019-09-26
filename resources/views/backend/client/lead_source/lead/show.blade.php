@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 
-@section('title', $lead_source->name . ' < Lead Sources < ' . $client->name);
+@section('title', 'TODO')
 
 @section('breadcrumb-links')
     {{-- @include('backend.client.includes.breadcrumb-links') --}}
@@ -20,16 +20,6 @@
                     </h4>
                 </div>
 
-                <div class="col-sm-7 pull-right">
-                    
-                    <div class="btn-toolbar float-right" role="toolbar" aria-label="@lang('labels.general.toolbar_btn_groups')">
-                        @can('client.lead_source.edit', $client)
-                            <a href="{{ route('admin.client.lead_source.edit', [$client, $lead_source]) }}" class="btn btn-success ml-1" data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
-                        @endcan
-                    </div>
-
-                </div>
-
             </div>
 
             <div class="row mt-4">
@@ -40,31 +30,34 @@
                     <div class="tab-content">
                         <div class="tab-pane active" role="tabpanel" aria-expanded="true">
 
+                            <h2 class="h4">{{ $lead_source->name }}: Leads Received: Lead {{ $lead->id }} Detail</h2>
+
                             <div class="table-responsive">
                                 <table class="table table-hover">
                                     <tbody>
 
-                                        {{-- Name --}}
-
                                         <tr>
-                                            <th>Name</th>
-                                            <td>{{ $lead_source->name }}</td>
+                                            <th scope="row">ID</th>
+                                            <td>{{ $lead->id }}</td>
                                         </tr>
 
-                                        {{-- Active --}}
+                                        <tr>
+                                            <th scope="row">Date/Time Received</th>
+                                            <td>{{ timezone()->convertToLocal($lead->created_at) }} ({{ $lead->created_at->diffForHumans() }})</td>
+                                        </tr>
 
                                         <tr>
-                                            <th>Active</th>
+                                            <th scope="row">Request Method</th>
+                                            <td>{{ $lead->request_method }}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <th scope="row">Request Headers</th>
                                             <td>
-                                                @include('backend.includes.partials.yn-badge', ['active' => $lead_source->is_active])
+                                                <pre>
+                                                    @request_headers_json($lead->request_headers_json)
+                                                </pre>
                                             </td>
-                                        </tr>
-
-                                        {{-- Notes --}}
-
-                                        <tr>
-                                            <th>Notes</th>
-                                            <td>{!! nl2br(e($lead_source->notes)) !!}</td>
                                         </tr>
 
                                     </tbody>

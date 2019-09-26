@@ -20,4 +20,9 @@ class LeadSource extends Model
         return $this->morphTo();
     }
 
+    public function leads()
+    {
+        return $this->hasMany('App\Models\Lead');
+    }
+
 }

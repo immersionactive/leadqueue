@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Client;
+use App\Models\Lead;
 use App\Models\LeadSource;
 
 Breadcrumbs::for('admin.dashboard', function ($trail) {
@@ -45,6 +46,16 @@ Breadcrumbs::for('admin.client.lead_source.create', function ($trail, Client $cl
 Breadcrumbs::for('admin.client.lead_source.edit', function ($trail, Client $client, LeadSource $lead_source) {
     $trail->parent('admin.client.lead_source.show', $client, $lead_source);
     $trail->push('Edit Lead Source', route('admin.client.lead_source.edit', [$client, $lead_source]));
+});
+
+Breadcrumbs::for('admin.client.lead_source.lead.index', function ($trail, Client $client, LeadSource $lead_source) {
+    $trail->parent('admin.client.lead_source.show', $client, $lead_source);
+    $trail->push('Leads', route('admin.client.lead_source.lead.index', [$client, $lead_source]));
+});
+
+Breadcrumbs::for('admin.client.lead_source.lead.show', function ($trail, Client $client, LeadSource $lead_source, Lead $lead) {
+    $trail->parent('admin.client.lead_source.lead.index', $client, $lead_source);
+    $trail->push('Leads', route('admin.client.lead_source.lead.show', [$client, $lead_source, $lead]));
 });
 
 require __DIR__.'/auth.php';

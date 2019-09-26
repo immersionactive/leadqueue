@@ -14,3 +14,4 @@ Route::get('/client/{client}/lead_source/create/{lead_source_type}', 'LeadSource
 Route::post('/client/{client}/lead_source/{lead_source_type}', 'LeadSourceController@store')->name('client.lead_source.store');
 
 Route::resource('client.lead_source', 'LeadSourceController')->except(['create', 'store']);
+Route::resource('client.lead_source.lead', 'LeadController')->only(['index', 'show']);

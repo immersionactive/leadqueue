@@ -36,6 +36,14 @@
                         <div class="tab-content">
                             <div class="tab-pane active" role="tabpanel" aria-expanded="true">
 
+                                <h2 class="h4">
+                                    @if ($lead_source->exists)
+                                        Edit Lead Source: {{ $lead_source->name }}
+                                    @else
+                                        New Lead Source
+                                    @endif
+                                </h2>
+
                                 <h2 class="h5">General Fields</h2>
 
                                 {{-- Name --}}
