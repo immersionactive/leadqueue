@@ -16,9 +16,4 @@ class WebflowSourceConfig extends SourceConfig
         return $this->morphOne('App\Models\LeadSource', 'source_config');
     }
 
-    public function getURL()
-    {
-        return route('api.webflow.insert-lead', $this);
-    }
-
 }

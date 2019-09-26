@@ -32,9 +32,6 @@ class LeadQueueWebflowSourceServiceProvider extends ServiceProvider
         // ...but laravel/cashier (an official package) does it in the registerResources() method:
         // https://github.com/laravel/cashier/blob/10.0/src/CashierServiceProvider.php
         $this->loadViewsFrom(__DIR__ . '/../resources/views/', 'lead-queue-webflow-source');
-
-        $this->loadRoutesFrom(__DIR__ . '/../routes/api.php');
-
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations/');
 
         $source_config_type_registry->register(WebflowSourceConfigType::class);

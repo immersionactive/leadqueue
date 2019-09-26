@@ -73,7 +73,7 @@
                                                 <td>TODO</td>
                                                 <td>
                                                     @if ($lead_source->source_config)
-                                                        {{ $lead_source->source_config->getURL() }}
+                                                        {{ route('api.insert', $lead_source) }}
                                                     @else
                                                         <span class="badge badge-danger">Config Not Found</span>
                                                     @endif
