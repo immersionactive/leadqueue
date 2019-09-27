@@ -92,10 +92,34 @@ class AppServiceProvider extends ServiceProvider
 
         Blade::directive('request_headers_json', function ($expression) {
 
+            // Yes, this is really how custom directives work in Blade. Yikes.
+
             return '<?php
                 $request_headers_json = ' . $expression . ';
-                $request_headers = json_decode($request_headers_json);
-                echo "<pre>" . json_encode($request_headers, JSON_PRETTY_PRINT) . "</pre>";
+                $request_headers_object = json_decode($request_headers_json);
+                // Convert the object to an array, so we can sort it alphabetically
+                $request_headers_array = [];
+                foreach ($request_headers_object as $key => $value) {
+                    $request_headers_array[$key] = $value;
+                }
+                ksort($request_headers_array);
+                // Render output
+                echo "<table class=\"table table-bordered\">";
+                echo "<tbody>";
+                foreach ($request_headers_array as $header_name => $header_values) {
+                    $is_first = true;
+                    foreach ($header_values as $header_value) {
+                        echo "<tr>";
+                        if ($is_first) {
+                            echo "<th scope=\"row\"" . (count($header_values) > 1 ? " rowspan=\"" . count($header_values) . "\"" : "") . ">" . e($header_name) . "</th>";
+                            $is_first = false;
+                        }
+                        echo "<td>" . e($header_value) . "</td>";
+                        echo "</tr>";
+                    }
+                }
+                echo "</tbody>";
+                echo "</table>";
                 ?>';
 
         });

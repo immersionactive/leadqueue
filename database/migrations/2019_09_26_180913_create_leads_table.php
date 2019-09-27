@@ -19,6 +19,7 @@ class CreateLeadsTable extends Migration
             
             $table->bigIncrements('id');
             $table->unsignedBigInteger('lead_source_id');
+            $table->enum('status', ['', '']);
             $table->text('request_url');
             $table->string('request_method', 255);
             $table->text('request_headers_json');

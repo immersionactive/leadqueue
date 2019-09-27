@@ -203,6 +203,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         ImmersionActive\LeadQueueWebflowSource\LeadQueueWebflowSourceServiceProvider::class,
+        ImmersionActive\LeadQueueGravityFormsSource\LeadQueueGravityFormsSourceServiceProvider::class,
 
     ],
 
