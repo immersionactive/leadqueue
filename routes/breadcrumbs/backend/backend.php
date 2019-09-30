@@ -55,7 +55,7 @@ Breadcrumbs::for('admin.client.lead_source.lead.index', function ($trail, Client
 
 Breadcrumbs::for('admin.client.lead_source.lead.show', function ($trail, Client $client, LeadSource $lead_source, Lead $lead) {
     $trail->parent('admin.client.lead_source.lead.index', $client, $lead_source);
-    $trail->push('Leads', route('admin.client.lead_source.lead.show', [$client, $lead_source, $lead]));
+    $trail->push('View Lead ' . $lead->id, route('admin.client.lead_source.lead.show', [$client, $lead_source, $lead]));
 });
 
 require __DIR__.'/auth.php';

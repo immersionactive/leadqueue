@@ -38,7 +38,8 @@
                                         <tr>
                                             <th scope="col">ID</th>
                                             <th scope="col">Date/Time Received</th>
-                                            <th scope="col"></th>
+                                            <th scope="col">IP Address</th>
+                                            <th scope="col">@lang('labels.general.actions')</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -46,6 +47,7 @@
                                             <tr>
                                                 <td>{{ $lead->id }}</td>
                                                 <td>{{ timezone()->convertToLocal($lead->created_at) }} ({{ $lead->created_at->diffForHumans() }})</td>
+                                                <td>{{ $lead->request_origin_ip }}</td>
                                                 <td>
 
                                                     <div class="btn-group" role="group" aria-label="@lang('labels.backend.access.users.user_actions')">

@@ -36,11 +36,13 @@ class LeadSourceController extends Controller
     {
 
         $lead_sources = LeadSource::where('client_id', $client->id)->paginate(20);
+        $source_config_types_by_model_classname = $this->source_config_type_registry->getAllByModelClassname();
 
         return view('backend.client.lead_source.index', [
             'client' => $client,
             'lead_sources' => $lead_sources,
-            'source_config_type_classnames' => $this->source_config_type_registry->getRegisteredTypes()
+            'source_config_type_classnames' => $this->source_config_type_registry->getRegisteredTypes(),
+            'source_config_types_by_model_classname' => $source_config_types_by_model_classname
         ]);
 
     }

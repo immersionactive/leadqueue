@@ -6,6 +6,7 @@ use App\Http\Requests\Backend\StoreClientLeadSourceRequest;
 use App\Http\Requests\Backend\UpdateClientLeadSourceRequest;
 use App\Models\LeadSource;
 use App\Models\SourceConfig;
+use Illuminate\Http\Request;
 
 abstract class SourceConfigType
 {
@@ -68,5 +69,11 @@ abstract class SourceConfigType
      * @return SourceConfig
      */
     abstract public static function patchConfig(UpdateClientLeadSourceRequest $request, LeadSource $lead_source, SourceConfig $config): void;
+
+    /**
+     * @todo Document this method.
+     * @return void
+     */
+    abstract public static function processInsert(Request $request, LeadSource $lead_source): void;
 
 }

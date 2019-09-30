@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class DatabaseSeeder extends Seeder
 {
+    
     use TruncateTable;
 
     /**
@@ -22,8 +23,14 @@ class DatabaseSeeder extends Seeder
             'sessions',
         ]);
 
-        $this->call(AuthTableSeeder::class);
+        $this->call([
+            AuthTableSeeder::class,
+            ClientsTableSeeder::class,
+            GravityFormsSourceConfigsTableSeeder::class,
+            LeadSourcesTableSeeder::class,
+        ]);
 
         Model::reguard();
     }
+
 }

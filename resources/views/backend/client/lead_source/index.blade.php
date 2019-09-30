@@ -70,7 +70,13 @@
                                                         {{ $lead_source->name }}
                                                     @endif
                                                 </td>
-                                                <td>TODO</td>
+                                                <td>
+                                                    @if (array_key_exists($lead_source->source_config_type, $source_config_types_by_model_classname)) 
+                                                        {{ $source_config_types_by_model_classname[$lead_source->source_config_type] }}
+                                                    @else
+                                                        <span class="badge badge-danger">Unknown: {{ $lead_source->source_config_type }}</span>
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     @if ($lead_source->source_config)
                                                         {{ route('api.insert', $lead_source) }}

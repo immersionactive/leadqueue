@@ -7,6 +7,7 @@ use App\Http\Requests\Backend\StoreClientLeadSourceRequest;
 use App\Http\Requests\Backend\UpdateClientLeadSourceRequest;
 use App\Models\LeadSource;
 use App\Models\SourceConfig;
+use Illuminate\Http\Request;
 use ImmersionActive\LeadQueueWebflowSource\Models\WebflowSourceConfig;
 
 class WebflowSourceConfigType extends SourceConfigType
@@ -91,6 +92,11 @@ class WebflowSourceConfigType extends SourceConfigType
         $config->webflow_site_id = $request->input('source_config.webflow_site_id');
         $config->webflow_form_name = $request->input('source_config.webflow_form_name');
 
+    }
+
+    public static function processInsert(Request $request, LeadSource $lead_source): void
+    {
+        throw new \Exception('unimplemented');
     }
 
 }

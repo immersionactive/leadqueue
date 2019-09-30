@@ -47,6 +47,11 @@
                                         </tr>
 
                                         <tr>
+                                            <th scope="row">IP Address</th>
+                                            <td>{{ $lead->request_origin_ip }}</td>
+                                        </tr>
+
+                                        <tr>
                                             <th scope="row">Request Method</th>
                                             <td>{{ $lead->request_method }}</td>
                                         </tr>
@@ -54,9 +59,26 @@
                                         <tr>
                                             <th scope="row">Request Headers</th>
                                             <td>
-                                                <pre>
-                                                    @request_headers_json($lead->request_headers_json)
-                                                </pre>
+                                                @request_headers_json($lead->request_headers_json)
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <th scope="row">Request Body (Raw)</th>
+                                            <td>{{ $lead->request_body_raw }}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <th scope="row">Request Body (Formatted)</th>
+                                            <td>
+                                                @if ($lead->request_content_type === 'application/json')
+                                                    <pre>{!! json_encode(json_decode($lead->request_body_json), JSON_PRETTY_PRINT) !!}</pre>
+                                                @elseif ($lead->request_content_type === 'application/x-www-form-urlencoded')
+                                                    {{-- TODO: actually format this --}}
+                                                    @form_request_body_json($lead->request_body_json)
+                                                @else
+                                                    No body parser available for this Content-Type.
+                                                @endif
                                             </td>
                                         </tr>
 

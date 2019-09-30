@@ -41,4 +41,27 @@ class SourceConfigTypeRegistry
         return $rv;
     }
 
+    /**
+     * Returns an array of registered SouceConfigTypes, with model classnames
+     * as keys and names as values. E.g.:
+     *
+     * [
+     *     '' => 'Webflow Webhook'
+     * ]
+     *
+     * @return array
+     */
+    public function getAllByModelClassname(): array
+    {
+
+        $output = [];
+
+        foreach ($this->type_classnames as $type_classname) {
+            $output[$type_classname::getModelClassname()] = $type_classname::getName();
+        }
+
+        return $output;
+
+    }
+
 }

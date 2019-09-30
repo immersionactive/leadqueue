@@ -124,5 +124,26 @@ class AppServiceProvider extends ServiceProvider
 
         });
 
+        Blade::directive('form_request_body_json', function ($expression) {
+
+            return '<?php
+                $request_body_json = ' . $expression . ';
+                if (mb_strlen($request_body_json) > 0) {
+                    $request_body = json_decode($request_body_json);
+                    echo "<table class=\"table table-bordered\">";
+                    echo "<tbody>";
+                    foreach ($request_body as $name => $value) {
+                        echo "<tr>";
+                        echo "<th scope=\"row\">" . e($name) . "</th>";
+                        echo "<td>" . e($value) . "</td>";
+                        echo "</tr>";                        
+                    }
+                    echo "</tbody>";
+                    echo "</table>";
+                }
+                ?>';
+
+        });
+
     }
 }

@@ -7,6 +7,7 @@ use App\Http\Requests\Backend\StoreClientLeadSourceRequest;
 use App\Http\Requests\Backend\UpdateClientLeadSourceRequest;
 use App\Models\LeadSource;
 use App\Models\SourceConfig;
+use Illuminate\Http\Request;
 use ImmersionActive\LeadQueueGravityFormsSource\Models\GravityFormsSourceConfig;
 
 class GravityFormsSourceConfigType extends SourceConfigType
@@ -75,6 +76,17 @@ class GravityFormsSourceConfigType extends SourceConfigType
     }
 
     public static function patchConfig(UpdateClientLeadSourceRequest $request, LeadSource $lead_source, SourceConfig $config): void
+    {
+
+        // TODO
+
+    }
+
+    /**
+     * @todo Document this method.
+     * @return void
+     */
+    public static function processInsert(Request $request, LeadSource $lead_source): void
     {
 
         // TODO
