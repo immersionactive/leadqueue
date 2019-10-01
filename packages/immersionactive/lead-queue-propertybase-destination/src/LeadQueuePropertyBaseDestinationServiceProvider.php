@@ -1,12 +1,12 @@
 <?php
 
-namespace ImmersionActive\LeadQueuePropertyBaseDestination;
+namespace ImmersionActive\LeadQueuePropertybaseDestination;
 
 use App\DestinationConfigTypeRegistry;
 use Illuminate\Support\ServiceProvider;
-use ImmersionActive\LeadQueuePropertyBaseDestination\PropertyBaseDestinationConfigType;
+use ImmersionActive\LeadQueuePropertybaseDestination\PropertybaseDestinationConfigType;
 
-class LeadQueuePropertyBaseDestinationServiceProvider extends ServiceProvider
+class LeadQueuePropertybaseDestinationServiceProvider extends ServiceProvider
 {
 
     /**
@@ -34,7 +34,7 @@ class LeadQueuePropertyBaseDestinationServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../resources/views/', 'lead-queue-propertybase-destination');
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations/');
 
-        $destination_config_type_registry->register(PropertyBaseDestinationConfigType::class);
+        $destination_config_type_registry->register(PropertybaseDestinationConfigType::class);
 
     }
 
