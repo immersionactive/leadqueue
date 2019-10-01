@@ -115,9 +115,12 @@ class LeadSourceController extends Controller
     public function show(Client $client, LeadSource $lead_source)
     {
 
+        $source_config_type_classname = $this->getSourceConfigTypeClassnameByModelClassname($lead_source->source_config_type);
+
         return view('backend.client.lead_source.show', [
             'client' => $client,
-            'lead_source' => $lead_source
+            'lead_source' => $lead_source,
+            'source_config_type_classname' => $source_config_type_classname
         ]);
 
     }

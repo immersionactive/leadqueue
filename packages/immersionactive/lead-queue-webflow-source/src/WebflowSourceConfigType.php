@@ -28,6 +28,11 @@ class WebflowSourceConfigType extends SourceConfigType
         return 'webflow-webhook';
     }
 
+    public static function getShowView(): string
+    {
+        return 'lead-queue-webflow-source::partials.show';
+    }
+
     public static function getCreateView(): string
     {
         return 'lead-queue-webflow-source::partials.create-edit';

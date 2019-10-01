@@ -115,9 +115,12 @@ class LeadDestinationController extends Controller
     public function show(Client $client, LeadDestination $lead_destination)
     {
 
+        $destination_config_type_classname = $this->getDestinationConfigTypeClassnameByModelClassname($lead_destination->destination_config_type);
+
         return view('backend.client.lead_destination.show', [
             'client' => $client,
-            'lead_destination' => $lead_destination
+            'lead_destination' => $lead_destination,
+            'destination_config_type_classname' => $destination_config_type_classname
         ]);
 
     }

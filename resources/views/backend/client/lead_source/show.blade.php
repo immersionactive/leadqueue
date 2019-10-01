@@ -67,6 +67,8 @@
                                             <td>{!! nl2br(e($lead_source->notes)) !!}</td>
                                         </tr>
 
+                                        @include($source_config_type_classname::getShowView())
+
                                     </tbody>
                                 </table>
                             </div>

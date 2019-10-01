@@ -67,6 +67,8 @@
                                             <td>{!! nl2br(e($lead_destination->notes)) !!}</td>
                                         </tr>
 
+                                        @include($destination_config_type_classname::getShowView())
+
                                     </tbody>
                                 </table>
                             </div>

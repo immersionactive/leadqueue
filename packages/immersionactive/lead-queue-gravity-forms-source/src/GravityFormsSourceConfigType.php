@@ -28,6 +28,11 @@ class GravityFormsSourceConfigType extends SourceConfigType
         return 'gravity-forms-webhook';
     }
 
+    public static function getShowView(): string
+    {
+        return 'lead-queue-gravity-forms-source::partials.show';
+    }
+
     public static function getCreateView(): string
     {
         return 'lead-queue-gravity-forms-source::partials.create-edit';

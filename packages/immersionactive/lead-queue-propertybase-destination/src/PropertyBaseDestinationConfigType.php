@@ -27,6 +27,11 @@ class PropertybaseDestinationConfigType extends DestinationConfigType
         return 'propertybase-webtoprospect';
     }
 
+    public static function getShowView(): string
+    {
+        return 'lead-queue-propertybase-destination::partials.show';
+    }
+
     public static function getCreateView(): string
     {
         return 'lead-queue-propertybase-destination::partials.create-edit';

@@ -31,6 +31,12 @@ abstract class DestinationConfigType
     abstract public static function getSlug(): string;
 
     /**
+     * @todo Document this method.
+     * @return string
+     */
+    abstract public static function getShowView(): string;
+
+    /**
      * @todo Document this method.     
      * @todo Does this approach allow the main app to override views?
      * @return string
