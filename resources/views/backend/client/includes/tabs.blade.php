@@ -6,6 +6,9 @@
         <a class="nav-link{{ $active_tab === 'lead_sources' ? ' active' : '' }}" href="{{ route('admin.client.lead_source.index', $client) }}"><i class="fas fa-arrow-alt-circle-down"></i> Lead Sources</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#TODO"><i class="fas fa-arrow-alt-circle-up"></i> Lead Destinations</a>
+        <a class="nav-link{{ $active_tab === 'lead_destinations' ? ' active' : '' }}" href="{{ route('admin.client.lead_destination.index', $client) }}"><i class="fas fa-arrow-alt-circle-up"></i> Lead Destinations</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link{{ $active_tab === 'mappings' ? ' active' : '' }}" href="#TODO"><i class="fas fa-sitemap"></i> Mappings</a>
     </li>
 </ul>

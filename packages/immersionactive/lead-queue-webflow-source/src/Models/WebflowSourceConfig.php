@@ -10,9 +10,4 @@ class WebflowSourceConfig extends SourceConfig
 
     use SoftDeletes;
 
-    public function lead_source()
-    {
-        return $this->morphOne('App\Models\LeadSource', 'source_config');
-    }
-
 }

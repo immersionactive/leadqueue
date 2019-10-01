@@ -3,8 +3,8 @@
 namespace ImmersionActive\LeadQueueGravityFormsSource;
 
 use App\SourceConfigType;
-use App\Http\Requests\Backend\StoreClientLeadSourceRequest;
-use App\Http\Requests\Backend\UpdateClientLeadSourceRequest;
+use App\Http\Requests\Backend\StoreLeadSourceRequest;
+use App\Http\Requests\Backend\UpdateLeadSourceRequest;
 use App\Models\LeadSource;
 use App\Models\SourceConfig;
 use Illuminate\Http\Request;
@@ -65,7 +65,7 @@ class GravityFormsSourceConfigType extends SourceConfigType
 
     }
 
-    public static function buildConfig(StoreClientLeadSourceRequest $request, LeadSource $lead_source): SourceConfig
+    public static function buildConfig(StoreLeadSourceRequest $request, LeadSource $lead_source): SourceConfig
     {
 
         $config = new GravityFormsSourceConfig();
@@ -75,7 +75,7 @@ class GravityFormsSourceConfigType extends SourceConfigType
 
     }
 
-    public static function patchConfig(UpdateClientLeadSourceRequest $request, LeadSource $lead_source, SourceConfig $config): void
+    public static function patchConfig(UpdateLeadSourceRequest $request, LeadSource $lead_source, SourceConfig $config): void
     {
 
         // TODO

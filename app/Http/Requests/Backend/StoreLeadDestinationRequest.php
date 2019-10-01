@@ -4,12 +4,12 @@ namespace App\Http\Requests\Backend;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateClientLeadSourceRequest extends FormRequest
+class StoreLeadDestinationRequest extends FormRequest
 {
 
     public function authorize()
     {
-        return $this->user()->can('client.lead_source.update');
+        return $this->user()->can('client.lead_destination.store');
     }
 
     /**

@@ -37,6 +37,15 @@ class PermissionRoleTableSeeder extends Seeder
 
         Permission::create(['name' => 'client.lead_source.lead.index']);
         Permission::create(['name' => 'client.lead_source.lead.show']);
+        Permission::create(['name' => 'client.lead_source.lead.store']);
+        Permission::create(['name' => 'client.lead_source.lead.update']);
+        Permission::create(['name' => 'client.lead_source.lead.destroy']);
+
+        Permission::create(['name' => 'client.lead_destination.index']);
+        Permission::create(['name' => 'client.lead_destination.show']);
+        Permission::create(['name' => 'client.lead_destination.store']);
+        Permission::create(['name' => 'client.lead_destination.update']);
+        Permission::create(['name' => 'client.lead_destination.destroy']);
 
         /**
          * Create roles and assign corresponding permissions

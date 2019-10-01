@@ -42,7 +42,7 @@ class SourceConfigTypeRegistry
     }
 
     /**
-     * Returns an array of registered SouceConfigTypes, with model classnames
+     * Returns an array of registered SourceConfigTypes, with model classnames
      * as keys and names as values. E.g.:
      *
      * [

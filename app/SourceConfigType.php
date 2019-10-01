@@ -2,8 +2,8 @@
 
 namespace App;
 
-use App\Http\Requests\Backend\StoreClientLeadSourceRequest;
-use App\Http\Requests\Backend\UpdateClientLeadSourceRequest;
+use App\Http\Requests\Backend\StoreLeadSourceRequest;
+use App\Http\Requests\Backend\UpdateLeadSourceRequest;
 use App\Models\LeadSource;
 use App\Models\SourceConfig;
 use Illuminate\Http\Request;
@@ -62,13 +62,13 @@ abstract class SourceConfigType
      * @todo Document this method.
      * @return SourceConfig
      */
-    abstract public static function buildConfig(StoreClientLeadSourceRequest $request, LeadSource $lead_source): SourceConfig;
+    abstract public static function buildConfig(StoreLeadSourceRequest $request, LeadSource $lead_source): SourceConfig;
 
     /**
      * @todo Document this method.
      * @return SourceConfig
      */
-    abstract public static function patchConfig(UpdateClientLeadSourceRequest $request, LeadSource $lead_source, SourceConfig $config): void;
+    abstract public static function patchConfig(UpdateLeadSourceRequest $request, LeadSource $lead_source, SourceConfig $config): void;
 
     /**
      * @todo Document this method.

@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Backend;
 
 use DB;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Backend\StoreClientLeadSourceRequest;
-use App\Http\Requests\Backend\UpdateClientLeadSourceRequest;
+use App\Http\Requests\Backend\StoreLeadSourceRequest;
+use App\Http\Requests\Backend\UpdateLeadSourceRequest;
 use App\SourceConfigTypeRegistry;
 use App\Models\Client;
 use App\Models\LeadSource;
@@ -67,7 +67,7 @@ class LeadSourceController extends Controller
      * doesn't do any validation. Instead, validation is handled here in the
      * controller.
      */
-    public function store(StoreClientLeadSourceRequest $request, Client $client, $source_config_type_slug)
+    public function store(StoreLeadSourceRequest $request, Client $client, $source_config_type_slug)
     {
 
         $source_config_type_classname = $this->getSourceConfigTypeClassnameBySlug($source_config_type_slug);
@@ -144,7 +144,7 @@ class LeadSourceController extends Controller
      * doesn't do any validation. Instead, validation is handled here in the
      * controller.
      */
-    public function update(UpdateClientLeadSourceRequest $request, Client $client, LeadSource $lead_source)
+    public function update(UpdateLeadSourceRequest $request, Client $client, LeadSource $lead_source)
     {
 
         $source_config_type_classname = $this->getSourceConfigTypeClassnameByModelClassname($lead_source->source_config_type);

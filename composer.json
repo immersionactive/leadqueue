@@ -53,7 +53,7 @@
             "App\\": "app/",
             "ImmersionActive\\LeadQueueWebflowSource\\": "packages/immersionactive/lead-queue-webflow-source/src/",
             "ImmersionActive\\LeadQueueGravityFormsSource\\": "packages/immersionactive/lead-queue-gravity-forms-source/src/",
-            "ImmersionActive\\LeadQueuePropertyBaseDestination\\": "packages/immersionactive/lead-queue-propertybase-destination/src/"
+            "ImmersionActive\\LeadQueuePropertybaseDestination\\": "packages/immersionactive/lead-queue-propertybase-destination/src/"
         }
     },
     "autoload-dev": {

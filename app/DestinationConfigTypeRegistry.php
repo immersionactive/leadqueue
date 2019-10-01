@@ -12,4 +12,56 @@ class DestinationConfigTypeRegistry
         $this->type_classnames[] = $type_classname;
     }
 
+    public function getRegisteredTypes(): array
+    {
+        return $this->type_classnames;
+    }
+
+    public function getByModelClassname(string $model_classname)
+    {
+        $rv = false;
+        foreach ($this->type_classnames as $type_classname) {
+            if ($model_classname === $type_classname::getModelClassname()) {
+                $rv = $type_classname;
+                break;
+            }
+        }
+        return $rv;
+    }
+
+    public function getBySlug(string $slug)
+    {
+        $rv = false;
+        foreach ($this->type_classnames as $type_classname) {
+            if ($slug === $type_classname::getSlug()) {
+                $rv = $type_classname;
+                break;
+            }
+        }
+        return $rv;
+    }
+
+    /**
+     * Returns an array of registered DestinationConfigTypes, with model classnames
+     * as keys and names as values. E.g.:
+     *
+     * [
+     *     '' => 'Webflow Webhook'
+     * ]
+     *
+     * @return array
+     */
+    public function getAllByModelClassname(): array
+    {
+
+        $output = [];
+
+        foreach ($this->type_classnames as $type_classname) {
+            $output[$type_classname::getModelClassname()] = $type_classname::getName();
+        }
+
+        return $output;
+
+    }
+
 }
