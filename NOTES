@@ -1,0 +1,35 @@
+
+
+
+Possible approaches to source-mapping-destination:
+
+1. Have a single `mappings` table, that hasMany `mapping_fields`:
+
+   mappings
+   --------------
+   id
+   client_id
+   name
+   source_id
+   destination_id
+   is_active
+
+   mapping_fields
+   --------------
+   source_field_name
+   destination_field_name
+   append_as enum('email', 'phone') nullable
+   destination_append_field_name
+
+   mapping_addl_appends
+   --------------------
+   
+
+   TBD:
+
+   - What about append fields that don't have a corresponding source field (e.g., "Recent Home Buyer")?
+
+     Perhaps these could be a separate "Additional Append Fields" section on the mapping form?
+
+
+

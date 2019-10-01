@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Client;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -14,7 +15,7 @@ class ClientsTableSeeder extends Seeder
     public function run()
     {
         
-        DB::table('clients')->insert([
+        Client::create([
             'name' => 'Test Client',
             'is_active' => true,
             'notes' => ''

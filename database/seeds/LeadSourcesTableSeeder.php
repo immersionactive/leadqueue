@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\LeadSource;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -14,7 +15,7 @@ class LeadSourcesTableSeeder extends Seeder
     public function run()
     {
 
-        DB::table('lead_sources')->insert([
+        LeadSource::create([
             'client_id' => 1,
             'name' => 'Test GF Source',
             'is_active' => true,

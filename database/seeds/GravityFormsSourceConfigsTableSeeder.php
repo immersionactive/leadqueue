@@ -1,5 +1,6 @@
 <?php
 
+use ImmersionActive\LeadQueueGravityFormsSource\Models\GravityFormsSourceConfig;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -14,7 +15,7 @@ class GravityFormsSourceConfigsTableSeeder extends Seeder
     public function run()
     {
         
-        DB::table('gravity_forms_source_configs')->insert([
+        GravityFormsSourceConfig::create([
             // this space intentionally left blank
         ]);
 
