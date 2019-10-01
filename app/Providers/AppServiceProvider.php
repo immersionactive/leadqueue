@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\DestinationConfigTypeRegistry;
 use App\SourceConfigTypeRegistry;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Blade;
@@ -29,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
         }
 
         $this->app->singleton(SourceConfigTypeRegistry::class);
+        $this->app->singleton(DestinationConfigTypeRegistry::class);
 
     }
 
@@ -89,6 +91,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         $this->app->make(SourceConfigTypeRegistry::class);
+        $this->app->make(DestinationConfigTypeRegistry::class);
 
         Blade::directive('request_headers_json', function ($expression) {
 

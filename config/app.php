@@ -202,8 +202,12 @@ return [
         App\Providers\ObserverServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        // Lead Sources
         ImmersionActive\LeadQueueWebflowSource\LeadQueueWebflowSourceServiceProvider::class,
         ImmersionActive\LeadQueueGravityFormsSource\LeadQueueGravityFormsSourceServiceProvider::class,
+
+        // Lead Destinations
+        ImmersionActive\LeadQueuePropertyBaseDestination\LeadQueuePropertyBaseDestinationServiceProvider::class,
 
     ],
 
