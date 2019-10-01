@@ -17,14 +17,15 @@
         "creativeorange/gravatar": "~1.0",
         "davejamesmiller/laravel-breadcrumbs": "^5.0",
         "fideloper/proxy": "^4.0",
+        "immersionactive/propertybase": "dev-master",
+        "immersionactive/usadata-api-client": "dev-master",
         "lab404/laravel-impersonate": "^1.4",
         "langleyfoxall/laravel-nist-password-rules": "^4.0",
         "laravel/framework": "^6.0",
         "laravel/socialite": "^4.1",
         "spatie/laravel-html": "^2.22",
         "spatie/laravel-permission": "^3.0",
-        "torann/geoip": "^1.0",
-        "immersionactive/usadata-api-client": "dev-master"
+        "torann/geoip": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",
@@ -116,6 +117,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/immersionactive/usadata-api-client"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/immersionactive/propertybase"
         }
     ]
 }

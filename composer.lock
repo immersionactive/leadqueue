@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "af20e9dd48cee994cdf4b9cfb43f8cb9",
+    "content-hash": "f420c87fd898625f9877dd210abd767b",
     "packages": [
         {
             "name": "albertcht/invisible-recaptcha",
@@ -1251,6 +1251,42 @@
                 "url"
             ],
             "time": "2019-07-01T23:21:34+00:00"
+        },
+        {
+            "name": "immersionactive/propertybase",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:immersionactive/propertybase.git",
+                "reference": "72519dbfa073b20029a3bff3e7e2cd906aeede88"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/immersionactive/propertybase/zipball/72519dbfa073b20029a3bff3e7e2cd906aeede88",
+                "reference": "72519dbfa073b20029a3bff3e7e2cd906aeede88",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ImmersionActive\\PropertyBase\\": "src/"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Travis Miller",
+                    "email": "travis@immersionactive.com"
+                }
+            ],
+            "description": "PHP utilities for interacting with PropertyBase. (Currently, only the WebToProspect REST API is supported.)",
+            "support": {
+                "source": "https://github.com/immersionactive/propertybase/tree/master",
+                "issues": "https://github.com/immersionactive/propertybase/issues"
+            },
+            "time": "2019-09-30T18:20:02+00:00"
         },
         {
             "name": "immersionactive/usadata-api-client",
@@ -8460,6 +8496,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "immersionactive/propertybase": 20,
         "immersionactive/usadata-api-client": 20,
         "roave/security-advisories": 20
     },
