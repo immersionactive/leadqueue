@@ -1,28 +1,20 @@
 <?php
 
-namespace App\Models;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class LeadSource extends Model
+class LeadDestination extends Model
 {
-    
-    use SoftDeletes;
 
     public function client()
     {
         return $this->belongsTo('App\Models\Client');
     }
 
-    public function source_config()
+    public function destination_config()
     {
         return $this->morphTo();
-    }
-
-    public function leads()
-    {
-        return $this->hasMany('App\Models\Lead');
     }
 
     public function mappings()

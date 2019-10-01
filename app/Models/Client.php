@@ -15,4 +15,14 @@ class Client extends Model
         return $this->hasMany('App\Models\LeadSource');
     }
 
+    // public function lead_destinations()
+    // {
+    //     return $this->hasMany('App\Models\LeadDestination');
+    // }
+
+    public function mappings()
+    {
+        return $this->hasMany('App\Models\Mapping');
+    }
+
 }
