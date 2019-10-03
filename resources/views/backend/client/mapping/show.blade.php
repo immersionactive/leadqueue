@@ -8,100 +8,95 @@
 
 @section('content')
 
-    <div class="card">
+    @component('backend.client.mapping.components.tabbox', ['client' => $client, 'mappings' => $mappings])
 
-        <div class="card-body">
+        <div class="row mb-4">
 
-            <div class="row">
+            <div class="col-md-6">
+                <h4>{{ $mapping->name }}</h4>
+            </div>
 
-                <div class="col-sm-5">
-                    <h4 class="card-title mb-0">
-                        {{ $client->name }}
-                    </h4>
-                </div>
+            @canany(['client.mapping.update', 'client.mapping.destroy'])
+                <div class="col-md-6 pull-right">
 
-                <div class="col-sm-7 pull-right">
-                    
-                    <div class="btn-toolbar float-right" role="toolbar" aria-label="@lang('labels.general.toolbar_btn_groups')">
-                        @can('client.mapping.edit', $client)
-                            <a href="{{ route('admin.client.mapping.edit', [$client, $mapping]) }}" class="btn btn-success ml-1" data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
+                    <div class="btn-group float-right" role="group" aria-label="TODO">
+                       
+                        @can('client.mapping.update', $client)
+                            <a href="{{ route('admin.client.mapping.edit', [$client, $mapping]) }}" class="btn btn-success" data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
                         @endcan
+
+                        @can('client.mapping.destroy', $client)
+                            <a href="{{ route('admin.client.mapping.destroy', [$client, $mapping]) }}"
+                               data-method="delete"
+                               data-trans-button-cancel="@lang('buttons.general.cancel')"
+                               data-trans-button-confirm="@lang('buttons.general.crud.delete')"
+                               data-trans-title="@lang('strings.backend.general.are_you_sure')"
+                               class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="@lang('buttons.general.crud.delete')">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        @endcan
+
                     </div>
 
                 </div>
+            @endcanany
 
-            </div>
+        </div>
 
-            <div class="row mt-4">
-                <div class="col">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <tbody>
 
-                    @include('backend.client.includes.tabs', ['active_tab' => 'mappings', 'client' => $client])
+                    {{-- Name --}}
 
-                    <div class="tab-content">
-                        <div class="tab-pane active" role="tabpanel" aria-expanded="true">
+                    <tr>
+                        <th scope="row">Name</th>
+                        <td>{{ $mapping->name }}</td>
+                    </tr>
 
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <tbody>
+                    {{-- Active --}}
 
-                                        {{-- Name --}}
+                    <tr>
+                        <th scope="row">Active</th>
+                        <td>
+                            @include('backend.includes.partials.yn-badge', ['active' => $mapping->is_active])
+                        </td>
+                    </tr>
 
-                                        <tr>
-                                            <th scope="row">Name</th>
-                                            <td>{{ $mapping->name }}</td>
-                                        </tr>
+                    {{-- Lead Source --}}
 
-                                        {{-- Active --}}
+                    <tr>
+                        <th scope="row">Lead Source</th>
+                        <td>
+                            @can('client.lead_source.show')
+                                <a href="{{ route('admin.client.lead_source.show', [$client, $mapping->lead_source]) }}">{{ $mapping->lead_source->name }}</a>
+                            @else
+                                {{ $mapping->lead_source->name }}
+                            @endcan
+                            @include('backend.includes.partials.yn-badge', ['active' => $mapping->lead_source->is_active, 'yes_text' => 'Active', 'no_text' => 'Inactive'])
+                        </td>
+                    </tr>
 
-                                        <tr>
-                                            <th scope="row">Active</th>
-                                            <td>
-                                                @include('backend.includes.partials.yn-badge', ['active' => $mapping->is_active])
-                                            </td>
-                                        </tr>
+                    {{-- Lead Destination --}}
 
-                                        {{-- Lead Source --}}
+                    <tr>
+                        <th scope="row">Lead Destination</th>
+                        <td>
+                            @can('client.lead_destination.show')
+                                <a href="{{ route('admin.client.lead_destination.show', [$client, $mapping->lead_destination]) }}">{{ $mapping->lead_destination->name }}</a>
+                            @else
+                                {{ $mapping->lead_destination->name }}
+                            @endcan
+                            @include('backend.includes.partials.yn-badge', ['active' => $mapping->lead_destination->is_active, 'yes_text' => 'Active', 'no_text' => 'Inactive'])
+                        </td>
+                    </tr>
 
-                                        <tr>
-                                            <th scope="row">Lead Source</th>
-                                            <td>
-                                                @can('client.lead_source.show')
-                                                    <a href="{{ route('admin.client.lead_source.show', [$client, $mapping->lead_source]) }}">{{ $mapping->lead_source->name }}</a>
-                                                @else
-                                                    {{ $mapping->lead_source->name }}
-                                                @endcan
-                                                @include('backend.includes.partials.yn-badge', ['active' => $mapping->lead_source->is_active, 'yes_text' => 'Active', 'no_text' => 'Inactive'])
-                                            </td>
-                                        </tr>
+                    {{-- TODO --}}
 
-                                        {{-- Lead Destination --}}
+                </tbody>
+            </table>
+        </div>
 
-                                        <tr>
-                                            <th scope="row">Lead Destination</th>
-                                            <td>
-                                                @can('client.lead_destination.show')
-                                                    <a href="{{ route('admin.client.lead_destination.show', [$client, $mapping->lead_destination]) }}">{{ $mapping->lead_destination->name }}</a>
-                                                @else
-                                                    {{ $mapping->lead_destination->name }}
-                                                @endcan
-                                                @include('backend.includes.partials.yn-badge', ['active' => $mapping->lead_destination->is_active, 'yes_text' => 'Active', 'no_text' => 'Inactive'])
-                                            </td>
-                                        </tr>
-
-                                        {{-- TODO --}}
-
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-                    </div> <!-- .tab-content -->
-
-                </div>
-            </div>
-
-        </div> <!-- .card-body -->
-
-    </div> <!-- .card -->
+    @endcomponent
     
 @endsection

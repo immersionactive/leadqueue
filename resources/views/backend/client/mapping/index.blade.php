@@ -8,6 +8,13 @@
 
 @section('content')
 
+    @component('backend.client.mapping.components.tabbox', ['client' => $client, 'mappings' => $mappings])
+
+        <p class="mb-0">Please select a mapping to the left.</p>
+
+    @endcomponent
+
+    {{--
     <div class="card">
 
         <div class="card-body">
@@ -109,5 +116,6 @@
         </div> <!-- .card-body -->
 
     </div> <!-- .card -->
+    --}}
     
 @endsection

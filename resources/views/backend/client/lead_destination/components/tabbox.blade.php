@@ -23,7 +23,7 @@
                         @component('backend.components.index-detail')
 
                             @slot('sidebar')
-                                @include('backend.client.lead_destination.includes.lead-destination-index', ['lead_destinations' => $lead_destinations, 'active_lead_destination_id' => isset($active_lead_destination_id) ? $active_lead_destination_id : null, 'destination_config_type_classnames' => $destination_config_type_classnames])
+                                @include('backend.client.lead_destination.includes.lead-destination-index', ['lead_destinations' => $lead_destinations, 'active_lead_destination_id' => $active_lead_destination_id ?? null, 'destination_config_type_classnames' => $destination_config_type_classnames])
                             @endslot
 
                             <div class="card">

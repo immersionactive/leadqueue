@@ -10,6 +10,7 @@ use Illuminate\Support\ServiceProvider;
 use App\Http\Composers\Backend\SidebarComposer;
 use App\Models\LeadSource;
 use App\Models\LeadDestination;
+use App\Models\Mapping;
 use Illuminate\Routing\Route;
 
 /**
@@ -68,6 +69,21 @@ class ComposerServiceProvider extends ServiceProvider
                 $view->with([
                     'lead_destinations' => $lead_destinations,
                     'destination_config_type_classnames' => $destination_config_type_registry->getRegisteredTypes()
+                ]);
+            }
+        );
+
+        View::composer(
+            [
+                'backend.client.mapping.index',
+                'backend.client.mapping.show',
+                'backend.client.mapping.create-edit',
+            ],
+            function ($view) {
+                $client_id = $view->getData()['client']->id;
+                $mappings = Mapping::where('client_id', $client_id)->orderBy('name')->paginate(20, ['*'], 'mappingPage');
+                $view->with([
+                    'mappings' => $mappings
                 ]);
             }
         );

@@ -55,7 +55,7 @@ Breadcrumbs::for('admin.client.lead_source.create', function ($trail, Client $cl
 
 Breadcrumbs::for('admin.client.lead_source.edit', function ($trail, Client $client, LeadSource $lead_source) {
     $trail->parent('admin.client.lead_source.show', $client, $lead_source);
-    $trail->push('Edit Lead Source', route('admin.client.lead_source.edit', [$client, $lead_source]));
+    $trail->push('Edit', route('admin.client.lead_source.edit', [$client, $lead_source]));
 });
 
 /**
@@ -93,7 +93,7 @@ Breadcrumbs::for('admin.client.lead_destination.create', function ($trail, Clien
 
 Breadcrumbs::for('admin.client.lead_destination.edit', function ($trail, Client $client, LeadDestination $lead_destination) {
     $trail->parent('admin.client.lead_destination.show', $client, $lead_destination);
-    $trail->push('Edit Lead Source', route('admin.client.lead_destination.edit', [$client, $lead_destination]));
+    $trail->push('Edit', route('admin.client.lead_destination.edit', [$client, $lead_destination]));
 });
 
 /**

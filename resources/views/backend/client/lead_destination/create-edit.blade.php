@@ -104,7 +104,11 @@
         <div class="row">
             
             <div class="col">
-                {{ form_cancel(route('admin.client.lead_destination.index', $client), __('buttons.general.cancel')) }}
+                @if ($lead_destination->exists)
+                    {{ form_cancel(route('admin.client.lead_destination.show', [$client, $lead_destination]), __('buttons.general.cancel')) }}
+                @else
+                    {{ form_cancel(route('admin.client.lead_destination.index', $client), __('buttons.general.cancel')) }}
+                @endif
             </div>
 
             <div class="col text-right">
