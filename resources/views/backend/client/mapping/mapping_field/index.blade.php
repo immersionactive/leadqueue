@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 
-@section('title', $client->name . ': Mappings')
+@section('title', $mapping->name . ': Fields')
 
 @section('breadcrumb-links')
     {{-- @include('backend.client.includes.breadcrumb-links') --}}
@@ -23,8 +23,8 @@
                 <div class="col-sm-7 pull-right">
                     
                     <div class="btn-toolbar float-right" role="toolbar" aria-label="@lang('labels.general.toolbar_btn_groups')">
-                        @can('client.mapping.create')
-                            <a href="{{ route('admin.client.mapping.create', $client) }}" class="btn btn-success ml-1" data-toggle="tooltip" title="@lang('labels.general.create_new')"><i class="fas fa-plus-circle"></i></a>
+                        @can('client.mapping.mapping_field.create')
+                            <a href="{{ route('admin.client.mapping.mapping_field.create', [$client, $mapping]) }}" class="btn btn-success ml-1" data-toggle="tooltip" title="@lang('labels.general.create_new')"><i class="fas fa-plus-circle"></i></a>
                         @endcan
                     </div>
 
@@ -44,22 +44,19 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Mapping</th>
-                                            <th scope="col">Active</th>
+                                            <th scope="col">Field</th>
                                             <th scope="col">@lang('labels.general.actions')</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($mappings as $mapping)
+                                        @foreach ($mapping_fields as $mapping_field)
                                             <tr>
-                                                <td>{{ $mapping->name }}</td>
-                                                <td>
-                                                    @include('backend.includes.partials.yn-badge', ['active' => $mapping->is_active])
-                                                </td>
+                                                <td>TODO</td>
                                                 <td>
 
                                                     <div class="btn-group" role="group" aria-label="@lang('labels.backend.access.users.user_actions')">
 
+                                                        {{--
                                                         @can('client.mapping.show')
                                                             <a href="{{ route('admin.client.mapping.show', [$client, $mapping]) }}" data-toggle="tooltip" data-placement="top" title="@lang('buttons.general.crud.view')" class="btn btn-info">
                                                                 <i class="fas fa-eye"></i>
@@ -88,6 +85,7 @@
                                                                 <i class="fas fa-trash"></i>
                                                             </a>
                                                         @endcan
+                                                        --}}
 
                                                     </div>
 
@@ -98,7 +96,7 @@
                                 </table>
                             </div>
 
-                            {{ $mappings->links() }}
+                            {{ $mapping_fields->links() }}
 
                         </div>
                     </div> <!-- .tab-content -->

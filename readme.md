@@ -26,8 +26,6 @@
 ## TODO
 
 * Immediate stuff:
-  * Implement edit mapping route
-  * Implement destroy mapping route
   * Start working on MappingFields CRUD
     * Should we just have a flat naming string, or allow individual sources & destinations to register their own views/validation/storage logic for field definitions?
 
@@ -41,3 +39,4 @@
 * Make sure that all CRUD operations are logged
 * Create .env.example file
 * Build support for dev vs. prod environments into the application
+* UX: Mapping routes (and possibly source and destination routes?): change to a columnar layout (index on left; detail views on right)?

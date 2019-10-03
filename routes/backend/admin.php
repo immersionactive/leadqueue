@@ -22,3 +22,4 @@ Route::post('/client/{client}/lead_destination/{lead_destination_type}', 'LeadDe
 Route::resource('client.lead_destination', 'LeadDestinationController')->except(['create', 'store']);
 
 Route::resource('client.mapping', 'MappingController');
+Route::resource('client.mapping.mapping_field', 'MappingFieldController');

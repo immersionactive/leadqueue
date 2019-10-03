@@ -2,10 +2,13 @@
 
 namespace App\Providers;
 
+use App\SourceConfigTypeRegistry;
 use Illuminate\Support\Facades\View;
 use App\Http\Composers\GlobalComposer;
 use Illuminate\Support\ServiceProvider;
 use App\Http\Composers\Backend\SidebarComposer;
+use App\Models\LeadSource;
+use Illuminate\Routing\Route;
 
 /**
  * Class ComposerServiceProvider.
@@ -15,7 +18,7 @@ class ComposerServiceProvider extends ServiceProvider
     /**
      * Register bindings in the container.
      */
-    public function boot()
+    public function boot(SourceConfigTypeRegistry $source_config_type_registry)
     {
         // Global
         View::composer(
@@ -32,6 +35,24 @@ class ComposerServiceProvider extends ServiceProvider
             'backend.includes.sidebar',
             SidebarComposer::class
         );
+
+        // For lead-source-index.blade.php
+        View::composer(
+            [
+                'backend.client.lead_source.index',
+                'backend.client.lead_source.show',
+                'backend.client.lead_source.create-edit'
+            ],
+            function ($view) use ($source_config_type_registry) {
+                $client_id = $view->getData()['client']->id;
+                $lead_sources = LeadSource::where('client_id', $client_id)->orderBy('name')->paginate(20, ['*'], 'leadSourcePage');
+                $view->with([
+                    'lead_sources' => $lead_sources,
+                    'source_config_type_classnames' => $source_config_type_registry->getRegisteredTypes()
+                ]);
+            }
+        );
+
     }
 
     /**

@@ -53,6 +53,12 @@ class PermissionRoleTableSeeder extends Seeder
         Permission::create(['name' => 'client.mapping.update']);
         Permission::create(['name' => 'client.mapping.destroy']);
 
+        Permission::create(['name' => 'client.mapping.mapping_field.index']);
+        Permission::create(['name' => 'client.mapping.mapping_field.show']);
+        Permission::create(['name' => 'client.mapping.mapping_field.store']);
+        Permission::create(['name' => 'client.mapping.mapping_field.update']);
+        Permission::create(['name' => 'client.mapping.mapping_field.destroy']);
+
         /**
          * Create roles and assign corresponding permissions
          */

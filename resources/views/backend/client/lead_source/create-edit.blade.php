@@ -36,90 +36,112 @@
                         <div class="tab-content">
                             <div class="tab-pane active" role="tabpanel" aria-expanded="true">
 
-                                <h2 class="h4">
-                                    @if ($lead_source->exists)
-                                        Edit Lead Source: {{ $lead_source->name }}
-                                    @else
-                                        New Lead Source
-                                    @endif
-                                </h2>
+                                @component('backend.components.index-detail')
 
-                                <h2 class="h5">General Fields</h2>
+                                    @slot('sidebar')
+                                        @include('backend.client.lead_source.includes.lead-source-index', ['lead_sources' => $lead_sources, 'active_lead_source_id' => $lead_source->id])
+                                    @endslot
 
-                                {{-- Name --}}
+                                    <div class="card">
+                                        <div class="card-body">
 
-                                <div class="form-group row">
-                                    
-                                    {{ html()->label('Name')
-                                        ->class('col-md-2 form-control-label')
-                                        ->for('name')
-                                    }}
+                                            <div class="row mb-4">
 
-                                    <div class="col-md-10">
-                                        {{ html()->text('name', old('name', $lead_source->name))
-                                            ->class('form-control')
-                                            ->placeholder('Name')
-                                            ->attribute('maxlength', 255)
-                                            ->required()
-                                            ->autofocus()
-                                        }}
-                                    </div>
-                                    
-                                </div>
+                                                <div class="col-md-6">
 
-                                {{-- Active --}}
+                                                    <h2 class="h4">
+                                                        @if ($lead_source->exists)
+                                                            {{ $lead_source->name }}
+                                                        @else
+                                                            New Lead Source
+                                                        @endif
+                                                    </h2>
 
-                                <div class="form-group row">
+                                                </div>
+                                                
+                                            </div>
 
-                                    {{ html()->label('Active')
-                                        ->class('col-md-2 form-control-label')
-                                        ->for('is_active')
-                                    }}
+                                            <h2 class="h5">General Fields</h2>
 
-                                    <div class="col-md-10">
+                                            {{-- Name --}}
 
-                                        <div class="checkbox d-flex align-items-center">
-                                            {{-- TODO: Add help text explaining that when a client is deactivated, so is all of their lead processing --}}
-                                            {{ html()->label(
-                                                    html()->checkbox('is_active', old('is_active', $lead_source->is_active))
-                                                          ->class('switch-input')
-                                                          ->id('is_active')
-                                                        . '<span class="switch-slider" data-checked="on" data-unchecked="off"></span>')
-                                                    ->class('switch switch-label switch-pill switch-primary mr-2')
-                                                ->for('is_active')
-                                            }}
-                                        </div>
+                                            <div class="form-group row">
+                                                
+                                                {{ html()->label('Name')
+                                                    ->class('col-md-2 form-control-label')
+                                                    ->for('name')
+                                                }}
 
-                                    </div>
+                                                <div class="col-md-10">
+                                                    {{ html()->text('name', old('name', $lead_source->name))
+                                                        ->class('form-control')
+                                                        ->placeholder('Name')
+                                                        ->attribute('maxlength', 255)
+                                                        ->required()
+                                                        ->autofocus()
+                                                    }}
+                                                </div>
+                                                
+                                            </div>
 
-                                </div>
+                                            {{-- Active --}}
 
-                                {{-- Notes --}}
+                                            <div class="form-group row">
 
-                                <div class="form-group row">
+                                                {{ html()->label('Active')
+                                                    ->class('col-md-2 form-control-label')
+                                                    ->for('is_active')
+                                                }}
 
-                                    {{ html()->label('Notes')->class('col-md-2 form-control-label')->for('notes') }}
+                                                <div class="col-md-10">
 
-                                    <div class="col-md-10">
+                                                    <div class="checkbox d-flex align-items-center">
+                                                        {{-- TODO: Add help text explaining that when a client is deactivated, so is all of their lead processing --}}
+                                                        {{ html()->label(
+                                                                html()->checkbox('is_active', old('is_active', $lead_source->is_active))
+                                                                      ->class('switch-input')
+                                                                      ->id('is_active')
+                                                                    . '<span class="switch-slider" data-checked="on" data-unchecked="off"></span>')
+                                                                ->class('switch switch-label switch-pill switch-primary mr-2')
+                                                            ->for('is_active')
+                                                        }}
+                                                    </div>
 
-                                        {{ html()->textarea('notes', old('notes', $lead_source->notes))
-                                            ->class('form-control')
-                                            ->placeholder('Notes')
-                                        }}
+                                                </div>
 
-                                    </div>
+                                            </div>
 
-                                </div>
+                                            {{-- Notes --}}
 
-                                {{-- Additional type-specific fields --}}
+                                            <div class="form-group row">
 
-                                <h2 class="h5">{{ $source_config_type_classname::getName() }} Fields</h2>
+                                                {{ html()->label('Notes')->class('col-md-2 form-control-label')->for('notes') }}
 
-                                @if ($lead_source->exists)
-                                    @include($source_config_type_classname::getEditView())
-                                @else
-                                    @include($source_config_type_classname::getCreateView())
-                                @endif
+                                                <div class="col-md-10">
+
+                                                    {{ html()->textarea('notes', old('notes', $lead_source->notes))
+                                                        ->class('form-control')
+                                                        ->placeholder('Notes')
+                                                    }}
+
+                                                </div>
+
+                                            </div>
+
+                                            {{-- Additional type-specific fields --}}
+
+                                            <h2 class="h5">{{ $source_config_type_classname::getName() }} Fields</h2>
+
+                                            @if ($lead_source->exists)
+                                                @include($source_config_type_classname::getEditView())
+                                            @else
+                                                @include($source_config_type_classname::getCreateView())
+                                            @endif
+
+                                        </div> <!-- .card-body -->
+                                    </div> <!-- .card -->
+
+                                @endcomponent
 
                             </div> <!-- .tab-pane -->
                         </div> <!-- .tab-content -->

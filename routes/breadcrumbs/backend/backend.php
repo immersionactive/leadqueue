@@ -120,5 +120,14 @@ Breadcrumbs::for('admin.client.mapping.edit', function ($trail, Client $client, 
     $trail->push('Edit Mapping', route('admin.client.mapping.edit', [$client, $mapping]));
 });
 
+/**
+ * Mapping Fields
+ */
+
+Breadcrumbs::for('admin.client.mapping.mapping_field.index', function ($trail, Client $client, Mapping $mapping) {
+    $trail->parent('admin.client.mapping.show', $client, $mapping);
+    $trail->push('Fields', route('admin.client.mapping.mapping_field.index', [$client, $mapping]));
+});
+
 require __DIR__.'/auth.php';
 require __DIR__.'/log-viewer.php';
