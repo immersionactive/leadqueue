@@ -20,3 +20,5 @@ Route::resource('client.lead_source.lead', 'LeadController')->only(['index', 'sh
 Route::get('/client/{client}/lead_destination/create/{lead_destination_type}', 'LeadDestinationController@create')->name('client.lead_destination.create');
 Route::post('/client/{client}/lead_destination/{lead_destination_type}', 'LeadDestinationController@store')->name('client.lead_destination.store');
 Route::resource('client.lead_destination', 'LeadDestinationController')->except(['create', 'store']);
+
+Route::resource('client.mapping', 'MappingController');

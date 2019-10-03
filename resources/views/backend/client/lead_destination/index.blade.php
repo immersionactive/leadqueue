@@ -23,7 +23,7 @@
                 <div class="col-sm-7 pull-right">
                     
                     <div class="btn-toolbar float-right" role="toolbar" aria-label="@lang('labels.general.toolbar_btn_groups')">
-                        @can('admin.client.lead_destination.create')
+                        @can('client.lead_destination.create')
                             <div class="dropdown">
                                 <button class="btn btn-primary dropdown-toggle" type="button" id="TODO" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-plus-circle"></i>

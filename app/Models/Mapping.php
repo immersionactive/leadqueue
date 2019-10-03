@@ -14,12 +14,12 @@ class Mapping extends Model
 
     public function lead_source()
     {
-        return $this->belongsTo('App\Model\LeadSource');
+        return $this->belongsTo('App\Models\LeadSource');
     }
 
     public function lead_destination()
     {
-        return $this->belongsTo('App\Model\LeadDestination');
+        return $this->belongsTo('App\Models\LeadDestination');
     }
 
     public function mapping_fields()
