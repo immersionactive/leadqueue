@@ -109,7 +109,7 @@
                                                             </a>
                                                         @endcan
 
-                                                        @can('client.lead_source.delete')
+                                                        @can('client.lead_source.destroy')
                                                             <a href="{{ route('admin.client.lead_source.destroy', [$client, $lead_source]) }}"
                                                                data-method="delete"
                                                                data-trans-button-cancel="@lang('buttons.general.cancel')"

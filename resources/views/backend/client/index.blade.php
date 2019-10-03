@@ -82,7 +82,7 @@
                                                     </a>
                                                 @endcan
 
-                                                @can('client.delete')
+                                                @can('client.destroy')
                                                     <a href="{{ route('admin.client.destroy', $client) }}"
                                                        data-method="delete"
                                                        data-trans-button-cancel="@lang('buttons.general.cancel')"

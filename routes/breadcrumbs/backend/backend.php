@@ -115,5 +115,10 @@ Breadcrumbs::for('admin.client.mapping.create', function ($trail, Client $client
     $trail->push('Create Mapping', route('admin.client.mapping.create', $client));
 });
 
+Breadcrumbs::for('admin.client.mapping.edit', function ($trail, Client $client, Mapping $mapping) {
+    $trail->parent('admin.client.mapping.index', $client);
+    $trail->push('Edit Mapping', route('admin.client.mapping.edit', [$client, $mapping]));
+});
+
 require __DIR__.'/auth.php';
 require __DIR__.'/log-viewer.php';

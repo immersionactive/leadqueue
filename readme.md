@@ -25,6 +25,12 @@
 
 ## TODO
 
+* Immediate stuff:
+  * Implement edit mapping route
+  * Implement destroy mapping route
+  * Start working on MappingFields CRUD
+    * Should we just have a flat naming string, or allow individual sources & destinations to register their own views/validation/storage logic for field definitions?
+
 * Where can users find a webflow site ID?
 * Refactor: Lead source create routes should probably pass the config type in the querystring, not as a route segment (to avoid potential route collisions)
 * Refactor: merge StoreClientRequest and UpdateClientRequest?

@@ -7,25 +7,26 @@ use App\Models\LeadDestination;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreMappingRequest extends FormRequest
+class UpdateMappingRequest extends FormRequest
 {
 
     public function authorize()
     {
-        return $this->user()->can('client.mapping.store');
+        return $this->user()->can('client.mapping.update');
     }
 
     public function rules()
     {
 
         $client = $this->route('client');
+        $mapping = $this->route('mapping');
 
         return [
             
             'name' => [
                 'required',
                 'max:255',
-                Rule::unique('mappings')->where(function ($query) use ($client) {
+                Rule::unique('mappings')->ignore($mapping->id)->where(function ($query) use ($client) {
                     return $query->where('client_id', $client->id);
                 })
             ],

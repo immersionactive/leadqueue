@@ -78,9 +78,10 @@
                                                                 <i class="fas fa-list"></i>
                                                             </a>
                                                         @endcan
+                                                        --}}
 
-                                                        @can('client.lead_source.delete')
-                                                            <a href="{{ route('admin.client.lead_source.destroy', [$client, $lead_source]) }}"
+                                                        @can('client.mapping.destroy')
+                                                            <a href="{{ route('admin.client.mapping.destroy', [$client, $mapping]) }}"
                                                                data-method="delete"
                                                                data-trans-button-cancel="@lang('buttons.general.cancel')"
                                                                data-trans-button-confirm="@lang('buttons.general.crud.delete')"
@@ -89,7 +90,6 @@
                                                                 <i class="fas fa-trash"></i>
                                                             </a>
                                                         @endcan
-                                                        --}}
 
                                                     </div>
 
