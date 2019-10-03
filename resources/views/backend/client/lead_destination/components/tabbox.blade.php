@@ -15,7 +15,7 @@
         <div class="row mt-4">
             <div class="col">
 
-                @include('backend.client.includes.tabs', ['active_tab' => 'lead_sources', 'client' => $client])
+                @include('backend.client.includes.tabs', ['active_tab' => 'lead_destinations', 'client' => $client])
 
                 <div class="tab-content">
                     <div class="tab-pane active" role="tabpanel" aria-expanded="true">
@@ -23,8 +23,7 @@
                         @component('backend.components.index-detail')
 
                             @slot('sidebar')
-                                {{-- var_dump($lead_sources) --}}
-                                @include('backend.client.lead_source.includes.lead-source-index', ['lead_sources' => $lead_sources, 'active_lead_source_id' => isset($active_lead_source_id) ? $active_lead_source_id : null, 'source_config_type_classnames' => $source_config_type_classnames])
+                                @include('backend.client.lead_destination.includes.lead-destination-index', ['lead_destinations' => $lead_destinations, 'active_lead_destination_id' => isset($active_lead_destination_id) ? $active_lead_destination_id : null, 'destination_config_type_classnames' => $destination_config_type_classnames])
                             @endslot
 
                             <div class="card">

@@ -8,7 +8,7 @@
 
 @section('content')
 
-    @component('backend.client.lead_source.components.tabbox', ['client' => $client, 'lead_sources' => $lead_sources, 'source_config_type_classnames' => $source_config_type_classnames])
+    @component('backend.client.lead_source.components.tabbox', ['client' => $client, 'lead_sources' => $lead_sources, 'active_lead_source_id' => $lead_source->id, 'source_config_type_classnames' => $source_config_type_classnames])
 
         <div class="row mb-4">
 

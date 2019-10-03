@@ -4,17 +4,17 @@
 
         <div class="row">
             <div class="col-sm-8">
-                Lead Sources
+                Lead Destinations
             </div>
             <div class="col-sm-4 pull-right">
-                @can('client.lead_source.create')
+                @can('client.lead_destination.create')
                     <div class="dropdown">
                         <button class="btn btn-primary dropdown-toggle" type="button" id="TODO" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-plus-circle"></i>
                         </button>
                         <div class="dropdown-menu" aria-labelledby="TODO">
-                            @foreach ($source_config_type_classnames as $source_config_type_classname)
-                                <a class="dropdown-item" href="{{ route('admin.client.lead_source.create', [$client, $source_config_type_classname::getSlug()]) }}">{{ $source_config_type_classname::getName() }}</a>
+                            @foreach ($destination_config_type_classnames as $destination_config_type_classname)
+                                <a class="dropdown-item" href="{{ route('admin.client.lead_destination.create', [$client, $destination_config_type_classname::getSlug()]) }}">{{ $destination_config_type_classname::getName() }}</a>
                             @endforeach
                         </div>
                     </div>
@@ -26,17 +26,17 @@
 
     <div class="list-group list-group-flush">
 
-        @if ($lead_sources->count() === 0)
+        @if ($lead_destinations->count() === 0)
             <div class="list-group-item">
-                No lead sources have been created for this client.
+                No lead destinations have been created for this client.
             </div>
         @else
-            @foreach ($lead_sources as $lead_source)
-                <a href="{{ route('admin.client.lead_source.show', [$client, $lead_source]) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center @if (isset($active_lead_source_id) && $lead_source->id === $active_lead_source_id ) active @endif">
+            @foreach ($lead_destinations as $lead_destination)
+                <a href="{{ route('admin.client.lead_destination.show', [$client, $lead_destination]) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center @if (isset($active_lead_destination_id) && $lead_destination->id === $active_lead_destination_id ) active @endif">
                     
-                    {{ $lead_source->name }}
+                    {{ $lead_destination->name }}
 
-                    @if ($lead_source->is_active)
+                    @if ($lead_destination->is_active)
                         <span class="badge badge-success badge-pill">Active</span>
                     @else
                         <span class="badge badge-danger badge-pill">Inactive</span>
@@ -50,4 +50,4 @@
 
 </div> <!-- .card -->
 
-{{ $lead_sources->links() }}
+{{ $lead_destinations->links() }}

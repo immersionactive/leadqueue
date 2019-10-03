@@ -8,79 +8,74 @@
 
 @section('content')
 
-    <div class="card">
+    @component('backend.client.lead_destination.components.tabbox', ['client' => $client, 'lead_destinations' => $lead_destinations, 'active_lead_destination_id' => $lead_destination->id, 'destination_config_type_classnames' => $destination_config_type_classnames])
 
-        <div class="card-body">
+        <div class="row mb-4">
 
-            <div class="row">
+            <div class="col-md-6">
+                <h4>{{ $lead_destination->name }}</h4>
+            </div>
 
-                <div class="col-sm-5">
-                    <h4 class="card-title mb-0">
-                        {{ $client->name }}
-                    </h4>
-                </div>
+            @canany(['client.lead_destination.update', 'client.lead_destination.destroy'])
+                <div class="col-md-6 pull-right">
 
-                <div class="col-sm-7 pull-right">
-                    
-                    <div class="btn-toolbar float-right" role="toolbar" aria-label="@lang('labels.general.toolbar_btn_groups')">
-                        @can('client.lead_destination.edit', $client)
-                            <a href="{{ route('admin.client.lead_destination.edit', [$client, $lead_destination]) }}" class="btn btn-success ml-1" data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
+                    <div class="btn-group float-right" role="group" aria-label="TODO">
+                       
+                        @can('client.lead_destination.update', $client)
+                            <a href="{{ route('admin.client.lead_destination.edit', [$client, $lead_destination]) }}" class="btn btn-success" data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
                         @endcan
+
+                        @can('client.lead_destination.destroy', $client)
+                            <a href="{{ route('admin.client.lead_destination.destroy', [$client, $lead_destination]) }}"
+                               data-method="delete"
+                               data-trans-button-cancel="@lang('buttons.general.cancel')"
+                               data-trans-button-confirm="@lang('buttons.general.crud.delete')"
+                               data-trans-title="@lang('strings.backend.general.are_you_sure')"
+                               class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="@lang('buttons.general.crud.delete')">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        @endcan
+
                     </div>
 
                 </div>
+            @endcanany
 
-            </div>
+        </div>
 
-            <div class="row mt-4">
-                <div class="col">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <tbody>
 
-                    @include('backend.client.includes.tabs', ['active_tab' => 'lead_destinations', 'client' => $client])
+                    {{-- Name --}}
 
-                    <div class="tab-content">
-                        <div class="tab-pane active" role="tabpanel" aria-expanded="true">
+                    <tr>
+                        <th>Name</th>
+                        <td>{{ $lead_destination->name }}</td>
+                    </tr>
 
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <tbody>
+                    {{-- Active --}}
 
-                                        {{-- Name --}}
+                    <tr>
+                        <th>Active</th>
+                        <td>
+                            @include('backend.includes.partials.yn-badge', ['active' => $lead_destination->is_active])
+                        </td>
+                    </tr>
 
-                                        <tr>
-                                            <th>Name</th>
-                                            <td>{{ $lead_destination->name }}</td>
-                                        </tr>
+                    {{-- Notes --}}
 
-                                        {{-- Active --}}
+                    <tr>
+                        <th>Notes</th>
+                        <td>{!! nl2br(e($lead_destination->notes)) !!}</td>
+                    </tr>
 
-                                        <tr>
-                                            <th>Active</th>
-                                            <td>
-                                                @include('backend.includes.partials.yn-badge', ['active' => $lead_destination->is_active])
-                                            </td>
-                                        </tr>
+                    @include($destination_config_type_classname::getShowView())
 
-                                        {{-- Notes --}}
+                </tbody>
+            </table>
+        </div>
 
-                                        <tr>
-                                            <th>Notes</th>
-                                            <td>{!! nl2br(e($lead_destination->notes)) !!}</td>
-                                        </tr>
-
-                                        @include($destination_config_type_classname::getShowView())
-
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-                    </div> <!-- .tab-content -->
-
-                </div>
-            </div>
-
-        </div> <!-- .card-body -->
-
-    </div> <!-- .card -->
+    @endcomponent
     
 @endsection

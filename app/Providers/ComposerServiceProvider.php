@@ -3,11 +3,13 @@
 namespace App\Providers;
 
 use App\SourceConfigTypeRegistry;
+use App\DestinationConfigTypeRegistry;
 use Illuminate\Support\Facades\View;
 use App\Http\Composers\GlobalComposer;
 use Illuminate\Support\ServiceProvider;
 use App\Http\Composers\Backend\SidebarComposer;
 use App\Models\LeadSource;
+use App\Models\LeadDestination;
 use Illuminate\Routing\Route;
 
 /**
@@ -18,7 +20,7 @@ class ComposerServiceProvider extends ServiceProvider
     /**
      * Register bindings in the container.
      */
-    public function boot(SourceConfigTypeRegistry $source_config_type_registry)
+    public function boot(SourceConfigTypeRegistry $source_config_type_registry, DestinationConfigTypeRegistry $destination_config_type_registry)
     {
         // Global
         View::composer(
@@ -49,6 +51,23 @@ class ComposerServiceProvider extends ServiceProvider
                 $view->with([
                     'lead_sources' => $lead_sources,
                     'source_config_type_classnames' => $source_config_type_registry->getRegisteredTypes()
+                ]);
+            }
+        );
+
+        // For lead-destination-index.blade.php
+        View::composer(
+            [
+                'backend.client.lead_destination.index',
+                'backend.client.lead_destination.show',
+                'backend.client.lead_destination.create-edit'
+            ],
+            function ($view) use ($destination_config_type_registry) {
+                $client_id = $view->getData()['client']->id;
+                $lead_destinations = LeadDestination::where('client_id', $client_id)->orderBy('name')->paginate(20, ['*'], 'leadDestinationPage');
+                $view->with([
+                    'lead_destinations' => $lead_destinations,
+                    'destination_config_type_classnames' => $destination_config_type_registry->getRegisteredTypes()
                 ]);
             }
         );

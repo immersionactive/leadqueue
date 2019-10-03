@@ -8,6 +8,15 @@
 
 @section('content')
 
+    @component('backend.client.lead_destination.components.tabbox', ['client' => $client, 'lead_destinations' => $lead_destinations, 'destination_config_type_classnames' => $destination_config_type_classnames])
+
+        <p class="mb-0">Please select a lead destination to the left.</p>
+
+    @endcomponent
+
+@endsection
+
+    {{--
     <div class="card">
 
         <div class="card-body">
@@ -71,13 +80,7 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    {{--
-                                                    @if (array_key_exists($lead_destination->destination_config_type, $destination_config_types_by_model_classname)) 
-                                                        {{ $destination_config_types_by_model_classname[$lead_destination->destination_config_type] }}
-                                                    @else
-                                                        <span class="badge badge-danger">Unknown: {{ $lead_destination->destination_config_type }}</span>
-                                                    @endif
-                                                    --}}
+                                                    TODO
                                                 </td>
                                                 <td>
                                                     @if ($lead_destination->destination_config)
@@ -136,5 +139,4 @@
         </div> <!-- .card-body -->
 
     </div> <!-- .card -->
-    
-@endsection
+    --}}
