@@ -33,3 +33,5 @@
 * Can we enforce delete cascade on the lead_source table on the MySQL level? (Maybe not, since it's a polymorphic relationship to multiple tables)
 * Soft-deleted lead sources still prevent other lead sources with the same name from being created. Maybe we should just delete stuff outright (or disallow deletion, except by admins).
 * Make sure that all CRUD operations are logged
+* Create .env.example file
+* Build support for dev vs. prod environments into the application
