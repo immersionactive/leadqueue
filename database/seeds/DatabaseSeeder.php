@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             ClientsTableSeeder::class,
             GravityFormsSourceConfigsTableSeeder::class,
             LeadSourcesTableSeeder::class,
+            AppendPropertiesTableSeeder::class,
         ]);
 
         Model::reguard();

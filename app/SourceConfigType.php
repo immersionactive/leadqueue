@@ -82,4 +82,20 @@ abstract class SourceConfigType
      */
     abstract public static function processInsert(Request $request, LeadSource $lead_source): void;
 
+    /**
+     * Field-Related Methods
+     */
+
+    /**
+     * @todo Document this method.
+     * @return string
+     */
+    // abstract public static function getCreateFieldView(): string;
+
+    /**
+     * @todo Document this method.
+     * @return string
+     */
+    // abstract public static function getEditFieldView(): string;
+
 }

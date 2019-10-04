@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 
-@section('title', $lead_destination->name . ' < Lead Destinations < ' . $client->name);
+@section('title', $lead_destination->name . ' < Lead Destinations < ' . $client->name)
 
 @section('breadcrumb-links')
     {{-- @include('backend.client.includes.breadcrumb-links') --}}

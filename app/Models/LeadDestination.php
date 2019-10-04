@@ -21,6 +21,11 @@ class LeadDestination extends Model
         return $this->morphTo();
     }
 
+    public function destination_appends()
+    {
+        return $this->hasMany('App\Model\DestinationAppend');
+    }
+
     public function mappings()
     {
         return $this->hasMany('App\Models\Mappings');

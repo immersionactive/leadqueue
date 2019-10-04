@@ -7,8 +7,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\StoreLeadDestinationRequest;
 use App\Http\Requests\Backend\UpdateLeadDestinationRequest;
 use App\DestinationConfigTypeRegistry;
+use App\Models\AppendProperty;
 use App\Models\Client;
 use App\Models\LeadDestination;
+use App\Models\DestinationAppend;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 use Validator;
@@ -51,13 +53,35 @@ class LeadDestinationController extends Controller
     {
 
         $destination_config_type_classname = $this->getDestinationConfigTypeClassnameBySlug($destination_config_type_slug);
+        $destination_config_model_classname = $destination_config_type_classname::getModelClassname();
+        $append_properties = AppendProperty::all();
+
+        /**
+         * Scaffold a new LeadDestination, along with its associated children.
+         */
 
         $lead_destination = new LeadDestination();
+
+        // scaffold the DestinationConfig
+
+        $lead_destination->destination_config = new $destination_config_model_classname;
+
+        // scaffold the DestinationAppends
+
+        foreach ($append_properties as $append_property) {
+
+            $destination_append = new DestinationAppend();
+            $destination_append->append_property_slug = $append_property->slug;
+
+            $lead_destination->destination_appends[] = $destination_append;
+
+        }
        
         return view('backend.client.lead_destination.create-edit', [
             'client' => $client,
             'lead_destination' => $lead_destination,
-            'destination_config_type_classname' => $destination_config_type_classname
+            'destination_config_type_classname' => $destination_config_type_classname,
+            'append_properties' => $append_properties
         ]);
 
     }
@@ -96,6 +120,37 @@ class LeadDestinationController extends Controller
         // Create the destination config (but don't save it yet)
 
         $destination_config = $destination_config_type_classname::buildConfig($request, $lead_destination);
+
+        // Create LeadDestinationAppends
+
+        $destination_appends = [];
+
+        if (is_array($request->input('destination_appends'))) {
+
+            $append_properties = AppendProperty::all();
+
+            foreach ($append_properties as $append_property) {
+
+                $destination_append = new DestinationAppend();
+                $destination_append->append_property_slug = $append_property->slug;
+
+                // Did the request include an entry for this append property?
+                if (array_key_exists($append_property->slug, $request->input('destination_appends'))) {
+                    $destination_append->is_enabled = !!$request->input('destination_appends')[$append_property->slug]['is_enabled'];
+                    // TODO: build the associated destination_append_config
+                } else {
+                    $destination_append->is_enabled = false;
+                }
+
+                $destination_appends[] = $destination_append;
+
+            }
+
+        }
+
+        echo '<pre>' . json_encode($destination_appends, JSON_PRETTY_PRINT) . '</pre>'; exit;
+
+        throw new \Exception('unimplemented');
 
         // Now save both.
         // This might not be the best way to save a morphTo relation.

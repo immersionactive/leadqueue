@@ -18,10 +18,10 @@ class CreateMappingFieldsTable extends Migration
             
             $table->bigIncrements('id');
             $table->unsignedBigInteger('mapping_id');
-            $table->string('source_field_name', 255);
-            $table->string('destination_field_name', 255);
-            $table->enum('append_as', ['email', 'phone' /* TODO */])->nullable();
-            $table->string('destination_appended_field_name', 255);
+            $table->unsignedBigInteger('source_field_id');
+            $table->string('source_field_type', 255);
+            $table->unsignedBigInteger('destination_field_id');
+            $table->string('destination_field_type', 255);
             $table->timestamps();
 
             $table->foreign('mapping_id')

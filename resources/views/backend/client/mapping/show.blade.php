@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 
-@section('title', $mapping->name . ' < Mappings < ' . $client->name);
+@section('title', $mapping->name . ' < Mappings < ' . $client->name)
 
 @section('breadcrumb-links')
     {{-- @include('backend.client.includes.breadcrumb-links') --}}
@@ -8,7 +8,7 @@
 
 @section('content')
 
-    @component('backend.client.mapping.components.tabbox', ['client' => $client, 'mappings' => $mappings])
+    @component('backend.client.mapping.components.tabbox', ['client' => $client, 'mappings' => $mappings, 'active_mapping_id' => $mapping->id])
 
         <div class="row mb-4">
 
@@ -20,6 +20,10 @@
                 <div class="col-md-6 pull-right">
 
                     <div class="btn-group float-right" role="group" aria-label="TODO">
+
+                        @can('client.mapping.mapping_field.index', $client)
+                            <a href="{{ route('admin.client.mapping.mapping_field.index', [$client, $mapping]) }}" class="btn btn-info" data-toggle="tooltip" title="Edit"><i class="fas fa-list"></i></a>
+                        @endcan
                        
                         @can('client.mapping.update', $client)
                             <a href="{{ route('admin.client.mapping.edit', [$client, $mapping]) }}" class="btn btn-success" data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>

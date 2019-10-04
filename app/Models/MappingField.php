@@ -12,4 +12,14 @@ class MappingField extends Model
         return $this->belongsTo('App\Models\Mapping');
     }
 
+    public function source_field_config()
+    {
+        return $this->morphTo();
+    }
+
+    public function destination_field_config()
+    {
+        return $this->morphTo();
+    }
+
 }

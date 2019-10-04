@@ -5,6 +5,7 @@ use App\Models\Lead;
 use App\Models\LeadSource;
 use App\Models\LeadDestination;
 use App\Models\Mapping;
+use App\Models\MappingField;
 
 Breadcrumbs::for('admin.dashboard', function ($trail) {
     $trail->push(__('strings.backend.dashboard.title'), route('admin.dashboard'));
@@ -107,7 +108,7 @@ Breadcrumbs::for('admin.client.mapping.index', function ($trail, Client $client)
 
 Breadcrumbs::for('admin.client.mapping.show', function ($trail, Client $client, Mapping $mapping) {
     $trail->parent('admin.client.mapping.index', $client);
-    $trail->push('View Mapping', route('admin.client.mapping.show', [$client, $mapping]));
+    $trail->push($mapping->name, route('admin.client.mapping.show', [$client, $mapping]));
 });
 
 Breadcrumbs::for('admin.client.mapping.create', function ($trail, Client $client) {
@@ -127,6 +128,11 @@ Breadcrumbs::for('admin.client.mapping.edit', function ($trail, Client $client, 
 Breadcrumbs::for('admin.client.mapping.mapping_field.index', function ($trail, Client $client, Mapping $mapping) {
     $trail->parent('admin.client.mapping.show', $client, $mapping);
     $trail->push('Fields', route('admin.client.mapping.mapping_field.index', [$client, $mapping]));
+});
+
+Breadcrumbs::for('admin.client.mapping.mapping_field.create', function ($trail, Client $client, Mapping $mapping) {
+    $trail->parent('admin.client.mapping.mapping_field.index', $client, $mapping);
+    $trail->push('Create Field', route('admin.client.mapping.mapping_field.create', [$client, $mapping]));
 });
 
 require __DIR__.'/auth.php';

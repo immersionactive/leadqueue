@@ -34,4 +34,18 @@ class MappingFieldController extends Controller
 
     }
 
+    public function create(Client $client, Mapping $mapping)
+    {
+
+        $mapping_field = new MappingField();
+        $mapping_field->mapping_id = $mapping->id;
+
+        return view('backend.client.mapping.mapping_field.create-edit', [
+            'client' => $client,
+            'mapping' => $mapping,
+            'mapping_field' => $mapping_field
+        ]);
+
+    }
+
 }

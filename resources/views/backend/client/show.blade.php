@@ -14,25 +14,9 @@
 
             <div class="card-body">
 
-                <div class="row">
-
-                    <div class="col-sm-5">
-                        <h4 class="card-title mb-0">
-                            {{ $client->name }}
-                        </h4>
-                    </div>
-
-                    <div class="col-sm-7 pull-right">
-                        
-                        <div class="btn-toolbar float-right" role="toolbar" aria-label="@lang('labels.general.toolbar_btn_groups')">
-                            @can('client.edit', $client)
-                                <a href="{{ route('admin.client.edit', $client) }}" class="btn btn-success ml-1" data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
-                            @endcan
-                        </div>
-
-                    </div>
-
-                </div>
+                <h4 class="card-title mb-0">
+                    {{ $client->name }}
+                </h4>
 
                 <div class="row mt-4">
                     <div class="col">
@@ -41,6 +25,10 @@
 
                         <div class="tab-content">
                             <div class="tab-pane active" role="tabpanel" aria-expanded="true">
+
+                                @can('client.edit', $client)
+                                     <a href="{{ route('admin.client.edit', $client) }}" class="btn btn-success mb-4 float-right" data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
+                                @endcan
 
                                 <div class="table-responsive">
                                     <table class="table table-hover">

@@ -8,7 +8,7 @@
 
 @section('content')
 
-    @component('backend.client.mapping.components.tabbox', ['client' => $client, 'mappings' => $mappings])
+    @component('backend.client.mapping.components.tabbox', ['client' => $client, 'mappings' => $mappings, 'active_mapping_id' => $mapping->id])
 
         <h2 class="h4">
             @if ($mapping->exists)

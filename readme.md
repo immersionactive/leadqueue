@@ -29,6 +29,9 @@
   * Start working on MappingFields CRUD
     * Should we just have a flat naming string, or allow individual sources & destinations to register their own views/validation/storage logic for field definitions?
 
+* Document the format that destination fields must accept (e.g., if we insert gender as a string, we need to make sure that the field isn't configured as enum('m','f') in the CRM)
+* Some way to coerce fields from the USADATA response (e.g., booleans -> "Yes"/"No"/"Unknown")
+* Consider what models really need an is_active field - it might be enough to do just client and mapping
 * Where can users find a webflow site ID?
 * Refactor: Lead source create routes should probably pass the config type in the querystring, not as a route segment (to avoid potential route collisions)
 * Refactor: merge StoreClientRequest and UpdateClientRequest?
@@ -39,4 +42,7 @@
 * Make sure that all CRUD operations are logged
 * Create .env.example file
 * Build support for dev vs. prod environments into the application
-* UX: Mapping routes (and possibly source and destination routes?): change to a columnar layout (index on left; detail views on right)?
+* UX: find a good place for created/updated/deleted timestamps (and make sure they're on all model CRUD pages)
+* UX: when there are no records, don't just show an empty table
+* UX: use color consistently (e.g., for buttons, icons...)
+* Client tabs: hide tabs that the user doesn't have access to
