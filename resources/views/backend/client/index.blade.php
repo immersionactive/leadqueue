@@ -17,7 +17,7 @@
                 <div class="col-sm-7">
                     <div class="btn-toolbar float-right" role="toolbar" aria-label="@lang('labels.general.toolbar_btn_groups')">
                         @can('client.create')
-                            <a href="{{ route('admin.client.create') }}" class="btn btn-success ml-1" data-toggle="tooltip" title="@lang('labels.general.create_new')"><i class="fas fa-plus-circle"></i></a>
+                            <a href="{{ route('admin.client.edit') }}" class="btn btn-success ml-1" data-toggle="tooltip" title="@lang('labels.general.create_new')"><i class="fas fa-plus-circle"></i></a>
                         @endcan
                     </div>
                 </div>
@@ -82,8 +82,8 @@
                                                     </a>
                                                 @endcan
 
-                                                @can('client.destroy')
-                                                    <a href="{{ route('admin.client.destroy', $client) }}"
+                                                @can('client.delete')
+                                                    <a href="{{ route('admin.client.delete', $client) }}"
                                                        data-method="delete"
                                                        data-trans-button-cancel="@lang('buttons.general.cancel')"
                                                        data-trans-button-confirm="@lang('buttons.general.crud.delete')"

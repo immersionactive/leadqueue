@@ -46,3 +46,4 @@
 * UX: when there are no records, don't just show an empty table
 * UX: use color consistently (e.g., for buttons, icons...)
 * Client tabs: hide tabs that the user doesn't have access to
+* Logging: tweak all backend controllers to inherit from a superclass that provides a log() method, which automatically records the current user ID and email

@@ -19,20 +19,21 @@ Breadcrumbs::for('admin.client.index', function ($trail) {
     $trail->push('Clients', route('admin.client.index'));
 });
 
-Breadcrumbs::for('admin.client.create', function ($trail) {
-    $trail->parent('admin.client.index');
-    $trail->push('Create Client', route('admin.client.create'));
-});
-
 Breadcrumbs::for('admin.client.show', function ($trail, Client $client) {
     $trail->parent('admin.client.index');
     $trail->push($client->name, route('admin.client.show', $client));
 });
 
-Breadcrumbs::for('admin.client.edit', function ($trail, Client $client) {
-    $trail->parent('admin.client.index');
-    $trail->push($client->name, route('admin.client.show', $client));
-    $trail->push('Edit Client', route('admin.client.edit', $client));
+Breadcrumbs::for('admin.client.edit', function ($trail, Client $client = null) {
+
+    if ($client) {
+        $trail->parent('admin.client.show', $client);
+        $trail->push('Edit', route('admin.client.edit', $client));
+    } else {
+        $trail->parent('admin.client.index');
+        $trail->push('New Client', route('admin.client.edit', $client));
+    }
+
 });
 
 /**

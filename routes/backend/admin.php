@@ -1,13 +1,17 @@
 <?php
 
 use App\Http\Controllers\Backend\DashboardController;
-// use App\Http\Controllers\Backend\ClientController;
 
 // All route names are prefixed with 'admin.'.
 Route::redirect('/', '/admin/dashboard', 301);
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::resource('client', 'ClientController');
+// Route::resource('client', 'ClientController');
+
+Route::get('client', 'ClientController@index')->name('client.index');
+Route::get('client/{client}', 'ClientController@show')->where('client', '[1-9][0-9]*')->name('client.show');
+Route::match(['get', 'post'], 'client/edit/{client?}', 'ClientController@edit')->where('client', '[1-9][0-9]*')->name('client.edit');
+Route::post('client/delete/{client}', 'ClientController@delete')->where('client', '[1-9][0-9]*')->name('client.delete');
 
 // We define these routes separately, because we want them to support an additional /:type/ segment
 Route::get('/client/{client}/lead_source/create/{lead_source_type}', 'LeadSourceController@create')->name('client.lead_source.create');

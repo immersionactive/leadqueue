@@ -8,11 +8,7 @@
 
 @section('content')
 
-    @if ($client->exists)
-        {{ html()->modelForm($client, 'PATCH', route('admin.client.update', $client))->class('form-horizontal')->novalidate()->open() }}
-    @else
-        {{ html()->form('POST', route('admin.client.store'))->class('form-horizontal')->novalidate()->open() }}
-    @endif
+    {{ html()->modelForm($client, 'POST', route('admin.client.edit', $client))->class('form-horizontal')->novalidate()->open() }}
 
         <div class="card">
 
@@ -42,7 +38,7 @@
                             }}
 
                             <div class="col-md-10">
-                                {{ html()->text('name', old('name', $client->name))
+                                {{ html()->text('name')
                                     ->class('form-control')
                                     ->placeholder('Name')
                                     ->attribute('maxlength', 255)
@@ -67,7 +63,7 @@
                                 <div class="checkbox d-flex align-items-center">
                                     {{-- TODO: Add help text explaining that when a client is deactivated, so is all of their lead processing --}}
                                     {{ html()->label(
-                                            html()->checkbox('is_active', old('is_active', $client->is_active))
+                                            html()->checkbox('is_active')
                                                   ->class('switch-input')
                                                   ->id('is_active')
                                                 . '<span class="switch-slider" data-checked="on" data-unchecked="off"></span>')
@@ -88,7 +84,7 @@
 
                             <div class="col-md-10">
 
-                                {{ html()->textarea('notes', old('notes', $client->notes))
+                                {{ html()->textarea('notes')
                                     ->class('form-control')
                                     ->placeholder('Notes')
                                 }}
@@ -118,10 +114,6 @@
 
         </div> <!-- .card -->
 
-    @if ($client->exists)
-        {{ html()->closeModelForm() }}
-    @else
-        {{ html()->form()->close() }}
-    @endif
+    {{ html()->closeModelForm() }}
     
 @endsection
