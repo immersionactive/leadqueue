@@ -7,14 +7,14 @@
                 Lead Destinations
             </div>
             <div class="col-sm-4 pull-right">
-                @can('client.lead_destination.create')
+                @can('client.lead_destination.edit')
                     <div class="dropdown">
                         <button class="btn btn-primary dropdown-toggle" type="button" id="TODO" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-plus-circle"></i>
                         </button>
                         <div class="dropdown-menu" aria-labelledby="TODO">
                             @foreach ($destination_config_type_classnames as $destination_config_type_classname)
-                                <a class="dropdown-item" href="{{ route('admin.client.lead_destination.create', [$client, $destination_config_type_classname::getSlug()]) }}">{{ $destination_config_type_classname::getName() }}</a>
+                                <a class="dropdown-item" href="{{ route('admin.client.lead_destination.edit', ['client' => $client, 'type' => $destination_config_type_classname::getSlug()]) }}">{{ $destination_config_type_classname::getName() }}</a>
                             @endforeach
                         </div>
                     </div>
@@ -28,7 +28,7 @@
 
         @if ($lead_destinations->count() === 0)
             <div class="list-group-item">
-                No lead destinations have been created for this client.
+                This client has no lead destinations.
             </div>
         @else
             @foreach ($lead_destinations as $lead_destination)

@@ -4,8 +4,7 @@ namespace App;
 
 use App\Models\LeadDestination;
 use App\Models\DestinationConfig;
-use App\Http\Requests\Backend\StoreLeadDestinationRequest;
-use App\Http\Requests\Backend\UpdateLeadDestinationRequest;
+use Illuminate\Http\Request;
 
 abstract class DestinationConfigType
 {
@@ -55,16 +54,10 @@ abstract class DestinationConfigType
      *       instead? Would that be more flexible?
      * @return array
      */
-    abstract public static function getStoreRules(): array;
+    abstract public static function getDestinationConfigValidationRules(LeadDestination $lead_destination): array;
 
-    /**
-     * @todo Document this method.
-     * @return array
-     */
-    abstract public static function getUpdateRules(LeadDestination $lead_destination): array;
+    abstract public static function buildDestinationConfig(LeadDestination $lead_destination): DestinationConfig;
 
-    abstract public static function buildConfig(StoreLeadDestinationRequest $request, LeadDestination $lead_destination): DestinationConfig;
-
-    abstract public static function patchConfig(UpdateLeadDestinationRequest $request, LeadDestination $lead_destination, DestinationConfig $config): void;
+    abstract public static function patchDestinationConfig(Request $request, LeadDestination $lead_destination, DestinationConfig $destination_config): void;
 
 }

@@ -10,7 +10,7 @@
     }}
 
     <div class="col-md-10">
-        {{ html()->text('destination_config[account]', old('destination_config.account'))
+        {{ html()->text('destination_config[account]', $destination_config->account)
             ->class('form-control')
             ->placeholder('Account Name')
             ->attribute('maxlength', 255)
@@ -31,7 +31,7 @@
     }}
 
     <div class="col-md-10">
-        {{ html()->text('destination_config[token]', old('destination_config.token'))
+        {{ html()->text('destination_config[token]', $destination_config->token)
             ->class('form-control')
             ->placeholder('Token')
             ->attribute('maxlength', 255)

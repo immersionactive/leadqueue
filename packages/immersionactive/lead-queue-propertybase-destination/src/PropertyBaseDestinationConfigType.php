@@ -3,10 +3,9 @@
 namespace ImmersionActive\LeadQueuePropertybaseDestination;
 
 use App\DestinationConfigType;
-use App\Http\Requests\Backend\StoreLeadDestinationRequest;
-use App\Http\Requests\Backend\UpdateLeadDestinationRequest;
 use App\Models\LeadDestination;
 use App\Models\DestinationConfig;
+use Illuminate\Http\Request;
 use ImmersionActive\LeadQueuePropertybaseDestination\Models\PropertybaseWebToProspectDestinationConfig;
 
 class PropertybaseDestinationConfigType extends DestinationConfigType
@@ -42,24 +41,10 @@ class PropertybaseDestinationConfigType extends DestinationConfigType
         return 'lead-queue-propertybase-destination::partials.create-edit';
     }
 
-    public static function getStoreRules(): array
-    {
-        $rules = self::getCommonRules();
-        // TODO: do we need to do anything more here? should we allow only one destination for a given Propertybase account?
-        return $rules;
-    }
-
-    public static function getUpdateRules(LeadDestination $lead_destination): array
-    {
-        $rules = self::getCommonRules();
-        // TODO: do we need to do anything more here? should we allow only one destination for a given Propertybase account?
-        return $rules;
-    }
-
-    protected static function getCommonRules(): array
+    public static function getDestinationConfigValidationRules(LeadDestination $lead_destination): array
     {
 
-        return [
+        $rules = [
 
             'destination_config.account' => [
                 'required',
@@ -73,25 +58,20 @@ class PropertybaseDestinationConfigType extends DestinationConfigType
 
         ];
 
-    }
-
-    public static function buildConfig(StoreLeadDestinationRequest $request, LeadDestination $lead_destination): DestinationConfig
-    {
-
-        $config = new PropertybaseWebToProspectDestinationConfig();
-        $config->account = $request->input('destination_config.account');
-        $config->token = $request->input('destination_config.token');
-
-        return $config;
+        return $rules;
 
     }
 
-    public static function patchConfig(UpdateLeadDestinationRequest $request, LeadDestination $lead_destination, DestinationConfig $config): void
+    public static function buildDestinationConfig(LeadDestination $lead_destination): DestinationConfig
     {
+        $destination_config = new PropertybaseWebToProspectDestinationConfig();
+        return $destination_config;
+    }
 
-        $config->account = $request->input('destination_config.account');
-        $config->token = $request->input('destination_config.token');
-
+    public static function patchDestinationConfig(Request $request, LeadDestination $lead_destination, DestinationConfig $destination_config): void
+    {
+        $destination_config->account = $request->input('destination_config.account');
+        $destination_config->token = $request->input('destination_config.token');
     }
 
 }
