@@ -21,6 +21,10 @@
 
                     <div class="btn-group float-right" role="group" aria-label="TODO">
                        
+                        @can('client.lead_destination.destination_append.index')
+                            <a href="{{ route('admin.client.lead_destination.destination_append.index', [$client, $lead_destination]) }}" class="btn btn-info" data-toggle="tooltip" title="View Destination Appends"><i class="fas fa-list"></i></a>
+                        @endcan
+
                         @can('client.lead_destination.update', $client)
                             <a href="{{ route('admin.client.lead_destination.edit', [$client, $lead_destination]) }}" class="btn btn-success" data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
                         @endcan

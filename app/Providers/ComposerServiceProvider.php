@@ -61,7 +61,10 @@ class ComposerServiceProvider extends ServiceProvider
             [
                 'backend.client.lead_destination.index',
                 'backend.client.lead_destination.show',
-                'backend.client.lead_destination.edit'
+                'backend.client.lead_destination.edit',
+                'backend.client.lead_destination.destination_append.index',
+                'backend.client.lead_destination.destination_append.show',
+                'backend.client.lead_destination.destination_append.edit',
             ],
             function ($view) use ($destination_config_type_registry) {
                 $client_id = $view->getData()['client']->id;

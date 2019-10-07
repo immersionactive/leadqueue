@@ -2,9 +2,9 @@
 
 namespace ImmersionActive\LeadQueuePropertybaseDestination\Models;
 
-use App\Models\LeadDestinationAppendConfig;
+use App\Models\DestinationAppendConfig;
 
-class PropertybaseLeadDestinationAppendConfig extends LeadDestinationAppendConfig
+class PropertybaseLeadDestinationAppendConfig extends DestinationAppendConfig
 {
 
 }

@@ -101,6 +101,20 @@ Breadcrumbs::for('admin.client.lead_destination.edit', function ($trail, Client 
 });
 
 /**
+ * Destination Appends
+ */
+
+Breadcrumbs::for('admin.client.lead_destination.destination_append.index', function ($trail, Client $client, LeadDestination $lead_destination) {
+    $trail->parent('admin.client.lead_destination.show', $client, $lead_destination);
+    $trail->push('View Destination Appends', route('admin.client.lead_destination.destination_append.index', [$client, $lead_destination]));
+});
+
+Breadcrumbs::for('admin.client.lead_destination.destination_append.edit', function ($trail, Client $client, LeadDestination $lead_destination) {
+    $trail->parent('admin.client.lead_destination.destination_append.index', $client, $lead_destination);
+    $trail->push('Create Destination Append', route('admin.client.lead_destination.destination_append.edit', [$client, $lead_destination]));
+});
+
+/**
  * Mappings
  */
 

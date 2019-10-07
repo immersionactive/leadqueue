@@ -94,9 +94,12 @@ class LeadDestinationController extends Controller
                 $is_new = !$lead_destination->exists;
                 
                 DB::transaction(function () use ($lead_destination, $destination_config) {
-                    $lead_destination->save();
+                    // this probably isn't the ideal way to save a polymorphic relation, but Laravel's docs are
+                    // pretty sketchy...and this works.
                     $destination_config->save();
-                    $destination_config->lead_destination()->save($lead_destination);
+                    $lead_destination->destination_config_id = $destination_config->id;
+                    $lead_destination->destination_config_type = get_class($destination_config);
+                    $lead_destination->save();
                 });
 
                 $user = auth()->user();

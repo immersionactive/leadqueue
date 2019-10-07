@@ -46,6 +46,11 @@ class PermissionRoleTableSeeder extends Seeder
         Permission::create(['name' => 'client.lead_destination.update']);
         Permission::create(['name' => 'client.lead_destination.destroy']);
 
+        Permission::create(['name' => 'client.lead_destination.destination_append.index']);
+        Permission::create(['name' => 'client.lead_destination.destination_append.show']);
+        Permission::create(['name' => 'client.lead_destination.destination_append.edit']);
+        Permission::create(['name' => 'client.lead_destination.destination_append.destroy']);
+
         Permission::create(['name' => 'client.mapping.index']);
         Permission::create(['name' => 'client.mapping.show']);
         Permission::create(['name' => 'client.mapping.store']);

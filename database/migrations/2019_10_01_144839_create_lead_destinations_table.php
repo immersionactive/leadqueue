@@ -21,8 +21,8 @@ class CreateLeadDestinationsTable extends Migration
             $table->string('name', 255);
             $table->boolean('is_active');
             $table->text('notes');
-            $table->unsignedBigInteger('destination_config_id')->nullable();
-            $table->string('destination_config_type', 255)->nullable();
+            $table->unsignedBigInteger('destination_config_id');
+            $table->string('destination_config_type', 255);
             $table->timestamps();
             $table->softDeletes();
 
