@@ -26,8 +26,6 @@ class DatabaseSeeder extends Seeder
         $this->call([
             AuthTableSeeder::class,
             ClientsTableSeeder::class,
-            GravityFormsSourceConfigsTableSeeder::class,
-            LeadSourcesTableSeeder::class,
             AppendPropertiesTableSeeder::class,
         ]);
 

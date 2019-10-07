@@ -33,15 +33,7 @@
         @else
             @foreach ($lead_destinations as $lead_destination)
                 <a href="{{ route('admin.client.lead_destination.show', [$client, $lead_destination]) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center @if (isset($active_lead_destination_id) && $lead_destination->id === $active_lead_destination_id ) active @endif">
-                    
                     {{ $lead_destination->name }}
-
-                    @if ($lead_destination->is_active)
-                        <span class="badge badge-success badge-pill">Active</span>
-                    @else
-                        <span class="badge badge-danger badge-pill">Inactive</span>
-                    @endif                    
-
                 </a>
             @endforeach
         @endif

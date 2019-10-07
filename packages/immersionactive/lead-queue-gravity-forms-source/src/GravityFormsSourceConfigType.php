@@ -3,8 +3,6 @@
 namespace ImmersionActive\LeadQueueGravityFormsSource;
 
 use App\SourceConfigType;
-use App\Http\Requests\Backend\StoreLeadSourceRequest;
-use App\Http\Requests\Backend\UpdateLeadSourceRequest;
 use App\Models\LeadSource;
 use App\Models\SourceConfig;
 use Illuminate\Http\Request;
@@ -43,59 +41,26 @@ class GravityFormsSourceConfigType extends SourceConfigType
         return 'lead-queue-gravity-forms-source::partials.create-edit';
     }
 
-    public static function getStoreRules(): array
+    public static function getSourceConfigValidationRules(LeadSource $lead_source): array
     {
 
-        $rules = self::getCommonRules();
-        // TODO
-        return $rules;
-
-    }
-
-    public static function getUpdateRules(LeadSource $lead_source): array
-    {
-
-        $rules = self::getCommonRules();
-        // TODO
-        return $rules;
-
-    }
-
-    protected static function getCommonRules(): array
-    {
-
-        return [
+        $rules = [
             // TODO
         ];
 
+        return $rules;
+
     }
 
-    public static function buildConfig(StoreLeadSourceRequest $request, LeadSource $lead_source): SourceConfig
+    public static function buildSourceConfig(LeadSource $lead_source): SourceConfig
     {
-
         $config = new GravityFormsSourceConfig();
-        // TODO
-
         return $config;
-
     }
 
-    public static function patchConfig(UpdateLeadSourceRequest $request, LeadSource $lead_source, SourceConfig $config): void
+    public static function patchSourceConfig(Request $request, LeadSource $lead_source, SourceConfig $config): void
     {
-
         // TODO
-
-    }
-
-    /**
-     * @todo Document this method.
-     * @return void
-     */
-    public static function processInsert(Request $request, LeadSource $lead_source): void
-    {
-
-        // TODO
-
     }
 
 }

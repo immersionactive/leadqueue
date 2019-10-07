@@ -44,7 +44,7 @@ class ComposerServiceProvider extends ServiceProvider
             [
                 'backend.client.lead_source.index',
                 'backend.client.lead_source.show',
-                'backend.client.lead_source.create-edit'
+                'backend.client.lead_source.edit'
             ],
             function ($view) use ($source_config_type_registry) {
                 $client_id = $view->getData()['client']->id;

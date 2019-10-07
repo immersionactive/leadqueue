@@ -18,7 +18,6 @@ class CreateLeadSourcesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('client_id');
             $table->string('name', 255);
-            $table->boolean('is_active');
             $table->text('notes');
             $table->unsignedBigInteger('source_config_id');
             $table->string('source_config_type', 255);

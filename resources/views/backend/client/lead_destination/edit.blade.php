@@ -53,33 +53,6 @@
                                 
                             </div>
 
-                            {{-- Active --}}
-
-                            <div class="form-group row">
-
-                                {{ html()->label('Active')
-                                    ->class('col-md-2 form-control-label')
-                                    ->for('is_active')
-                                }}
-
-                                <div class="col-md-10">
-
-                                    <div class="checkbox d-flex align-items-center">
-                                        {{-- TODO: Add help text explaining that when a client is deactivated, so is all of their lead processing --}}
-                                        {{ html()->label(
-                                                html()->checkbox('is_active', old('is_active', $lead_destination->is_active))
-                                                      ->class('switch-input')
-                                                      ->id('is_active')
-                                                    . '<span class="switch-slider" data-checked="on" data-unchecked="off"></span>')
-                                                ->class('switch switch-label switch-pill switch-primary mr-2')
-                                            ->for('is_active')
-                                        }}
-                                    </div>
-
-                                </div>
-
-                            </div>
-
                             {{-- Notes --}}
 
                             <div class="form-group row">

@@ -22,11 +22,8 @@ class InsertController extends Controller
     public function insert(Request $request, LeadSource $lead_source)
     {
 
-        if (
-            !$lead_source->is_active ||
-            !$lead_source->client->is_active
-        ) {
-            Log::notice('The API insert endpoint for lead source ' . $lead_source->id . ' (' . $lead_source->name . ') was invoked, but the lead_source and/or client are inactive.');
+        if (!$lead_source->client->is_active) {
+            Log::notice('The API insert endpoint for lead source ' . $lead_source->id . ' (' . $lead_source->name . ') was invoked, but the client is inactive.');
             abort(404);
         }
 

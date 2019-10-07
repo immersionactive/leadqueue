@@ -31,7 +31,6 @@
 
 * Document the format that destination fields must accept (e.g., if we insert gender as a string, we need to make sure that the field isn't configured as enum('m','f') in the CRM)
 * Some way to coerce fields from the USADATA response (e.g., booleans -> "Yes"/"No"/"Unknown")
-* Consider what models really need an is_active field - it might be enough to do just client and mapping
 * Where can users find a webflow site ID?
 * Refactor/bugfix: better handling for is_active checkboxes, including the ability to default to true (I can't believe this is so difficult...)
 * Check out [the throttle middleware](https://laravel.com/docs/6.x/routing#rate-limiting) for rate-limiting
@@ -47,3 +46,4 @@
 * Logging: tweak all backend controllers to inherit from a superclass that provides a log() method, which automatically records the current user ID and email
 * Implement delete/destroy routes for everything
 * Make validation messages clearer
+* Lead Destinations: display type-specific fields on show route

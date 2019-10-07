@@ -21,10 +21,11 @@
 
                     <div class="btn-group float-right" role="group" aria-label="TODO">
                        
-                        @can('client.lead_source.update', $client)
+                        @can('client.lead_source.edit', $client)
                             <a href="{{ route('admin.client.lead_source.edit', [$client, $lead_source]) }}" class="btn btn-success" data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
                         @endcan
 
+                        {{--
                         @can('client.lead_source.destroy', $client)
                             <a href="{{ route('admin.client.lead_source.destroy', [$client, $lead_source]) }}"
                                data-method="delete"
@@ -35,6 +36,7 @@
                                 <i class="fas fa-trash"></i>
                             </a>
                         @endcan
+                        --}}
 
                     </div>
 

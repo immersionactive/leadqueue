@@ -60,15 +60,6 @@
                         <td>{{ $lead_destination->name }}</td>
                     </tr>
 
-                    {{-- Active --}}
-
-                    <tr>
-                        <th>Active</th>
-                        <td>
-                            @include('backend.includes.partials.yn-badge', ['active' => $lead_destination->is_active])
-                        </td>
-                    </tr>
-
                     {{-- Notes --}}
 
                     <tr>

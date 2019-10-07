@@ -2,8 +2,6 @@
 
 namespace App;
 
-use App\Http\Requests\Backend\StoreLeadSourceRequest;
-use App\Http\Requests\Backend\UpdateLeadSourceRequest;
 use App\Models\LeadSource;
 use App\Models\SourceConfig;
 use Illuminate\Http\Request;
@@ -52,50 +50,20 @@ abstract class SourceConfigType
 
     /**
      * @todo Document this method.
-     * @todo Should we pass the Validator instance to the get*Rules() methods
-     *       instead? Would that be more flexible?
      * @return array
      */
-    abstract public static function getStoreRules(): array;
-
-    /**
-     * @todo Document this method.
-     * @return array
-     */
-    abstract public static function getUpdateRules(LeadSource $lead_source): array;
+    abstract public static function getSourceConfigValidationRules(LeadSource $lead_source): array;
 
     /**
      * @todo Document this method.
      * @return SourceConfig
      */
-    abstract public static function buildConfig(StoreLeadSourceRequest $request, LeadSource $lead_source): SourceConfig;
+    abstract public static function buildSourceConfig(LeadSource $lead_source): SourceConfig;
 
     /**
      * @todo Document this method.
      * @return SourceConfig
      */
-    abstract public static function patchConfig(UpdateLeadSourceRequest $request, LeadSource $lead_source, SourceConfig $config): void;
-
-    /**
-     * @todo Document this method.
-     * @return void
-     */
-    abstract public static function processInsert(Request $request, LeadSource $lead_source): void;
-
-    /**
-     * Field-Related Methods
-     */
-
-    /**
-     * @todo Document this method.
-     * @return string
-     */
-    // abstract public static function getCreateFieldView(): string;
-
-    /**
-     * @todo Document this method.
-     * @return string
-     */
-    // abstract public static function getEditFieldView(): string;
+    abstract public static function patchSourceConfig(Request $request, LeadSource $lead_source, SourceConfig $config): void;
 
 }

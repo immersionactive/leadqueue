@@ -19,7 +19,6 @@ class CreateLeadDestinationsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('client_id');
             $table->string('name', 255);
-            $table->boolean('is_active');
             $table->text('notes');
             $table->unsignedBigInteger('destination_config_id');
             $table->string('destination_config_type', 255);

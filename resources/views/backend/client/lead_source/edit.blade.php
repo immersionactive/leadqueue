@@ -26,13 +26,9 @@
             
         </div>
 
-        @if ($lead_source->exists)
-            {{ html()->modelForm($lead_source, 'PATCH', route('admin.client.lead_source.update', [$client, $lead_source]))->class('form-horizontal')->novalidate()->open() }}
-        @else
-            {{ html()->form('POST', route('admin.client.lead_source.store', [$client, $source_config_type_classname::getSlug()]))->class('form-horizontal')->novalidate()->open() }}
-        @endif
+        {{ html()->modelForm($lead_source, 'POST', route('admin.client.lead_source.edit', ['client' => $client, 'lead_source' => $lead_source, 'type' => $lead_source->exists ? null : $source_config_type_classname::getSlug()]))->class('form-horizontal')->novalidate()->open() }}
 
-        <h2 class="h5">General Fields</h2>
+            <h2 class="h5">General Fields</h2>
 
             {{-- Name --}}
 
@@ -44,7 +40,7 @@
                 }}
 
                 <div class="col-md-10">
-                    {{ html()->text('name', old('name', $lead_source->name))
+                    {{ html()->text('name', $lead_source->name)
                         ->class('form-control')
                         ->placeholder('Name')
                         ->attribute('maxlength', 255)
@@ -53,33 +49,6 @@
                     }}
                 </div>
                 
-            </div>
-
-            {{-- Active --}}
-
-            <div class="form-group row">
-
-                {{ html()->label('Active')
-                    ->class('col-md-2 form-control-label')
-                    ->for('is_active')
-                }}
-
-                <div class="col-md-10">
-
-                    <div class="checkbox d-flex align-items-center">
-                        {{-- TODO: Add help text explaining that when a client is deactivated, so is all of their lead processing --}}
-                        {{ html()->label(
-                                html()->checkbox('is_active', old('is_active', $lead_source->is_active))
-                                      ->class('switch-input')
-                                      ->id('is_active')
-                                    . '<span class="switch-slider" data-checked="on" data-unchecked="off"></span>')
-                                ->class('switch switch-label switch-pill switch-primary mr-2')
-                            ->for('is_active')
-                        }}
-                    </div>
-
-                </div>
-
             </div>
 
             {{-- Notes --}}
@@ -121,11 +90,7 @@
 
             </div>
 
-        @if ($lead_source->exists)
-            {{ html()->closeModelForm() }}
-        @else
-            {{ html()->form()->close() }}
-        @endif
+        {{ html()->closeModelForm() }}
 
     @endcomponent
 

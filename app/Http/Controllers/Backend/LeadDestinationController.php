@@ -29,8 +29,6 @@ class LeadDestinationController extends Controller
 
         $this->authorize('client.lead_destination.index'); // TODO: make sure this works as expected
 
-        // TODO: Log
-
         $lead_destinations = LeadDestination::where('client_id', $client->id)->paginate(20);
         $destination_config_types_by_model_classname = $this->destination_config_type_registry->getAllByModelClassname();
 
@@ -66,7 +64,7 @@ class LeadDestinationController extends Controller
         if (!$lead_destination) {
             $destination_config_type_slug = $request->input('type');
             $destination_config_type_classname = $this->getDestinationConfigTypeClassnameBySlug($destination_config_type_slug);
-            $lead_destination = $this->buildNewLeadDestination($client, $destination_config_type_classname);
+            $lead_destination = $this->buildLeadDestination($client, $destination_config_type_classname);
             $destination_config = $destination_config_type_classname::buildDestinationConfig($lead_destination);
         } else {
             $destination_config_type_classname = $this->getDestinationConfigTypeClassnameByModelClassname($lead_destination->destination_config_type);
@@ -80,7 +78,6 @@ class LeadDestinationController extends Controller
             // patch
 
             $lead_destination->name = $request->input('name');
-            $lead_destination->is_active = !!$request->input('is_active');
             $lead_destination->notes = $request->input('notes') ?? '';
 
             $destination_config_type_classname::patchDestinationConfig($request, $lead_destination, $destination_config);
@@ -122,11 +119,10 @@ class LeadDestinationController extends Controller
 
     }
 
-    protected function buildNewLeadDestination(Client $client, string $destination_config_type_classname): LeadDestination
+    protected function buildLeadDestination(Client $client, string $destination_config_type_classname): LeadDestination
     {
         $lead_destination = new LeadDestination();
         $lead_destination->client_id = $client->id;
-        $lead_destination->is_active = true;
         $lead_destination->notes = '';
         return $lead_destination;
     }
