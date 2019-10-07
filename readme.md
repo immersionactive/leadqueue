@@ -47,3 +47,4 @@
 * Implement delete/destroy routes for everything
 * Make validation messages clearer
 * Lead Destinations: display type-specific fields on show route
+* Don't forget to release a v1 of immersionactive/propertybase (and pin this project to it)

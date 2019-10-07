@@ -20,12 +20,14 @@ Route::post('client/delete/{client}', 'ClientController@delete')->where('client'
  */
 
 Route::get('client/{client}/lead_source', 'LeadSourceController@index')->where('client', '[1-9][0-9]*')->name('client.lead_source.index');
+
 Route::get('client/{client}/lead_source/{lead_source}', 'LeadSourceController@show')
     ->where([
         'client' => '[1-9][0-9]*',
         'lead_source' => '[1-9][0-9]*'
     ])
     ->name('client.lead_source.show');
+
 Route::match(['get', 'post'], 'client/{client}/lead_source/edit/{lead_source?}', 'LeadSourceController@edit')
     ->where([
         'client' => '[1-9][0-9]*',
@@ -38,12 +40,14 @@ Route::match(['get', 'post'], 'client/{client}/lead_source/edit/{lead_source?}',
  */
 
 Route::get('client/{client}/lead_destination', 'LeadDestinationController@index')->where('client', '[1-9][0-9]*')->name('client.lead_destination.index');
+
 Route::get('client/{client}/lead_destination/{lead_destination}', 'LeadDestinationController@show')
     ->where([
         'client' => '[1-9][0-9]*',
         'lead_destination' => '[1-9][0-9]*'
     ])
     ->name('client.lead_destination.show');
+
 Route::match(['get', 'post'], 'client/{client}/lead_destination/edit/{lead_destination?}', 'LeadDestinationController@edit')
     ->where([
         'client' => '[1-9][0-9]*',
@@ -67,5 +71,25 @@ Route::post('client/{client}/lead_destination/{lead_destination}/destination_app
  * Mappings
  */
 
-Route::resource('client.mapping', 'MappingController');
-Route::resource('client.mapping.mapping_field', 'MappingFieldController');
+Route::get('client/{client}/mapping', 'MappingController@index')->where('client', '[1-9][0-9]*')->name('client.mapping.index');
+
+Route::get('client/{client}/mapping/{mapping}', 'MappingController@show')
+    ->where([
+        'client' => '[1-9][0-9]*',
+        'mapping' => '[1-9][0-9]*'
+    ])
+    ->name('client.mapping.show');
+
+Route::match(['get', 'post'], 'client/{client}/mapping/edit/{mapping?}', 'MappingController@edit')
+    ->where([
+        'client' => '[1-9][0-9]*',
+        'mapping' => '[1-9][0-9]*'
+    ])
+    ->name('client.mapping.edit');
+
+Route::delete('client/{client}/mapping/delete/{mapping}', 'MappingController@destroy')
+    ->where([
+        'client' => '[1-9][0-9]*',
+        'mapping' => '[1-9][0-9]*'
+    ])
+    ->name('client.mapping.destroy');

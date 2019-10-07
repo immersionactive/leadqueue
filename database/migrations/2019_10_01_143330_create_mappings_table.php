@@ -19,6 +19,7 @@ class CreateMappingsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('client_id');
             $table->string('name', 255);
+            $table->text('notes');
             $table->unsignedBigInteger('lead_source_id');
             $table->unsignedBigInteger('lead_destination_id');
             $table->boolean('is_active')->default(true);

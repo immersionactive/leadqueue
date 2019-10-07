@@ -124,29 +124,20 @@ Breadcrumbs::for('admin.client.mapping.show', function ($trail, Client $client, 
     $trail->push($mapping->name, route('admin.client.mapping.show', [$client, $mapping]));
 });
 
-Breadcrumbs::for('admin.client.mapping.create', function ($trail, Client $client) {
-    $trail->parent('admin.client.mapping.index', $client);
-    $trail->push('Create Mapping', route('admin.client.mapping.create', $client));
+Breadcrumbs::for('admin.client.mapping.edit', function ($trail, Client $client, Mapping $mapping = null) {
+    if ($mapping) {
+        $trail->parent('admin.client.mapping.show', $client, $mapping);
+        $trail->push('Edit', route('admin.client.mapping.edit', [$client, $mapping]));
+    } else {
+        $trail->parent('admin.client.mapping.index', $client);
+        $trail->push('Create Mapping', route('admin.client.mapping.edit', [$client, null]));
+    }
 });
 
-Breadcrumbs::for('admin.client.mapping.edit', function ($trail, Client $client, Mapping $mapping) {
-    $trail->parent('admin.client.mapping.index', $client);
-    $trail->push('Edit Mapping', route('admin.client.mapping.edit', [$client, $mapping]));
-});
 
-/**
- * Mapping Fields
- */
 
-Breadcrumbs::for('admin.client.mapping.mapping_field.index', function ($trail, Client $client, Mapping $mapping) {
-    $trail->parent('admin.client.mapping.show', $client, $mapping);
-    $trail->push('Fields', route('admin.client.mapping.mapping_field.index', [$client, $mapping]));
-});
 
-Breadcrumbs::for('admin.client.mapping.mapping_field.create', function ($trail, Client $client, Mapping $mapping) {
-    $trail->parent('admin.client.mapping.mapping_field.index', $client, $mapping);
-    $trail->push('Create Field', route('admin.client.mapping.mapping_field.create', [$client, $mapping]));
-});
+
 
 require __DIR__.'/auth.php';
 require __DIR__.'/log-viewer.php';

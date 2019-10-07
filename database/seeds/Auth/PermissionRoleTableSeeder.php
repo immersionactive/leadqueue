@@ -26,24 +26,21 @@ class PermissionRoleTableSeeder extends Seeder
         Permission::create(['name' => 'client.index']);
         Permission::create(['name' => 'client.show']);
         Permission::create(['name' => 'client.edit']);
-        Permission::create(['name' => 'client.delete']);
+        Permission::create(['name' => 'client.destroy']);
 
         Permission::create(['name' => 'client.lead_source.index']);
         Permission::create(['name' => 'client.lead_source.show']);
-        Permission::create(['name' => 'client.lead_source.store']);
-        Permission::create(['name' => 'client.lead_source.update']);
+        Permission::create(['name' => 'client.lead_source.edit']);
         Permission::create(['name' => 'client.lead_source.destroy']);
 
         Permission::create(['name' => 'client.lead_source.lead.index']);
         Permission::create(['name' => 'client.lead_source.lead.show']);
-        Permission::create(['name' => 'client.lead_source.lead.store']);
-        Permission::create(['name' => 'client.lead_source.lead.update']);
+        Permission::create(['name' => 'client.lead_source.lead.edit']);
         Permission::create(['name' => 'client.lead_source.lead.destroy']);
 
         Permission::create(['name' => 'client.lead_destination.index']);
         Permission::create(['name' => 'client.lead_destination.show']);
-        Permission::create(['name' => 'client.lead_destination.store']);
-        Permission::create(['name' => 'client.lead_destination.update']);
+        Permission::create(['name' => 'client.lead_destination.edit']);
         Permission::create(['name' => 'client.lead_destination.destroy']);
 
         Permission::create(['name' => 'client.lead_destination.destination_append.index']);
@@ -53,14 +50,12 @@ class PermissionRoleTableSeeder extends Seeder
 
         Permission::create(['name' => 'client.mapping.index']);
         Permission::create(['name' => 'client.mapping.show']);
-        Permission::create(['name' => 'client.mapping.store']);
-        Permission::create(['name' => 'client.mapping.update']);
+        Permission::create(['name' => 'client.mapping.edit']);
         Permission::create(['name' => 'client.mapping.destroy']);
 
         Permission::create(['name' => 'client.mapping.mapping_field.index']);
         Permission::create(['name' => 'client.mapping.mapping_field.show']);
-        Permission::create(['name' => 'client.mapping.mapping_field.store']);
-        Permission::create(['name' => 'client.mapping.mapping_field.update']);
+        Permission::create(['name' => 'client.mapping.mapping_field.edit']);
         Permission::create(['name' => 'client.mapping.mapping_field.destroy']);
 
         /**

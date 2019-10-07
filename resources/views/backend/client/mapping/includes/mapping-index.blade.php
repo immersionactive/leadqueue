@@ -7,8 +7,8 @@
                 Mappings
             </div>
             <div class="col-sm-4 pull-right">
-                @can('client.mapping.create')
-                    <a href="{{ route('admin.client.mapping.create', $client) }}" class="btn btn-info float-right" data-toggle="tooltip" title="@lang('labels.general.create_new')"><i class="fas fa-plus-circle"></i></a>
+                @can('client.mapping.edit')
+                    <a href="{{ route('admin.client.mapping.edit', [$client]) }}" class="btn btn-info float-right" data-toggle="tooltip" title="@lang('labels.general.create_new')"><i class="fas fa-plus-circle"></i></a>
                 @endcan
             </div>
         </div>
@@ -31,7 +31,7 @@
                         <span class="badge badge-success badge-pill">Active</span>
                     @else
                         <span class="badge badge-danger badge-pill">Inactive</span>
-                    @endif                    
+                    @endif
 
                 </a>
             @endforeach

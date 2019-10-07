@@ -21,9 +21,11 @@
 
                     <div class="btn-group float-right" role="group" aria-label="TODO">
 
+                        {{--
                         @can('client.mapping.mapping_field.index', $client)
                             <a href="{{ route('admin.client.mapping.mapping_field.index', [$client, $mapping]) }}" class="btn btn-info" data-toggle="tooltip" title="Edit"><i class="fas fa-list"></i></a>
                         @endcan
+                        --}}
                        
                         @can('client.mapping.update', $client)
                             <a href="{{ route('admin.client.mapping.edit', [$client, $mapping]) }}" class="btn btn-success" data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
@@ -67,6 +69,13 @@
                         </td>
                     </tr>
 
+                    {{-- Notes --}}
+
+                    <tr>
+                        <th scope="row">Notes</th>
+                        <td>{!! nl2br(e($mapping->notes)) !!}</td>
+                    </tr>
+
                     {{-- Lead Source --}}
 
                     <tr>
@@ -77,7 +86,6 @@
                             @else
                                 {{ $mapping->lead_source->name }}
                             @endcan
-                            @include('backend.includes.partials.yn-badge', ['active' => $mapping->lead_source->is_active, 'yes_text' => 'Active', 'no_text' => 'Inactive'])
                         </td>
                     </tr>
 
@@ -91,7 +99,6 @@
                             @else
                                 {{ $mapping->lead_destination->name }}
                             @endcan
-                            @include('backend.includes.partials.yn-badge', ['active' => $mapping->lead_destination->is_active, 'yes_text' => 'Active', 'no_text' => 'Inactive'])
                         </td>
                     </tr>
 
