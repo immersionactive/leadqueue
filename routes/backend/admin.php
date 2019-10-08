@@ -87,9 +87,44 @@ Route::match(['get', 'post'], 'client/{client}/mapping/edit/{mapping?}', 'Mappin
     ])
     ->name('client.mapping.edit');
 
-Route::delete('client/{client}/mapping/delete/{mapping}', 'MappingController@destroy')
+Route::post('client/{client}/mapping/delete/{mapping}', 'MappingController@destroy')
     ->where([
         'client' => '[1-9][0-9]*',
         'mapping' => '[1-9][0-9]*'
     ])
     ->name('client.mapping.destroy');
+
+/**
+ * MappingFields
+ */
+
+Route::get('client/{client}/mapping/{mapping}/mapping_field', 'MappingFieldController@index')
+    ->where([
+        'client' => '[1-9][0-9]*',
+        'mapping' => '[1-9][0-9]*'
+    ])
+    ->name('client.mapping.mapping_field.index');
+
+Route::get('client/{client}/mapping/{mapping}/mapping_field/{mapping_field}', 'MappingFieldController@show')
+    ->where([
+        'client' => '[1-9][0-9]*',
+        'mapping' => '[1-9][0-9]*',
+        'mapping_field' => '[1-9][0-9]*',
+    ])
+    ->name('client.mapping.mapping_field.show');
+
+Route::match(['get', 'post'], 'client/{client}/mapping/{mapping}/mapping_field/edit/{mapping_field?}', 'MappingFieldController@edit')
+    ->where([
+        'client' => '[1-9][0-9]*',
+        'mapping' => '[1-9][0-9]*',
+        'mapping_field' => '[1-9][0-9]*',
+    ])
+    ->name('client.mapping.mapping_field.edit');
+
+Route::post('client/{client}/mapping/{mapping}/mapping_field/delete/{mapping_field}', 'MappingFieldController@destroy')
+    ->where([
+        'client' => '[1-9][0-9]*',
+        'mapping' => '[1-9][0-9]*',
+        'mapping_field' => '[1-9][0-9]*',
+    ])
+    ->name('client.mapping.mapping_field.destroy');

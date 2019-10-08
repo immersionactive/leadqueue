@@ -21,11 +21,9 @@
 
                     <div class="btn-group float-right" role="group" aria-label="TODO">
 
-                        {{--
                         @can('client.mapping.mapping_field.index', $client)
-                            <a href="{{ route('admin.client.mapping.mapping_field.index', [$client, $mapping]) }}" class="btn btn-info" data-toggle="tooltip" title="Edit"><i class="fas fa-list"></i></a>
+                            <a href="{{ route('admin.client.mapping.mapping_field.index', [$client, $mapping]) }}" class="btn btn-info" data-toggle="tooltip" title="View Fields"><i class="fas fa-list"></i></a>
                         @endcan
-                        --}}
                        
                         @can('client.mapping.update', $client)
                             <a href="{{ route('admin.client.mapping.edit', [$client, $mapping]) }}" class="btn btn-success" data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>

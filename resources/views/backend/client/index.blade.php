@@ -56,13 +56,7 @@
                             <tbody>
                                 @foreach ($clients as $client)
                                     <tr>
-                                        <td>
-                                            @if ($client->trashed())
-                                                <strike>{{ $client->name }}</strike>
-                                            @else
-                                                {{ $client->name }}
-                                            @endif
-                                        </td>
+                                        <td>{{ $client->name }}</td>
                                         <td>
                                             @include('backend.includes.partials.yn-badge', ['active' => $client->is_active])
                                         </td>

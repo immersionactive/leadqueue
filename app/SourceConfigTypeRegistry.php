@@ -46,7 +46,7 @@ class SourceConfigTypeRegistry
      * as keys and names as values. E.g.:
      *
      * [
-     *     '' => 'Webflow Webhook'
+     *     'Namespace\Models\FooConfig' => 'Namespace\FooConfigType'
      * ]
      *
      * @return array
@@ -57,7 +57,7 @@ class SourceConfigTypeRegistry
         $output = [];
 
         foreach ($this->type_classnames as $type_classname) {
-            $output[$type_classname::getModelClassname()] = $type_classname::getName();
+            $output[$type_classname::getModelClassname()] = $type_classname;
         }
 
         return $output;

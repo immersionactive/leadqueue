@@ -81,6 +81,9 @@ class ComposerServiceProvider extends ServiceProvider
                 'backend.client.mapping.index',
                 'backend.client.mapping.show',
                 'backend.client.mapping.edit',
+                'backend.client.mapping.mapping_field.index',
+                'backend.client.mapping.mapping_field.show',
+                'backend.client.mapping.mapping_field.edit',
             ],
             function ($view) {
                 $client_id = $view->getData()['client']->id;

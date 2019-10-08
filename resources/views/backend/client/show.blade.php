@@ -74,9 +74,6 @@
                     <small class="float-right text-muted">
                         <strong>Created At:</strong> {{ timezone()->convertToLocal($client->created_at) }} ({{ $client->created_at->diffForHumans() }}),
                         <strong>Last Updated:</strong> {{ timezone()->convertToLocal($client->updated_at) }} ({{ $client->updated_at->diffForHumans() }})
-                        @if($client->trashed())
-                            <strong>Deleted At:</strong> {{ timezone()->convertToLocal($client->deleted_at) }} ({{ $client->deleted_at->diffForHumans() }})
-                        @endif
                     </small>
                 </div>
             </div>

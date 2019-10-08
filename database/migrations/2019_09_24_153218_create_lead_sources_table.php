@@ -22,7 +22,6 @@ class CreateLeadSourcesTable extends Migration
             $table->unsignedBigInteger('source_config_id');
             $table->string('source_config_type', 255);
             $table->timestamps();
-            $table->softDeletes();
 
             $table->index('client_id');
             $table->index('source_config_id');

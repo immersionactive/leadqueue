@@ -23,7 +23,6 @@ class CreateLeadDestinationsTable extends Migration
             $table->unsignedBigInteger('destination_config_id');
             $table->string('destination_config_type', 255);
             $table->timestamps();
-            $table->softDeletes();
 
             $table->index('client_id');
             $table->index('destination_config_id');

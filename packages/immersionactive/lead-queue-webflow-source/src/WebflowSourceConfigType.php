@@ -75,4 +75,14 @@ class WebflowSourceConfigType extends SourceConfigType
         $config->webflow_form_name = $request->input('source_config.webflow_form_name');
     }
 
+    public static function getMappingFieldCreateView(): string
+    {
+        return 'lead-queue-webflow-source::partials.mapping-field-create-edit';
+    }
+
+    public static function getMappingFieldEditView(): string
+    {
+        return 'lead-queue-webflow-source::partials.mapping-field-create-edit';
+    }
+
 }

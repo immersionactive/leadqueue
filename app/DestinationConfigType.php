@@ -6,6 +6,8 @@ use App\Models\LeadDestination;
 use App\Models\DestinationConfig;
 use App\Models\DestinationAppend;
 use App\Models\DestinationAppendConfig;
+use App\Models\MappingField;
+use App\Models\DestinationFieldConfig;
 use Illuminate\Http\Request;
 
 abstract class DestinationConfigType
@@ -29,7 +31,7 @@ abstract class DestinationConfigType
     abstract public static function getModelClassname(): string;
 
     /**
-     * Should return the name of the source config type as a slug, suitable for
+     * Should return the name of the destination config type as a slug, suitable for
      * use in URLs and similar contexts (e.g., "webflow-form").
      * @return string
      */
@@ -111,5 +113,45 @@ abstract class DestinationConfigType
      * @return array
      */
     abstract public static function getDestinationAppendConfigValidationRules(DestinationAppend $destination_append): array;
+
+    /**
+     * Methods related to Mappings & MappingFields
+     */
+
+    /**
+     * @todo Document this method.
+     * @return string
+     */
+    abstract public static function getDestinationFieldConfigSummaryView(): string;
+
+    /**
+     * @todo Document this method.
+     * @return string
+     */
+    abstract public static function getDestinationFieldConfigCreateView(): string;
+
+    /**
+     * @todo Document this method.
+     * @return string
+     */
+    abstract public static function getDestinationFieldConfigEditView(): string;
+
+    /**
+     * @todo Document this method.
+     * @return array
+     */
+    abstract public static function getDestinationFieldConfigValidationRules(MappingField $mapping_field): array;
+
+    /**
+     * @todo Document this method.
+     * @return DestinationFieldConfig
+     */
+    abstract public static function buildDestinationFieldConfig(MappingField $mapping_field): DestinationFieldConfig;
+
+    /**
+     * @todo Document this method.
+     * @return void
+     */
+    abstract public static function patchDestinationFieldConfig(Request $request, MappingField $mapping_field, DestinationFieldConfig $destination_field_config): void;
 
 }

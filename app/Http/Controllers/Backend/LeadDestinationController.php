@@ -30,13 +30,11 @@ class LeadDestinationController extends Controller
         $this->authorize('client.lead_destination.index'); // TODO: make sure this works as expected
 
         $lead_destinations = LeadDestination::where('client_id', $client->id)->paginate(20);
-        $destination_config_types_by_model_classname = $this->destination_config_type_registry->getAllByModelClassname();
 
         return view('backend.client.lead_destination.index', [
             'client' => $client,
             'lead_destinations' => $lead_destinations,
-            'destination_config_type_classnames' => $this->destination_config_type_registry->getRegisteredTypes(),
-            'destination_config_types_by_model_classname' => $destination_config_types_by_model_classname
+            'destination_config_type_classnames' => $this->destination_config_type_registry->getRegisteredTypes()
         ]);
 
     }

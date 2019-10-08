@@ -7,9 +7,12 @@ use App\Models\LeadDestination;
 use App\Models\DestinationConfig;
 use App\Models\DestinationAppend;
 use App\Models\DestinationAppendConfig;
+use App\Models\MappingField;
+use App\Models\DestinationFieldConfig;
 use Illuminate\Http\Request;
 use ImmersionActive\LeadQueuePropertybaseDestination\Models\PropertybaseWebToProspectDestinationConfig;
 use ImmersionActive\LeadQueuePropertybaseDestination\Models\PropertybaseLeadDestinationAppendConfig;
+use ImmersionActive\LeadQueuePropertybaseDestination\Models\PropertybaseDestinationFieldConfig;
 
 class PropertybaseDestinationConfigType extends DestinationConfigType
 {
@@ -124,6 +127,52 @@ class PropertybaseDestinationConfigType extends DestinationConfigType
 
         return $rules;
 
+    }
+
+    public static function getDestinationFieldConfigSummaryView(): string
+    {
+        return 'lead-queue-propertybase-destination::partials.destination-field-config-summary';
+    }
+
+    public static function getDestinationFieldConfigCreateView(): string
+    {
+        return 'lead-queue-propertybase-destination::partials.destination-field-config-create-edit';
+    }
+
+    public static function getDestinationFieldConfigEditView(): string
+    {
+        return 'lead-queue-propertybase-destination::partials.destination-field-config-create-edit';
+    }
+
+    public static function getDestinationFieldConfigValidationRules(MappingField $mapping_field): array
+    {
+
+        $rules = [
+
+            'destination_field_config.contact_field_name' => [
+                'required',
+                'max:255'
+            ],
+
+        ];
+
+        return $rules;
+
+    }
+
+    public static function buildDestinationFieldConfig(MappingField $mapping_field): DestinationFieldConfig
+    {
+        $destination_field_config = new PropertybaseDestinationFieldConfig();
+        return $destination_field_config;
+    }
+
+    /**
+     * @todo Document this method.
+     * @return void
+     */
+    public static function patchDestinationFieldConfig(Request $request, MappingField $mapping_field, DestinationFieldConfig $destination_field_config): void
+    {
+        $destination_field_config->contact_field_name = $request->input('destination_field_config.contact_field_name');
     }
 
 }
