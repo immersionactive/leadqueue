@@ -20,7 +20,7 @@ class LeadDestination extends Model
 
     public function destination_appends()
     {
-        return $this->hasMany('App\Model\DestinationAppend');
+        return $this->hasMany('App\Models\DestinationAppend');
     }
 
     public function mappings()

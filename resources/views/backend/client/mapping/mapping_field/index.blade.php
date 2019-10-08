@@ -45,6 +45,7 @@
                     <thead>
                         <tr>
                             <th scope="col">Source Field</th>
+                            <th scope="col">Append Input</th>
                             <th scope="col">Destination Field</th>
                             <th scope="col">@lang('labels.general.actions')</th>
                         </tr>
@@ -59,6 +60,15 @@
                                     @else
                                         <span class="text-danger">Unknown ({{ $mapping->lead_source->source_config_type }})</span>
                                     @endif
+                                </td>
+                                <td>
+                                    @if ($mapping_field->append_input_property)
+                                        @if (array_key_exists($mapping_field->append_input_property, $append_inputs_list))
+                                            {{ $append_inputs_list[$mapping_field->append_input_property] }}
+                                        @else
+                                            <span class="text-danger">Unknown ({{ $mapping_field->append_input_property }})</span>
+                                        @endif
+                                    @endif                                    
                                 </td>
                                 <td>
                                     @if (array_key_exists($mapping->lead_destination->destination_config_type, $destination_config_type_classnames_by_model_classname))

@@ -38,6 +38,21 @@
                                 @include($source_config_type_classname::getSourceFieldConfigCreateView())
                             @endif
 
+                            {{-- Append Input --}}
+
+                            <div class="form-group row">
+                                
+                                {{ html()->label('Append Input')
+                                    ->class('col-md-4 form-control-label')
+                                    ->for('append_input_property')
+                                }}
+
+                                <div class="col-md-8">
+                                    {{ html()->select('append_input_property', $append_inputs_list, $mapping_field->append_input_property)->class('form-control')->required() }}
+                                </div>
+                                
+                            </div>
+
                         </div> <!-- .card-body -->
 
                     </div> <!-- .card -->
@@ -53,6 +68,8 @@
                         </div>
 
                         <div class="card-body">
+
+                            <p>Leave blank if you don't want to insert this field into the destination system. (This is useful if you want to configure a field for append only.)</p>
 
                             @if ($mapping_field->exists)
                                 @include($destination_config_type_classname::getDestinationFieldConfigEditView())

@@ -2,7 +2,6 @@
 
 use App\Models\Client;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class ClientsTableSeeder extends Seeder
 {

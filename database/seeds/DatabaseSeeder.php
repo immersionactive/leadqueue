@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             AuthTableSeeder::class,
             ClientsTableSeeder::class,
             AppendPropertiesTableSeeder::class,
+            AppendInputsTableSeeder::class,
         ]);
 
         Model::reguard();

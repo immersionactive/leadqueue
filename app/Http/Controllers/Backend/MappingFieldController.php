@@ -7,10 +7,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Client;
 use App\Models\Mapping;
 use App\Models\MappingField;
+use App\Models\AppendInput;
 use App\SourceConfigTypeRegistry;
 use App\DestinationConfigTypeRegistry;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
 use Validator;
 
 class MappingFieldController extends Controller
@@ -31,13 +33,15 @@ class MappingFieldController extends Controller
         $this->authorize('client.mapping.mapping_field.index');
 
         $mapping_fields = MappingField::where('mapping_id', $mapping->id)->paginate(20);
+        $append_inputs_list = AppendInput::getList();
 
         return view('backend.client.mapping.mapping_field.index', [
             'client' => $client,
             'mapping' => $mapping,
             'mapping_fields' => $mapping_fields,
             'source_config_type_classnames_by_model_classname' => $this->source_config_type_registry->getAllByModelClassname(),
-            'destination_config_type_classnames_by_model_classname' => $this->destination_config_type_registry->getAllByModelClassname()
+            'destination_config_type_classnames_by_model_classname' => $this->destination_config_type_registry->getAllByModelClassname(),
+            'append_inputs_list' => $append_inputs_list
         ]);
 
     }
@@ -71,7 +75,7 @@ class MappingFieldController extends Controller
             $source_field_config = $source_config_type_classname::buildSourceFieldConfig($mapping_field);
             $destination_field_config = $destination_config_type_classname::buildDestinationFieldConfig($mapping_field);
 
-        }  else {
+        } else {
 
             $source_field_config = $mapping_field->source_field_config;
             $destination_field_config = $mapping_field->destination_field_config;
@@ -83,6 +87,8 @@ class MappingFieldController extends Controller
         if ($request->method() === 'POST') {
 
             // patch
+
+            $mapping_field->append_input_property = $request->input('append_input_property');
 
             $source_config_type_classname::patchSourceFieldConfig($request, $mapping_field, $source_field_config);
             $destination_config_type_classname::patchDestinationFieldConfig($request, $mapping_field, $destination_field_config);
@@ -120,14 +126,18 @@ class MappingFieldController extends Controller
 
         }
 
+        $append_inputs_list = ['' => ''] + AppendInput::getList();
+
         return $view->with([
             'client' => $client,
             'mapping' => $mapping,
             'mapping_field' => $mapping_field,
             'source_field_config' => $source_field_config,
             'source_config_type_classname' => $source_config_type_classname,
+            'append_inputs_list' => $append_inputs_list,
             'destination_field_config' => $destination_field_config,
-            'destination_config_type_classname' => $destination_config_type_classname
+            'destination_config_type_classname' => $destination_config_type_classname,
+            'append_inputs_list' => $append_inputs_list
         ]);
 
     }
@@ -149,7 +159,27 @@ class MappingFieldController extends Controller
     protected function buildValidator($input, MappingField $mapping_field, string $source_config_type_classname, string $destination_config_type_classname): \Illuminate\Validation\Validator
     {
 
-        $rules = [];
+        // Don't allow users to assign more than one field (in the same mapping)
+        // to the same AppendInput.
+
+        $unique_rule = Rule::unique('mapping_fields')->where(function ($query) use ($mapping_field) {
+            return $query->where('mapping_id', $mapping_field->mapping_id);
+        });
+
+        // If we're editing an existing field, then exclude it from the
+        // uniqueness check.
+
+        if ($mapping_field->exists) {
+            $unique_rule->ignore($mapping_field->id);
+        }
+
+        $rules = [
+            'append_input_property' => [
+                'nullable',
+                'exists:append_inputs,property',
+                $unique_rule
+            ]
+        ];
 
         $rules += $source_config_type_classname::getSourceFieldConfigValidationRules($mapping_field);
         $rules += $destination_config_type_classname::getDestinationFieldConfigValidationRules($mapping_field);
