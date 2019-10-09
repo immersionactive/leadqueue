@@ -25,7 +25,6 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             AuthTableSeeder::class,
-            ClientsTableSeeder::class,
             AppendInputsTableSeeder::class,
             AppendOutputsTableSeeder::class,
         ]);

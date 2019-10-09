@@ -1,5 +1,16 @@
 # 
 
+## Installation
+
+TODO. Don't forget to document: adding USADATA API credentials to .env; setting up cron
+
+## Seeding test data
+
+To seed the application with test data suitable for development purposes, run this Artisan command:
+
+    php artisan db:seed --class=TestSeeder
+
+This creates a client, lead source, lead destination, mapping, and related records.
 
 ## Lead sources
 
@@ -53,6 +64,7 @@ In chronological order:
 * Disable public routes
 * Make sure that someone (i.e., me) gets notified when a lead fails
 * Carefully consider what will happen if a mapping/source/destination gets modified while a lead is still in the queue
+* Remove is_enabled checkbox from DestinationAppends
 * UX:
   * find a good place for created/updated/deleted timestamps (and make sure they're on all model CRUD pages)
   * when there are no records, don't just show an empty table
