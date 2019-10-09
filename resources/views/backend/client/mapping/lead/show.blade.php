@@ -31,6 +31,13 @@
                         </td>
                     </tr>
 
+                    {{-- Status --}}
+
+                    <tr>
+                        <th scope="row">Status</th>
+                        <td>{{ $lead->status }}</td>
+                    </tr>
+
                     {{-- Inputs --}}
 
                     <tr>
@@ -65,6 +72,30 @@
                                     @endforeach
                                 </tbody>
                             </table>
+
+                        </td>
+                    </tr>
+
+                    {{-- Appended Data --}}
+
+                    <tr>
+                        <th scope="row">Appended Values</th>
+                        <td>
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        @foreach ($lead->lead_appended_values as $lead_appended_value)
+                                            <tr>
+                                                <th scope="row">{{ $lead_appended_value->destination_append->append_output->label }}</th>
+                                                <td>
+                                                    {{ $lead_appended_value->value }}
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
 
                         </td>
                     </tr>

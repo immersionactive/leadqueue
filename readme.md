@@ -61,10 +61,12 @@ In chronological order:
 * Make validation messages clearer
 * Lead Destinations: display type-specific fields on show route
 * Don't forget to release a v1 of immersionactive/propertybase (and pin this project to it)
+* Don't forget to release a v1 of *this project* :)
 * Disable public routes
 * Make sure that someone (i.e., me) gets notified when a lead fails
 * Carefully consider what will happen if a mapping/source/destination gets modified while a lead is still in the queue
 * Remove is_enabled checkbox from DestinationAppends
+* Don't allow destination_append.append_output_slug to be edited after the destination_append has been created? (I think this could mess things up if a user changes the append_output after a lead has already entered the queue...or something. users should be able to edit the destination field, but not the append_output.)
 * UX:
   * find a good place for created/updated/deleted timestamps (and make sure they're on all model CRUD pages)
   * when there are no records, don't just show an empty table

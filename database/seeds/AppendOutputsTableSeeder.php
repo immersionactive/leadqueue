@@ -29,7 +29,8 @@ class AppendOutputsTableSeeder extends Seeder
             'slug' => 'recent_home_buyer',
             'label' => 'Recent Home Buyer?',
             'bundle' => 'mortgagesandloans',
-            'property' => 'recentHomeBuyer'
+            'property' => 'recentHomeBuyer',
+            'translator' => 'yesno'
         ]);
 
         AppendOutput::create([

@@ -22,6 +22,7 @@
                         <tr>
                             <th scope="col">ID</th>
                             <th scope="col">Received</th>
+                            <th scope="col">Status</th>
                             @can('client.lead_source.lead_source_request.show')
                                 <th scope="col">Lead Source Request</th>
                             @endcan
@@ -36,6 +37,7 @@
                                     {{ timezone()->convertToLocal($lead->created_at) }}<br>
                                     <small>({{ $lead->created_at->diffForHumans() }})</small>
                                 </td>
+                                <td>{{ $lead->status }}</td>
                                 @can('client.lead_source.lead_source_request.show')
                                     <td>
                                         <a href="{{ route('admin.client.lead_source.lead_source_request.show', [$client, $mapping->lead_source_id, $lead->lead_source_request_id]) }}">

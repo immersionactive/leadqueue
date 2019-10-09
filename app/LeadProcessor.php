@@ -2,7 +2,9 @@
 
 namespace App;
 
+use App\AppendOutputTranslator;
 use App\Models\Lead;
+use App\Models\LeadAppendedValue;
 use App\Models\MappingField;
 use ImmersionActive\USADataAPI\USADataAPIClient;
 use ImmersionActive\USADataAPI\LeadList;
@@ -57,20 +59,70 @@ class LeadProcessor
 
     /**
      * @param Lead $lead
+     * @return void
      */
-    protected function appendLead(Lead $lead) // TODO: type-hint return value
+    protected function appendLead(Lead $lead): void
     {
 
-        // TODO
+        $person = $this->callAppendAPI($lead);
+        $this->saveAppendedData($lead, $person);
 
+        $lead->status = 'appended';
+        $lead->save();
+
+    }
+
+    /**
+     * @return stdClass The object contained in the document.person property of the first entry in the usadataResponseList
+     */
+    protected function callAppendAPI(Lead $lead): \stdClass
+    {
         $body = $this->buildAppendRequestBody($lead);
         $usadata_lead = new USADataLead($body);
         $lead_list = new LeadList();
         $lead_list->addLead($usadata_lead);
+        $usadata_response = $this->usadata_api->portrait($lead_list);
+        if ($usadata_response->usadataResponseList[0]->code !== 200) {
+            // TODO: include the error message in the exception, if we can figure out what property of the response it's in...
+            throw new \Exception('The USADATA Portrait endpoint returned code ' . $usadata_response->usadataResponseList[0]->code . ' for lead ' . $lead->id);
+        }
+        // TODO: make sure these properties exist
+        return $usadata_response->usadataResponseList[0]->document->person;
+    }
 
-        $response = $this->usadata_api->portrait($lead_list);
+    protected function saveAppendedData(Lead $lead, \stdClass $person): void
+    {
 
-        var_dump($response); exit;
+        foreach ($lead->mapping->lead_destination->destination_appends as $destination_append) {
+            
+            $bundle = $destination_append->append_output->bundle;
+            $property = $destination_append->append_output->property;
+
+            if (
+                isset($person->$bundle) &&
+                isset($person->$bundle->$property)
+            ) {
+
+                $value = $person->$bundle->$property;
+
+                if ($destination_append->append_output->translator) {
+                    $value = AppendOutputTranslator::translate($value, $destination_append->append_output->translator);
+                }
+
+                // make sure that we don't try to save null in a text column (which would cause a MySQL error)
+                if ($value === null) {
+                    $value = '';
+                }
+
+                $lead_appended_value = new LeadAppendedValue();
+                $lead_appended_value->lead_id = $lead->id;
+                $lead_appended_value->destination_append_id = $destination_append->id;
+                $lead_appended_value->value = $value;
+                $lead_appended_value->save();
+
+            }
+
+        }
 
     }
 

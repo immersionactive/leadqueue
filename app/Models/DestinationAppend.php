@@ -12,6 +12,11 @@ class DestinationAppend extends Model
         return $this->belongsTo('App\Models\LeadDestination');
     }
 
+    public function append_output()
+    {
+        return $this->belongsTo('App\Models\AppendOutput');
+    }
+
     public function destination_append_config()
     {
         return $this->morphTo();

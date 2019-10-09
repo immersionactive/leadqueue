@@ -14,7 +14,7 @@
 
             <div class="form-group row">
                 
-                {{ html()->label('Append Property')
+                {{ html()->label('Append Output')
                     ->class('col-md-2 form-control-label')
                     ->for('append_output_slug')
                 }}

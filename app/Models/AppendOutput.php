@@ -7,6 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class AppendOutput extends Model
 {
 
+    // This model uses a string primary key, not an int
+    protected $primaryKey = 'slug';
+    public $incrementing = false;
+    protected $keyType = 'string';
+
+    public function destination_appends()
+    {
+        return $this->hasMany('App\Models\DestinationAppend');
+    }
+
     /**
      * @todo Cache this
      */

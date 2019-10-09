@@ -42,7 +42,7 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">Property</th>
+                            <th scope="col">Append Output</th>
                             <th scope="col">Enabled</th>
                             <th scope="col">Destination Field</th>
                             <th scope="col">@lang('labels.general.actions')</th>

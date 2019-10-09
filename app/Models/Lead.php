@@ -22,4 +22,9 @@ class Lead extends Model
         return $this->hasMany('App\Models\LeadInput');
     }
 
+    public function lead_appended_values()
+    {
+        return $this->hasMany('App\Models\LeadAppendedValue');
+    }
+
 }
