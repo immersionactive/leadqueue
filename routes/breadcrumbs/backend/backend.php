@@ -3,6 +3,7 @@
 use App\Models\Client;
 use App\Models\Lead;
 use App\Models\LeadSource;
+use App\Models\LeadSourceRequest;
 use App\Models\LeadDestination;
 use App\Models\Mapping;
 use App\Models\MappingField;
@@ -35,7 +36,7 @@ Breadcrumbs::for('admin.client.edit', function ($trail, Client $client = null) {
 });
 
 /**
- * Lead Sources
+ * LeadSources
  */
 
 Breadcrumbs::for('admin.client.lead_source.index', function ($trail, Client $client) {
@@ -59,6 +60,20 @@ Breadcrumbs::for('admin.client.lead_source.edit', function ($trail, Client $clie
 });
 
 /**
+ * LeadSourceRequests
+ */
+
+Breadcrumbs::for('admin.client.lead_source.lead_source_request.index', function ($trail, Client $client, LeadSource $lead_source) {
+    $trail->parent('admin.client.lead_source.show', $client, $lead_source);
+    $trail->push('View Requests', route('admin.client.lead_source.lead_source_request.index', [$client, $lead_source]));
+});
+
+Breadcrumbs::for('admin.client.lead_source.lead_source_request.show', function ($trail, Client $client, LeadSource $lead_source, LeadSourceRequest $lead_source_request) {
+    $trail->parent('admin.client.lead_source.lead_source_request.index', $client, $lead_source);
+    $trail->push('Request #' . $lead_source_request->id, route('admin.client.lead_source.lead_source_request.show', [$client, $lead_source, $lead_source_request]));
+});
+
+/**
  * Leads
  */
 
@@ -73,7 +88,7 @@ Breadcrumbs::for('admin.client.lead_source.lead.show', function ($trail, Client 
 });
 
 /**
- * Lead Destinations
+ * LeadDestinations
  */
 
 Breadcrumbs::for('admin.client.lead_destination.index', function ($trail, Client $client) {
@@ -97,7 +112,7 @@ Breadcrumbs::for('admin.client.lead_destination.edit', function ($trail, Client 
 });
 
 /**
- * Destination Appends
+ * DestinationAppends
  */
 
 Breadcrumbs::for('admin.client.lead_destination.destination_append.index', function ($trail, Client $client, LeadDestination $lead_destination) {
@@ -156,6 +171,20 @@ Breadcrumbs::for('admin.client.mapping.mapping_field.edit', function ($trail, Cl
         $trail->parent('admin.client.mapping.mapping_field.index', $client, $mapping);
         $trail->push('Create Field', route('admin.client.mapping.mapping_field.edit', [$client, $mapping, null]));
     }
+});
+
+/**
+ * Leads
+ */
+
+Breadcrumbs::for('admin.client.mapping.lead.index', function ($trail, Client $client, Mapping $mapping) {
+    $trail->parent('admin.client.mapping.show', $client, $mapping);
+    $trail->push('View Leads', route('admin.client.mapping.lead.index', [$client, $mapping]));
+});
+
+Breadcrumbs::for('admin.client.mapping.lead.show', function($trail, Client $client, Mapping $mapping, Lead $lead) {
+    $trail->parent('admin.client.mapping.lead.index', $client, $mapping);
+    $trail->push('Lead ' . $lead->id, route('admin.client.mapping.lead.show', [$client, $mapping, $lead]));
 });
 
 require __DIR__.'/auth.php';

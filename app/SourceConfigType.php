@@ -82,6 +82,12 @@ abstract class SourceConfigType
      * @todo Document this method.
      * @return string
      */
+    abstract public static function getSourceFieldConfigShowView(): string;
+
+    /**
+     * @todo Document this method.
+     * @return string
+     */
     abstract public static function getSourceFieldConfigCreateView(): string;
 
     /**
@@ -107,5 +113,11 @@ abstract class SourceConfigType
      * @return void
      */
     abstract public static function patchSourceFieldConfig(Request $request, MappingField $mapping_field, SourceFieldConfig $source_field_config): void;
+
+    /**
+     * @todo Document this method.
+     * @return mixed
+     */
+    abstract public static function extractSourceFieldFromInsertRequest(Request $request, MappingField $mapping_field);
 
 }

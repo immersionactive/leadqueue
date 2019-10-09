@@ -33,10 +33,8 @@ class PermissionRoleTableSeeder extends Seeder
         Permission::create(['name' => 'client.lead_source.edit']);
         Permission::create(['name' => 'client.lead_source.destroy']);
 
-        Permission::create(['name' => 'client.lead_source.lead.index']);
-        Permission::create(['name' => 'client.lead_source.lead.show']);
-        Permission::create(['name' => 'client.lead_source.lead.edit']);
-        Permission::create(['name' => 'client.lead_source.lead.destroy']);
+        Permission::create(['name' => 'client.lead_source.lead_source_request.index']);
+        Permission::create(['name' => 'client.lead_source.lead_source_request.show']);
 
         Permission::create(['name' => 'client.lead_destination.index']);
         Permission::create(['name' => 'client.lead_destination.show']);
@@ -57,6 +55,9 @@ class PermissionRoleTableSeeder extends Seeder
         Permission::create(['name' => 'client.mapping.mapping_field.show']);
         Permission::create(['name' => 'client.mapping.mapping_field.edit']);
         Permission::create(['name' => 'client.mapping.mapping_field.destroy']);
+
+        Permission::create(['name' => 'client.mapping.lead.index']);
+        Permission::create(['name' => 'client.mapping.lead.show']);
 
         /**
          * Create roles and assign corresponding permissions

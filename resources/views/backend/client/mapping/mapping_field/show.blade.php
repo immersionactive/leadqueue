@@ -34,7 +34,78 @@
 
         </div>
 
-        <h2>This show view isn't implemented yet...</h2>
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <div class="card">
+
+                    <div class="card-header">
+                        <strong>Source Field</strong> (from {{ $source_config_type_classname::getName() }})
+                    </div> <!-- .card-header -->
+
+                    <div class="card-body">
+
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+
+                                    {{-- type-specific fields --}}
+
+                                    @include($source_config_type_classname::getSourceFieldConfigShowView(), ['source_field_config' => $mapping_field->source_field_config])
+
+                                    {{-- Append Input --}}
+
+                                    <tr>
+                                        <th scope="row">Append Input</th>
+                                        <td>
+                                            @if ($mapping_field->append_input)
+                                                {{ $mapping_field->append_input->name }}
+                                            @else
+                                                &mdash;
+                                            @endif
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div> <!-- .card-body -->
+
+                </div> <!-- .card -->
+
+            </div> <!-- .col -->
+
+            <div class="col-md-6">
+
+                <div class="card">
+
+                    <div class="card-header">
+                        <strong>Destination Field</strong> (in {{ $destination_config_type_classname::getName() }})
+                    </div> <!-- .card-header -->
+
+                    <div class="card-body">
+
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+
+                                    {{-- type-specific fields --}}
+
+                                    @include($destination_config_type_classname::getDestinationFieldConfigShowView(), ['destination_field_config' => $mapping_field->destination_field_config])
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div> <!-- .card-body -->
+
+                </div> <!-- .card -->
+
+            </div> <!-- .col -->
+
+        </div> <!-- .row -->
 
     @endcomponent
 

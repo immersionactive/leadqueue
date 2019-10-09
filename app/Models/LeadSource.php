@@ -22,6 +22,11 @@ class LeadSource extends Model
         return $this->hasMany('App\Models\Mappings');
     }
 
+    public function lead_source_requests()
+    {
+        return $this->hasMany('App\Models\LeadSourceRequest');
+    }
+
     /**
      * Returns a list of active lead sources for the specified client,
      * suitable for use in the $options parameter of html()->select() (IDs as

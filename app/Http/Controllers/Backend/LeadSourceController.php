@@ -63,7 +63,7 @@ class LeadSourceController extends Controller
             $source_config = $source_config_type_classname::buildSourceConfig($lead_source);
         } else {
             $source_config = $lead_source->source_config;
-            $source_config_type_classname = $lead_source->source_config_type;
+            $source_config_type_classname = $this->getSourceConfigTypeClassnameByModelClassname($lead_source->source_config_type);
         }
 
         $view = view('backend.client.lead_source.edit');

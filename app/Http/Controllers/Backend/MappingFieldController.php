@@ -49,10 +49,16 @@ class MappingFieldController extends Controller
     public function show(Client $client, Mapping $mapping, MappingField $mapping_field)
     {
 
+        // Determine the source and destination types
+        $source_config_type_classname = $this->source_config_type_registry->getByModelClassname($mapping->lead_source->source_config_type);
+        $destination_config_type_classname = $this->destination_config_type_registry->getByModelClassname($mapping->lead_destination->destination_config_type);
+
         return view('backend.client.mapping.mapping_field.show', [
             'client' => $client,
             'mapping' => $mapping,
-            'mapping_field' => $mapping_field
+            'mapping_field' => $mapping_field,
+            'source_config_type_classname' => $source_config_type_classname,
+            'destination_config_type_classname' => $destination_config_type_classname
         ]);
 
     }
@@ -63,7 +69,6 @@ class MappingFieldController extends Controller
         $this->authorize('client.mapping.mapping_field.edit');
 
         // Determine the source and destination types
-
         $source_config_type_classname = $this->source_config_type_registry->getByModelClassname($mapping->lead_source->source_config_type);
         $destination_config_type_classname = $this->destination_config_type_registry->getByModelClassname($mapping->lead_destination->destination_config_type);
 

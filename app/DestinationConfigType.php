@@ -128,6 +128,12 @@ abstract class DestinationConfigType
      * @todo Document this method.
      * @return string
      */
+    abstract public static function getDestinationFieldConfigShowView(): string;
+
+    /**
+     * @todo Document this method.
+     * @return string
+     */
     abstract public static function getDestinationFieldConfigCreateView(): string;
 
     /**

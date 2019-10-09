@@ -72,6 +72,11 @@ class GravityFormsSourceConfigType extends SourceConfigType
         return 'lead-queue-gravity-forms-source::partials.source-field-config-summary';
     }
 
+    public static function getSourceFieldConfigShowView(): string
+    {
+        return 'lead-queue-gravity-forms-source::partials.source-field-config-show';
+    }
+
     public static function getSourceFieldConfigCreateView(): string
     {
         return 'lead-queue-gravity-forms-source::partials.source-field-config-create-edit';
@@ -104,6 +109,24 @@ class GravityFormsSourceConfigType extends SourceConfigType
     public static function patchSourceFieldConfig(Request $request, MappingField $mapping_field, SourceFieldConfig $source_field_config): void
     {
         $source_field_config->field_name = $request->input('source_field_config.field_name');
+    }
+
+    public static function extractSourceFieldFromInsertRequest(Request $request, MappingField $mapping_field)
+    {
+        
+        $field_name = $mapping_field->source_field_config->field_name;
+
+        // We can't use $request->input($field_name), because Gravity Forms
+        // passes some fields with a period in the name (e.g., "3.5"). For a
+        // JSON request, Laravel interprets that as "find a property named '3',
+        // and then find a sub-property named '5'). That's not what we want -
+        // we just want to find a property named '3.5'. This little workaround
+        // accomplishes that.
+
+        $input = $request->input();
+        $value = array_key_exists($field_name, $input) ? $input[$field_name] : null;
+        return $value;
+
     }
 
 }

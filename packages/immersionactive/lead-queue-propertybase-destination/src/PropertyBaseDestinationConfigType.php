@@ -134,6 +134,11 @@ class PropertybaseDestinationConfigType extends DestinationConfigType
         return 'lead-queue-propertybase-destination::partials.destination-field-config-summary';
     }
 
+    public static function getDestinationFieldConfigShowView(): string
+    {
+        return 'lead-queue-propertybase-destination::partials.destination-field-config-show';
+    }
+
     public static function getDestinationFieldConfigCreateView(): string
     {
         return 'lead-queue-propertybase-destination::partials.destination-field-config-create-edit';

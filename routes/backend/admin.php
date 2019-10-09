@@ -36,6 +36,14 @@ Route::match(['get', 'post'], 'client/{client}/lead_source/edit/{lead_source?}',
     ->name('client.lead_source.edit');
 
 /**
+ * LeadSourceRequests
+ */
+
+Route::get('client/{client}/lead_source/{lead_source}/requests', 'LeadSourceRequestController@index')->name('client.lead_source.lead_source_request.index');
+
+Route::get('client/{client}/lead_source/{lead_source}/requests/{lead_source_request}', 'LeadSourceRequestController@show')->name('client.lead_source.lead_source_request.show');
+
+/**
  * LeadDestinations
  */
 
@@ -128,3 +136,22 @@ Route::post('client/{client}/mapping/{mapping}/mapping_field/delete/{mapping_fie
         'mapping_field' => '[1-9][0-9]*',
     ])
     ->name('client.mapping.mapping_field.destroy');
+
+/**
+ * Leads
+ */
+
+Route::get('client/{client}/mapping/{mapping}/lead', 'LeadController@index')
+    ->where([
+        'client' => '[1-9][0-9]*',
+        'mapping' => '[1-9][0-9]*'
+    ])
+    ->name('client.mapping.lead.index');
+
+Route::get('client/{client}/mapping/{mapping}/lead/{lead}', 'LeadController@show')
+    ->where([
+        'client' => '[1-9][0-9]*',
+        'mapping' => '[1-9][0-9]*',
+        'lead' => '[1-9][0-9]*',
+    ])
+    ->name('client.mapping.lead.show');

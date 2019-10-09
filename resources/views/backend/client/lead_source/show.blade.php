@@ -20,6 +20,10 @@
                 <div class="col-md-6 pull-right">
 
                     <div class="btn-group float-right" role="group" aria-label="TODO">
+
+                        @can('client.lead_source.lead_source_request.index', $client)
+                            <a href="{{ route('admin.client.lead_source.lead_source_request.index', [$client, $lead_source]) }}" class="btn btn-info" data-toggle="tooltip" title="View Requests"><i class="fas fa-list"></i></a>
+                        @endcan
                        
                         @can('client.lead_source.edit', $client)
                             <a href="{{ route('admin.client.lead_source.edit', [$client, $lead_source]) }}" class="btn btn-success" data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
@@ -52,23 +56,23 @@
                     {{-- Name --}}
 
                     <tr>
-                        <th>Name</th>
+                        <th scope="row">Name</th>
                         <td>{{ $lead_source->name }}</td>
                     </tr>
 
-                    {{-- Active --}}
+                    {{-- Endpoint URL --}}
 
                     <tr>
-                        <th>Active</th>
+                        <th scope="row">Endpoint URL</th>
                         <td>
-                            @include('backend.includes.partials.yn-badge', ['active' => $lead_source->is_active])
+                            {{ route('api.insert', [$lead_source]) }}
                         </td>
                     </tr>
 
                     {{-- Notes --}}
 
                     <tr>
-                        <th>Notes</th>
+                        <th scope="row">Notes</th>
                         <td>{!! nl2br(e($lead_source->notes)) !!}</td>
                     </tr>
 

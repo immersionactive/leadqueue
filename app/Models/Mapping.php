@@ -27,4 +27,9 @@ class Mapping extends Model
         return $this->hasMany('App\Models\MappingField');
     }
 
+    public function leads()
+    {
+        return $this->hasMany('App\Models\Lead');
+    }
+
 }

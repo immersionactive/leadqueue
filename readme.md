@@ -23,6 +23,14 @@
 * **Lasso**
 * One more – HubSpot?
 
+## Lead statuses
+
+In chronological order:
+
+* `new`: The lead, but has not yet been appended.
+
+* 
+
 ## TODO
 
 * Immediate stuff:
@@ -32,16 +40,10 @@
 * Document the format that destination fields must accept (e.g., if we insert gender as a string, we need to make sure that the field isn't configured as enum('m','f') in the CRM)
 * Some way to coerce fields from the USADATA response (e.g., booleans -> "Yes"/"No"/"Unknown")
 * Where can users find a webflow site ID?
-* Refactor/bugfix: better handling for is_active checkboxes, including the ability to default to true (I can't believe this is so difficult...)
 * Check out [the throttle middleware](https://laravel.com/docs/6.x/routing#rate-limiting) for rate-limiting
-* Can we enforce delete cascade on the lead_source table on the MySQL level? (Maybe not, since it's a polymorphic relationship to multiple tables)
 * Make sure that all CRUD operations are logged
 * Create .env.example file
 * Build support for dev vs. prod environments into the application
-* UX: find a good place for created/updated/deleted timestamps (and make sure they're on all model CRUD pages)
-* UX: when there are no records, don't just show an empty table
-* UX: use color consistently (e.g., for buttons, icons...)
-* UX: Add explanatory text throughout, because this is gonna be unintuitive to everyone except me :/
 * Client tabs: hide tabs that the user doesn't have access to
 * Logging: tweak all backend controllers to inherit from a superclass that provides a log() method, which automatically records the current user ID and email
 * Implement delete/destroy routes for everything
@@ -49,5 +51,11 @@
 * Lead Destinations: display type-specific fields on show route
 * Don't forget to release a v1 of immersionactive/propertybase (and pin this project to it)
 * Disable public routes
-* Don't load the service provider for the Webflow source (since it's not working yet)
-* GravityFormsSourceConfigType::patchSourceConfig() is unimplemented
+* Make sure that someone (i.e., me) gets notified when a lead fails
+* Carefully consider what will happen if a mapping/source/destination gets modified while a lead is still in the queue
+* UX:
+  * find a good place for created/updated/deleted timestamps (and make sure they're on all model CRUD pages)
+  * when there are no records, don't just show an empty table
+  * use color consistently (e.g., for buttons, icons...)
+  * Add explanatory text throughout, because this is gonna be unintuitive to everyone except me :/
+  * Treat model IDS consistently throughout (either always show them, or only show them to certain users)

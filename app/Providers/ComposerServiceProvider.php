@@ -44,7 +44,9 @@ class ComposerServiceProvider extends ServiceProvider
             [
                 'backend.client.lead_source.index',
                 'backend.client.lead_source.show',
-                'backend.client.lead_source.edit'
+                'backend.client.lead_source.edit',
+                'backend.client.lead_source.lead_source_request.index',
+                'backend.client.lead_source.lead_source_request.show'
             ],
             function ($view) use ($source_config_type_registry) {
                 $client_id = $view->getData()['client']->id;
@@ -84,6 +86,8 @@ class ComposerServiceProvider extends ServiceProvider
                 'backend.client.mapping.mapping_field.index',
                 'backend.client.mapping.mapping_field.show',
                 'backend.client.mapping.mapping_field.edit',
+                'backend.client.mapping.lead.index',
+                'backend.client.mapping.lead.show',
             ],
             function ($view) {
                 $client_id = $view->getData()['client']->id;
