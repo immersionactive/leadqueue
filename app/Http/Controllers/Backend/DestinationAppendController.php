@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Client;
 use App\Models\LeadDestination;
 use App\Models\DestinationAppend;
-use App\Models\AppendProperty;
+use App\Models\AppendOutput;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
@@ -31,13 +31,13 @@ class DestinationAppendController extends Controller
         $this->authorize('client.lead_destination.destination_append.index'); // TODO: make sure this works as expected
 
         $destination_appends = DestinationAppend::where('lead_destination_id', $lead_destination->id)->paginate(20);
-        $append_properties_list = AppendProperty::getList();
+        $append_outputs_list = AppendOutput::getList();
 
         return view('backend.client.lead_destination.destination_append.index', [
             'client' => $client,
             'lead_destination' => $lead_destination,
             'destination_appends' => $destination_appends,
-            'append_properties_list' => $append_properties_list
+            'append_outputs_list' => $append_outputs_list
         ]);
 
     }
@@ -70,7 +70,7 @@ class DestinationAppendController extends Controller
             
             // patch
 
-            $destination_append->append_property_slug = $request->input('append_property_slug');
+            $destination_append->append_output_slug = $request->input('append_output_slug');
             $destination_append->is_enabled = !!$request->input('is_enabled');
             $destination_config_type_classname::patchDestinationAppendConfig($request, $destination_append, $destination_append_config);
 
@@ -85,9 +85,9 @@ class DestinationAppendController extends Controller
             }
 
             $rules = [                
-                'append_property_slug' => [
+                'append_output_slug' => [
                     'required',
-                    'exists:append_properties,slug',
+                    'exists:append_outputs,slug',
                     $unique_rule,
                 ]
             ];
@@ -123,7 +123,7 @@ class DestinationAppendController extends Controller
 
         }
 
-        $append_properties_list = ['' => ''] + AppendProperty::getList();
+        $append_outputs_list = ['' => ''] + AppendOutput::getList();
 
         return $view->with([
             'client' => $client,
@@ -131,7 +131,7 @@ class DestinationAppendController extends Controller
             'destination_config_type_classname' => $destination_config_type_classname,
             'destination_append' => $destination_append,
             'destination_append_config' => $destination_append_config,
-            'append_properties_list' => $append_properties_list
+            'append_outputs_list' => $append_outputs_list
         ]);
 
     }

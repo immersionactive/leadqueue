@@ -26,8 +26,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             AuthTableSeeder::class,
             ClientsTableSeeder::class,
-            AppendPropertiesTableSeeder::class,
             AppendInputsTableSeeder::class,
+            AppendOutputsTableSeeder::class,
         ]);
 
         Model::reguard();

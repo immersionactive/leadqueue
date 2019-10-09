@@ -19,6 +19,7 @@ class CreateLeadsTable extends Migration
             $table->bigIncrements('id');            
             $table->unsignedBigInteger('mapping_id');
             $table->unsignedBigInteger('lead_source_request_id');
+            $table->enum('status', ['new', 'appended', 'complete'])->default('new');
             $table->timestamps();
 
             $table->foreign('mapping_id')

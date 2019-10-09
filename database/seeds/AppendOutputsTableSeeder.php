@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\AppendProperty;
+use App\Models\AppendOutput;
 use Illuminate\Database\Seeder;
 
-class AppendPropertiesTableSeeder extends Seeder
+class AppendOutputsTableSeeder extends Seeder
 {
 
     public function run()
@@ -11,35 +11,35 @@ class AppendPropertiesTableSeeder extends Seeder
         
         // TODO: email and phone, if we can find them
 
-        AppendProperty::create([
+        AppendOutput::create([
             'slug' => 'estimated_income_min',
             'label' => 'Estimated Income (Minimum)',
             'bundle' => 'investmentsandassets',
             'property' => 'estimatedIncomeMin'
         ]);
 
-        AppendProperty::create([
+        AppendOutput::create([
             'slug' => 'estimated_income_max',
             'label' => 'Estimated Income (Maximum)',
             'bundle' => 'investmentsandassets',
             'property' => 'estimatedIncomeMax'
         ]);
 
-        AppendProperty::create([
+        AppendOutput::create([
             'slug' => 'recent_home_buyer',
             'label' => 'Recent Home Buyer?',
             'bundle' => 'mortgagesandloans',
             'property' => 'recentHomeBuyer'
         ]);
 
-        AppendProperty::create([
+        AppendOutput::create([
             'slug' => 'gender',
             'label' => 'Gender',
             'bundle' => 'basicdemographics',
             'property' => 'gender'
         ]);
 
-        AppendProperty::create([
+        AppendOutput::create([
             'slug' => 'age',
             'label' => 'Age',
             'bundle' => 'basicdemographics',

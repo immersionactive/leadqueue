@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAppendPropertiesTable extends Migration
+class CreateAppendOutputsTable extends Migration
 {
 
     /**
@@ -15,7 +15,7 @@ class CreateAppendPropertiesTable extends Migration
     public function up()
     {
 
-        Schema::create('append_properties', function (Blueprint $table) {
+        Schema::create('append_outputs', function (Blueprint $table) {
 
             $table->string('slug', 255)->primary();
             $table->string('label', 255)->comment('The human-readable name of the property.');
@@ -34,7 +34,7 @@ class CreateAppendPropertiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('append_properties');
+        Schema::dropIfExists('append_outputs');
     }
 
 }

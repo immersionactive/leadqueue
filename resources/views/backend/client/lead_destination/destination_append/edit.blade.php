@@ -16,11 +16,11 @@
                 
                 {{ html()->label('Append Property')
                     ->class('col-md-2 form-control-label')
-                    ->for('append_property_slug')
+                    ->for('append_output_slug')
                 }}
 
                 <div class="col-md-10">
-                    {{ html()->select('append_property_slug', $append_properties_list, $destination_append->append_property_slug)->required()->class('form-control') }}
+                    {{ html()->select('append_output_slug', $append_outputs_list, $destination_append->append_output_slug)->required()->class('form-control') }}
                 </div>
                 
             </div>
