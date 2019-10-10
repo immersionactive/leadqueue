@@ -12,39 +12,29 @@ class AppendOutputsTableSeeder extends Seeder
         // TODO: email and phone, if we can find them
 
         AppendOutput::create([
-            'slug' => 'estimated_income_min',
-            'label' => 'Estimated Income (Minimum)',
-            'bundle' => 'investmentsandassets',
-            'property' => 'estimatedIncomeMin'
+            'path' => 'person.investmentsandassets.estimatedIncomeMin',
+            'label' => 'Estimated Income (Minimum)'
         ]);
 
         AppendOutput::create([
-            'slug' => 'estimated_income_max',
-            'label' => 'Estimated Income (Maximum)',
-            'bundle' => 'investmentsandassets',
-            'property' => 'estimatedIncomeMax'
+            'path' => 'person.investmentsandassets.estimatedIncomeMax',
+            'label' => 'Estimated Income (Maximum)'
         ]);
 
         AppendOutput::create([
-            'slug' => 'recent_home_buyer',
+            'path' => 'person.mortgagesandloans.recentHomeBuyer',
             'label' => 'Recent Home Buyer?',
-            'bundle' => 'mortgagesandloans',
-            'property' => 'recentHomeBuyer',
-            'translator' => 'yesno'
+            // 'translator' => 'yesno'
         ]);
 
         AppendOutput::create([
-            'slug' => 'gender',
-            'label' => 'Gender',
-            'bundle' => 'basicdemographics',
-            'property' => 'gender'
+            'path' => 'person.basicdemographics.gender',
+            'label' => 'Gender'
         ]);
 
         AppendOutput::create([
-            'slug' => 'age',
-            'label' => 'Age',
-            'bundle' => 'basicdemographics',
-            'property' => 'age'
+            'path' => 'person.basicdemographics.age',
+            'label' => 'Age'
         ]);
 
     }

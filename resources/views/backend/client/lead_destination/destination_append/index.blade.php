@@ -52,8 +52,8 @@
                         @foreach ($destination_appends as $destination_append)
                             <tr>
                                 <td>
-                                    @if (array_key_exists($destination_append->append_output_slug, $append_outputs_list))
-                                        {{ $append_outputs_list[$destination_append->append_output_slug] }}
+                                    @if (array_key_exists($destination_append->append_output_path, $append_outputs_list))
+                                        {{ $append_outputs_list[$destination_append->append_output_path] }}
                                     @else
                                         Unknown
                                     @endif

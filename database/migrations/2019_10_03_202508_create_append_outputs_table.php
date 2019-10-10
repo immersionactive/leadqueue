@@ -17,11 +17,9 @@ class CreateAppendOutputsTable extends Migration
 
         Schema::create('append_outputs', function (Blueprint $table) {
 
-            $table->string('slug', 255)->primary();
-            $table->string('label', 255)->comment('The human-readable name of the property.');
-            $table->string('bundle', 255)->comment('The name of the bundle which contains this property in the response from the USADATA API.');
-            $table->string('property', 255)->comment('The name of the property itself in the response from the USADATA API.');
-            $table->enum('translator', ['yesno'])->nullable()->default(null);
+            $table->string('path', 255)->primary()->comment('The path to the element, in the format document.bundle.element (e.g., "person.basicdemographics.age").');
+            $table->string('label', 255)->comment('The human-readable name of the element.');
+            // $table->enum('translator', ['yesno'])->nullable()->default(null);
             $table->timestamps();
 
         });

@@ -80,11 +80,11 @@ class TestSeeder extends Seeder
 
         $destination_append_defns = [
             [
-                'append_output_slug' => 'age',
+                'append_output_path' => 'person.basicdemographics.age',
                 'contact_field_name' => 'Append_Age'
             ],
             [
-                'append_output_slug' => 'gender',
+                'append_output_path' => 'person.basicdemographics.gender',
                 'contact_field_name' => 'Gender'
             ],
         ];
@@ -97,7 +97,7 @@ class TestSeeder extends Seeder
 
             $destination_append = DestinationAppend::create([
                 'lead_destination_id' => $lead_destination->id,
-                'append_output_slug' => $destination_append_defn['append_output_slug'],
+                'append_output_path' => $destination_append_defn['append_output_path'],
                 'destination_append_config_id' => $destination_append_config->id,
                 'destination_append_config_type' => PropertybaseLeadDestinationAppendConfig::class
             ]);

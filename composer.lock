@@ -1295,12 +1295,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:immersionactive/usadata-api-client.git",
-                "reference": "0a15e09f348cccb372bf2ff58f3a8139ea8a63ad"
+                "reference": "9cf3cd7bc40f172c8be6ae44a3f04207bc0a9aa1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/immersionactive/usadata-api-client/zipball/0a15e09f348cccb372bf2ff58f3a8139ea8a63ad",
-                "reference": "0a15e09f348cccb372bf2ff58f3a8139ea8a63ad",
+                "url": "https://api.github.com/repos/immersionactive/usadata-api-client/zipball/9cf3cd7bc40f172c8be6ae44a3f04207bc0a9aa1",
+                "reference": "9cf3cd7bc40f172c8be6ae44a3f04207bc0a9aa1",
                 "shasum": ""
             },
             "type": "library",
@@ -1323,7 +1323,7 @@
                 "source": "https://github.com/immersionactive/usadata-api-client/tree/master",
                 "issues": "https://github.com/immersionactive/usadata-api-client/issues"
             },
-            "time": "2019-10-09T17:31:33+00:00"
+            "time": "2019-10-10T18:58:07+00:00"
         },
         {
             "name": "lab404/laravel-impersonate",

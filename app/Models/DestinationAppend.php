@@ -25,7 +25,7 @@ class DestinationAppend extends Model
     public static function getList(int $lead_destination_id)
     {
         // TODO: cache this
-        return self::where(['lead_destination_id' => $lead_destination_id])->pluck('append_output_slug', 'id')->toArray();
+        return self::where(['lead_destination_id' => $lead_destination_id])->pluck('append_output_path', 'id')->toArray();
     }
 
 }

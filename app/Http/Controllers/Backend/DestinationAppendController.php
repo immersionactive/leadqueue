@@ -70,7 +70,7 @@ class DestinationAppendController extends Controller
             
             // patch
 
-            $destination_append->append_output_slug = $request->input('append_output_slug');
+            $destination_append->append_output_path = $request->input('append_output_path');
             $destination_append->is_enabled = !!$request->input('is_enabled');
             $destination_config_type_classname::patchDestinationAppendConfig($request, $destination_append, $destination_append_config);
 
@@ -85,9 +85,9 @@ class DestinationAppendController extends Controller
             }
 
             $rules = [                
-                'append_output_slug' => [
+                'append_output_path' => [
                     'required',
-                    'exists:append_outputs,slug',
+                    'exists:append_outputs,path',
                     $unique_rule,
                 ]
             ];

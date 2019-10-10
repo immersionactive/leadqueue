@@ -16,11 +16,11 @@
                 
                 {{ html()->label('Append Output')
                     ->class('col-md-2 form-control-label')
-                    ->for('append_output_slug')
+                    ->for('append_output_path')
                 }}
 
                 <div class="col-md-10">
-                    {{ html()->select('append_output_slug', $append_outputs_list, $destination_append->append_output_slug)->required()->class('form-control') }}
+                    {{ html()->select('append_output_path', $append_outputs_list, $destination_append->append_output_path)->required()->class('form-control') }}
                 </div>
                 
             </div>

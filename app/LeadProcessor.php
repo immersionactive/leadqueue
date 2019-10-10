@@ -29,6 +29,7 @@ class LeadProcessor
 
         if ($lead->status === 'new') {
             // This lead has not yet been appended
+            // TODO: if this fails, increment the append_failures column. If that column reaches max_append_attempts, then change the status to "append_failed" (and notify someone)
             $this->appendLead($lead);
         }
 
@@ -126,17 +127,10 @@ class LeadProcessor
 
     }
 
-    protected function buildAppendRequestBody(Lead $lead) // TODO: type-hint return value
+    protected function buildAppendRequestBody(Lead $lead): array
     {
 
         $body = [];
-        // $mapping_fields = MappingField::where('mapping_id', $lead->mapping_id);
-
-        // foreach ($mapping_fields as $mapping_field) {
-        //     if ($mapping_field->append_input_property !== null) {
-        //         $body[$mapping_field->append_input_property] = 
-        //     }
-        // }
 
         foreach ($lead->lead_inputs as $lead_input) {
             if ($lead_input->mapping_field->append_input_property !== null) {
@@ -148,5 +142,9 @@ class LeadProcessor
         return $body;
 
     }
+
+    /**
+     * Methods for destination insertion
+     */
 
 }
