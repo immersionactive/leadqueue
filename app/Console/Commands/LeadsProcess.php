@@ -15,7 +15,7 @@ class LeadsProcess extends Command
      *
      * @var string
      */
-    protected $signature = 'leads:process-all';
+    protected $signature = 'leads:process';
 
     /**
      * The console command description.

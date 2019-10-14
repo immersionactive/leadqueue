@@ -8,7 +8,7 @@ class AppendOutput extends Model
 {
 
     // This model uses a string primary key, not an int
-    protected $primaryKey = 'path';
+    protected $primaryKey = 'slug';
     public $incrementing = false;
     protected $keyType = 'string';
 
@@ -22,7 +22,7 @@ class AppendOutput extends Model
      */
     static public function getList()
     {
-        return self::pluck('label', 'path')->toArray();
+        return self::orderBy('name')->pluck('name', 'slug')->toArray();
     }
 
 }

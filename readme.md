@@ -65,7 +65,6 @@ In chronological order:
 * Disable public routes
 * Make sure that someone (i.e., me) gets notified when a lead fails
 * Carefully consider what will happen if a mapping/source/destination gets modified while a lead is still in the queue
-* Remove is_enabled checkbox from DestinationAppends
 * Don't allow destination_append.append_output_slug to be edited after the destination_append has been created? (I think this could mess things up if a user changes the append_output after a lead has already entered the queue...or something. users should be able to edit the destination field, but not the append_output.)
 * On AppendOutputs, rename "Property" to "Element" (this is what USADATA calls them)
 * UX:

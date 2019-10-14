@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\AppendOutputTranslator;
+use App\AppendOutputExtractor;
 use App\Models\Lead;
 use App\Models\LeadAppendedValue;
 use App\Models\MappingField;

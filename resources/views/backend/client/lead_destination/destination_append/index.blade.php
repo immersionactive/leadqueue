@@ -43,7 +43,6 @@
                     <thead>
                         <tr>
                             <th scope="col">Append Output</th>
-                            <th scope="col">Enabled</th>
                             <th scope="col">Destination Field</th>
                             <th scope="col">@lang('labels.general.actions')</th>
                         </tr>
@@ -52,14 +51,11 @@
                         @foreach ($destination_appends as $destination_append)
                             <tr>
                                 <td>
-                                    @if (array_key_exists($destination_append->append_output_path, $append_outputs_list))
-                                        {{ $append_outputs_list[$destination_append->append_output_path] }}
+                                    @if (array_key_exists($destination_append->append_output_slug, $append_outputs_list))
+                                        {{ $append_outputs_list[$destination_append->append_output_slug] }}
                                     @else
                                         Unknown
                                     @endif
-                                </td>
-                                <td>
-                                    @include('backend.includes.partials.yn-badge', ['active' => $destination_append->is_enabled])
                                 </td>
                                 <td>
                                     TODO

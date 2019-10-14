@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\AppendOutput;
 use App\Models\Client;
 use App\Models\DestinationAppend;
 use App\Models\LeadDestination;
@@ -78,26 +79,19 @@ class TestSeeder extends Seeder
             'destination_config_type' => PropertybaseWebToProspectDestinationConfig::class
         ]);
 
-        $destination_append_defns = [
-            [
-                'append_output_path' => 'person.basicdemographics.age',
-                'contact_field_name' => 'Append_Age'
-            ],
-            [
-                'append_output_path' => 'person.basicdemographics.gender',
-                'contact_field_name' => 'Gender'
-            ],
-        ];
+        // Create an instance of every type of AppendOutput
 
-        foreach ($destination_append_defns as $destination_append_defn) {
+        $append_outputs = AppendOutput::all();
+
+        foreach ($append_outputs as $append_output) {
 
             $destination_append_config = PropertybaseLeadDestinationAppendConfig::create([
-                'contact_field_name' => $destination_append_defn['contact_field_name']
+                'contact_field_name' => 'TODO'
             ]);
 
             $destination_append = DestinationAppend::create([
                 'lead_destination_id' => $lead_destination->id,
-                'append_output_path' => $destination_append_defn['append_output_path'],
+                'append_output_slug' => $append_output->slug,
                 'destination_append_config_id' => $destination_append_config->id,
                 'destination_append_config_type' => PropertybaseLeadDestinationAppendConfig::class
             ]);

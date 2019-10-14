@@ -53,7 +53,6 @@ class DestinationAppendController extends Controller
             
             $destination_append = new DestinationAppend();
             $destination_append->lead_destination_id = $lead_destination->id;
-            $destination_append->is_enabled = true;
 
             $destination_append_config = $destination_config_type_classname::buildDestinationAppendConfig($destination_append);
 
@@ -70,8 +69,7 @@ class DestinationAppendController extends Controller
             
             // patch
 
-            $destination_append->append_output_path = $request->input('append_output_path');
-            $destination_append->is_enabled = !!$request->input('is_enabled');
+            $destination_append->append_output_slug = $request->input('append_output_slug');
             $destination_config_type_classname::patchDestinationAppendConfig($request, $destination_append, $destination_append_config);
 
             // validate
@@ -85,9 +83,9 @@ class DestinationAppendController extends Controller
             }
 
             $rules = [                
-                'append_output_path' => [
+                'append_output_slug' => [
                     'required',
-                    'exists:append_outputs,path',
+                    'exists:append_outputs,slug',
                     $unique_rule,
                 ]
             ];

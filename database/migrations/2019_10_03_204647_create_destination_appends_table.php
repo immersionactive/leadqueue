@@ -19,14 +19,13 @@ class CreateDestinationAppendsTable extends Migration
             
             $table->bigIncrements('id');
             $table->unsignedBigInteger('lead_destination_id');
-            $table->string('append_output_path', 255);
-            $table->boolean('is_enabled')->default(true);
+            $table->string('append_output_slug', 255);
             $table->unsignedBigInteger('destination_append_config_id');
             $table->string('destination_append_config_type', 255);
             $table->timestamps();
 
-            $table->foreign('append_output_path')
-                ->references('path')->on('append_outputs')
+            $table->foreign('append_output_slug')
+                ->references('slug')->on('append_outputs')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 

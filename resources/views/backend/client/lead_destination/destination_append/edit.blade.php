@@ -16,38 +16,13 @@
                 
                 {{ html()->label('Append Output')
                     ->class('col-md-2 form-control-label')
-                    ->for('append_output_path')
+                    ->for('append_output_slug')
                 }}
 
                 <div class="col-md-10">
-                    {{ html()->select('append_output_path', $append_outputs_list, $destination_append->append_output_path)->required()->class('form-control') }}
+                    {{ html()->select('append_output_slug', $append_outputs_list, $destination_append->append_output_slug)->required()->class('form-control') }}
                 </div>
                 
-            </div>
-
-            <div class="form-group row">
-
-                {{ html()->label('Enabled')
-                    ->class('col-md-2 form-control-label')
-                    ->for('is_enabled')
-                }}
-
-                <div class="col-md-10">
-
-                    <div class="checkbox d-flex align-items-center">
-                        {{-- TODO: Add help text explaining that when a client is deactivated, so is all of their lead processing --}}
-                        {{ html()->label(
-                                html()->checkbox('is_active', $destination_append->is_enabled)
-                                      ->class('switch-input')
-                                      ->id('is_enabled')
-                                    . '<span class="switch-slider" data-checked="on" data-unchecked="off"></span>')
-                                ->class('switch switch-label switch-pill switch-primary mr-2')
-                            ->for('is_enabled')
-                        }}
-                    </div>
-
-                </div>
-
             </div>
 
             @if ($destination_append->exists)
