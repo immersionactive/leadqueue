@@ -76,7 +76,6 @@ In chronological order:
 * Documentation
 * Check out [the throttle middleware](https://laravel.com/docs/6.x/routing#rate-limiting) for rate-limiting
 * Build support for dev vs. prod environments into the application?
-* Client tabs: hide tabs that the user doesn't have access to
 * Carefully consider what will happen if a mapping/source/destination gets modified while a lead is still in the queue
 * UX:
   * find a good place for created/updated/deleted timestamps (and make sure they're on all model CRUD pages)
