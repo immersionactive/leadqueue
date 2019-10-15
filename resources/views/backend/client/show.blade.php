@@ -50,7 +50,7 @@
                             </div>
 
                             <div class="table-responsive">
-                                <table class="table table-hover">
+                                <table class="table">
                                     <tbody>
 
                                         {{-- Name --}}
@@ -87,18 +87,9 @@
                 </div>
             </div>
 
-        </div> <!-- .card-body -->
+            @include('backend.includes.timestamps', ['model' => $client])
 
-        <div class="card-footer">
-            <div class="row">
-                <div class="col">
-                    <small class="float-right text-muted">
-                        <strong>Created At:</strong> {{ timezone()->convertToLocal($client->created_at) }} ({{ $client->created_at->diffForHumans() }}),
-                        <strong>Last Updated:</strong> {{ timezone()->convertToLocal($client->updated_at) }} ({{ $client->updated_at->diffForHumans() }})
-                    </small>
-                </div>
-            </div>
-        </div> <!--. card-footer -->
+        </div> <!-- .card-body -->
 
     </div> <!-- .card -->
     
