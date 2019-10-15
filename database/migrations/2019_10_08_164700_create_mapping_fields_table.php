@@ -19,6 +19,7 @@ class CreateMappingFieldsTable extends Migration
             
             $table->bigIncrements('id');
             $table->unsignedBigInteger('mapping_id');
+            $table->string('name', 255);
             $table->unsignedBigInteger('source_field_config_id');
             $table->string('source_field_config_type', 255);
             $table->unsignedBigInteger('destination_field_config_id');

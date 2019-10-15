@@ -20,6 +20,37 @@
 
         {{ html()->modelForm($mapping_field, 'POST', route('admin.client.mapping.mapping_field.edit', [$client, $mapping, $mapping_field]))->class('form-horizontal')->novalidate()->open() }}
 
+            <div class="card">
+
+                <div class="card-header">
+                    General
+                </div>
+
+                <div class="card-body">
+
+                    <div class="form-group row">
+                        
+                        {{ html()->label('Name')
+                            ->class('col-md-2 form-control-label')
+                            ->for('name')
+                        }}
+
+                        <div class="col-md-10">
+                            {{ html()->text('name')
+                                ->class('form-control')
+                                ->placeholder('Name')
+                                ->attribute('maxlength', 255)
+                                ->required()
+                                ->autofocus()
+                            }}
+                        </div>
+                        
+                    </div>
+                        
+                </div>
+
+            </div>
+
             <div class="row">
 
                 <div class="col-md-6">

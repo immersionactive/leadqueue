@@ -34,6 +34,33 @@
 
         </div>
 
+        <div class="card">
+
+            <div class="card-header">
+                General
+            </div>
+
+            <div class="card-body">
+
+                <div class="table-responsive">
+                    <table class="table">
+                        <tbody>
+
+                            {{-- Name --}}
+
+                            <tr>
+                                <th scope="row">Name</th>
+                                <td>{{ $mapping_field->name }}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+
         <div class="row">
 
             <div class="col-md-6">

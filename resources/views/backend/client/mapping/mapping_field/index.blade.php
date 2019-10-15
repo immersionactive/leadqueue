@@ -44,6 +44,7 @@
                 <table class="table">
                     <thead>
                         <tr>
+                            <th scope="col">Name</th>
                             <th scope="col">Source Field</th>
                             <th scope="col">Append Input</th>
                             <th scope="col">Destination Field</th>
@@ -53,6 +54,7 @@
                     <tbody>
                         @foreach ($mapping_fields as $mapping_field)
                             <tr>
+                                <td>{{ $mapping_field->name }}</td>
                                 <td>
                                     {{-- TODO: this is really inefficient. it has to run two additional render-time queries for each iteration of the loop (one to load the lead_source, and another to load the lead_destination) --}}
                                     @if (array_key_exists($mapping->lead_source->source_config_type, $source_config_type_classnames_by_model_classname))

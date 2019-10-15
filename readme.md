@@ -52,7 +52,6 @@ In chronological order:
 
 ### Essential
 
-* Leads CSV download: mapping field input values need human-readable headers
 * Finish building Propertybase insertion logic (need access to Propertybase first)
 * Don't forget to release a v1 of immersionactive/propertybase (and pin this project to it)
 * Don't forget to release a v1 of *this project* :)
@@ -63,7 +62,6 @@ In chronological order:
 ### Important
 
 * Create .env.example file
-* Disable public routes
 * Don't allow destination_append.append_output_slug to be edited after the destination_append has been created? (I think this could mess things up if a user changes the append_output after a lead has already entered the queue...or something. users should be able to edit the destination field, but not the append_output.)
 * Logging:
   * Make sure that all CRUD operations are logged

@@ -131,7 +131,7 @@ class LeadController extends Controller
         );
 
         // Uncomment this line if you want to view the CSV in the browser as an HTML table (for development & debugging)
-        echo $csv->renderTable(); exit;
+        // echo $csv->renderTable(); exit;
 
         return response()->streamDownload(function () use ($csv) {
             echo $csv->render();
@@ -155,7 +155,7 @@ class LeadController extends Controller
         $mapping_fields = MappingField::where('mapping_id', $mapping->id)->orderBy('id')->get();
 
         foreach ($mapping_fields as $mapping_field) {
-            $header_row[] = 'mapping_field ' . $mapping_field->id; // TODO - name this more meaningfully. that might require us to add a "Name" column to MappingFields
+            $header_row[] = $mapping_field->name;
         }
 
         /**

@@ -93,6 +93,7 @@ class MappingFieldController extends Controller
 
             // patch
 
+            $mapping_field->name = $request->input('name');
             $mapping_field->append_input_property = $request->input('append_input_property');
 
             $source_config_type_classname::patchSourceFieldConfig($request, $mapping_field, $source_field_config);
@@ -164,10 +165,10 @@ class MappingFieldController extends Controller
     protected function buildValidator($input, MappingField $mapping_field, string $source_config_type_classname, string $destination_config_type_classname): \Illuminate\Validation\Validator
     {
 
-        // Don't allow users to assign more than one field (in the same mapping)
-        // to the same AppendInput.
+        // Don't allow users to use the same name for two fields in the same
+        // Mapping.
 
-        $unique_rule = Rule::unique('mapping_fields')->where(function ($query) use ($mapping_field) {
+        $unique_name_rule = Rule::unique('mapping_fields')->where(function ($query) use ($mapping_field) {
             return $query->where('mapping_id', $mapping_field->mapping_id);
         });
 
@@ -175,14 +176,33 @@ class MappingFieldController extends Controller
         // uniqueness check.
 
         if ($mapping_field->exists) {
-            $unique_rule->ignore($mapping_field->id);
+            $unique_name_rule->ignore($mapping_field->id);
+        }
+
+        // Don't allow users to assign more than one field (in the same mapping)
+        // to the same AppendInput.
+
+        $unique_input_rule = Rule::unique('mapping_fields')->where(function ($query) use ($mapping_field) {
+            return $query->where('mapping_id', $mapping_field->mapping_id);
+        });
+
+        // If we're editing an existing field, then exclude it from the
+        // uniqueness check.
+
+        if ($mapping_field->exists) {
+            $unique_input_rule->ignore($mapping_field->id);
         }
 
         $rules = [
+            'name' => [
+                'required',
+                'max:255',
+                $unique_name_rule
+            ],
             'append_input_property' => [
                 'nullable',
                 'exists:append_inputs,property',
-                $unique_rule
+                $unique_input_rule
             ]
         ];
 
