@@ -13,7 +13,7 @@ Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard'
 Route::get('client', 'ClientController@index')->name('client.index');
 Route::get('client/{client}', 'ClientController@show')->where('client', '[1-9][0-9]*')->name('client.show');
 Route::match(['get', 'post'], 'client/edit/{client?}', 'ClientController@edit')->where('client', '[1-9][0-9]*')->name('client.edit');
-Route::post('client/delete/{client}', 'ClientController@delete')->where('client', '[1-9][0-9]*')->name('client.delete');
+Route::post('client/delete/{client}', 'ClientController@destroy')->where('client', '[1-9][0-9]*')->name('client.destroy');
 
 /**
  * LeadSources
@@ -34,6 +34,13 @@ Route::match(['get', 'post'], 'client/{client}/lead_source/edit/{lead_source?}',
         'lead_source' => '[1-9][0-9]*'
     ])
     ->name('client.lead_source.edit');
+
+Route::post('client/{client}/lead_source/delete/{lead_source}', 'LeadSourceController@destroy')
+    ->where([
+        'client' => '[1-9][0-9]*',
+        'lead_source' => '[1-9][0-9]*'
+    ])
+    ->name('client.lead_source.destroy');
 
 /**
  * LeadSourceRequests
@@ -63,6 +70,13 @@ Route::match(['get', 'post'], 'client/{client}/lead_destination/edit/{lead_desti
     ])
     ->name('client.lead_destination.edit');
 
+Route::post('client/{client}/lead_destination/delete/{lead_destination}', 'LeadDestinationController@destroy')
+    ->where([
+        'client' => '[1-9][0-9]*',
+        'lead_destination' => '[1-9][0-9]*'
+    ])
+    ->name('client.lead_destination.destroy');
+
 /**
  * DestinationAppends
  */
@@ -71,9 +85,13 @@ Route::get('client/{client}/lead_destination/{lead_destination}/destination_appe
 
 Route::match(['get', 'post'], 'client/{client}/lead_destination/{lead_destination}/destination_append/edit/{destination_append?}', 'DestinationAppendController@edit')->where(['client' => '[1-9][0-9]*', 'lead_destination' => '[1-9][0-9]*', 'destination_append' => '[1-9][0-9]*'])->name('client.lead_destination.destination_append.edit');
 
-// Route::resource('client.lead_destination.destination_append', 'DestinationAppendController'); // ->where(['client' => '[1-9][0-9]*', 'lead_destination' => '[1-9][0-9]*']);
-
-Route::post('client/{client}/lead_destination/{lead_destination}/destination_append/delete/{destination_append}', 'DestinationAppend@destroy')->where(['client' => '[1-9][0-9]*', 'lead_destination' => '[1-9][0-9]*', 'destination_append' => '[1-9][0-9]*'])->name('client.lead_destination.destination_append.destroy');
+Route::post('client/{client}/lead_destination/{lead_destination}/destination_append/delete/{destination_append}', 'DestinationAppendController@destroy')
+    ->where([
+        'client' => '[1-9][0-9]*',
+        'lead_destination' => '[1-9][0-9]*',
+        'destination_append' => '[1-9][0-9]*'
+    ])
+    ->name('client.lead_destination.destination_append.destroy');
 
 /**
  * Mappings
@@ -155,3 +173,10 @@ Route::get('client/{client}/mapping/{mapping}/lead/{lead}', 'LeadController@show
         'lead' => '[1-9][0-9]*',
     ])
     ->name('client.mapping.lead.show');
+
+Route::get('client/{client}/mapping/{mapping}/lead/download', 'LeadController@download')
+    ->where([
+        'client' => '[1-9][0-9]*',
+        'mapping' => '[1-9][0-9]*'
+    ])
+    ->name('client.mapping.lead.download');

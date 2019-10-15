@@ -25,7 +25,7 @@ class LeadDestinationController extends Controller
     public function index(Client $client)
     {
 
-        $this->authorize('client.lead_destination.index'); // TODO: make sure this works as expected
+        $this->authorize('client.lead_destination.index');
 
         $lead_destinations = LeadDestination::where('client_id', $client->id)->paginate(20);
 
@@ -42,12 +42,12 @@ class LeadDestinationController extends Controller
 
         // TODO: check permissions
 
-        // $destination_config_type_classname = $this->getDestinationConfigTypeClassnameByModelClassname($lead_destination->destination_config_type);
+        $destination_config_type_classname = $this->getDestinationConfigTypeClassnameByModelClassname($lead_destination->destination_config_type);
 
         return view('backend.client.lead_destination.show', [
             'client' => $client,
             'lead_destination' => $lead_destination,
-            // 'destination_config_type_classname' => $destination_config_type_classname
+            'destination_config_type_classname' => $destination_config_type_classname
         ]);
 
     }
@@ -55,7 +55,7 @@ class LeadDestinationController extends Controller
     public function edit(Request $request, Client $client, LeadDestination $lead_destination = null)
     {
 
-        $this->authorize('client.lead_destination.edit'); // TODO: make sure this works as expected
+        $this->authorize('client.lead_destination.edit');
 
         if (!$lead_destination) {
             $destination_config_type_slug = $request->input('type');
@@ -114,6 +114,20 @@ class LeadDestinationController extends Controller
         ]);
 
     }
+
+    public function destroy(Client $client, LeadDestination $lead_destination)
+    {
+
+        $this->authorize('client.lead_destination.destroy');
+
+        $lead_destination->delete();
+
+        // TODO: Log
+
+        return redirect()->route('admin.client.lead_destination.index', [$client])->withFlashSuccess('Lead Destination deleted.');        
+
+    }
+
 
     protected function buildLeadDestination(Client $client, string $destination_config_type_classname): LeadDestination
     {

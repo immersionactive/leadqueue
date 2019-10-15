@@ -19,7 +19,12 @@ class CreateLeadsTable extends Migration
             $table->bigIncrements('id');            
             $table->unsignedBigInteger('mapping_id');
             $table->unsignedBigInteger('lead_source_request_id');
-            $table->enum('status', ['new', 'appended', 'complete'])->default('new');
+            $table->enum('status', ['new', 'appended', 'complete', 'append_failed', 'destination_failed'])->default('new');
+            $table->unsignedSmallInteger('failed_append_attempts')->default(0);
+            $table->unsignedSmallInteger('failed_destination_attempts')->default(0);
+            $table->dateTime('appended_at')->nullable();
+            $table->dateTime('destination_at')->nullable();
+            $table->string('destination_id', 255)->nullable();
             $table->timestamps();
 
             $table->foreign('mapping_id')

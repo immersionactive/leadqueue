@@ -180,6 +180,15 @@ class AppendOutputsTableSeeder extends Seeder
             'uses_place_document' => false
         ]);
 
+        AppendOutput::create([
+            'slug' => 'person_email',
+            'name' => 'Person: Email Address',
+            'description' => 'person.emailcontact.(array)',
+            'uses_person_document' => true,
+            'uses_household_document' => false,
+            'uses_place_document' => false
+        ]);
+
     }
 
 }

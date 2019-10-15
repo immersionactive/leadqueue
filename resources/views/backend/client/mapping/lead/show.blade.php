@@ -35,8 +35,35 @@
 
                     <tr>
                         <th scope="row">Status</th>
-                        <td>{{ $lead->status }}</td>
+                        <td>@include('backend.includes.partials.lead-status-badge', ['status' => $lead->status])</td>
                     </tr>
+
+                    {{-- Append Failures --}}
+
+                    <tr>
+                        <th scope="row">Append Failures</th>
+                        <td>{{ $lead->failed_append_attempts }}</td>
+                    </tr>
+
+                    {{-- Destination Failures --}}
+
+                    <tr>
+                        <th scope="row">Destination Failures</th>
+                        <td>{{ $lead->failed_destination_attempts }}</td>
+                    </tr>
+
+                    {{-- Lead Source Request --}}
+
+                    @can('client.lead_source.lead_source_request.show')
+                        <tr>
+                            <th scope="row">Lead Source Request</th>
+                            <td>
+                                <a href="{{ route('admin.client.lead_source.lead_source_request.show', [$client, $mapping->lead_source_id, $lead->lead_source_request_id]) }}">
+                                    {{ $lead->lead_source_request_id }}
+                                </a>
+                            </td>
+                        </tr>
+                    @endcan
 
                     {{-- Inputs --}}
 
@@ -87,7 +114,7 @@
                                     <tbody>
                                         @foreach ($lead->lead_appended_values as $lead_appended_value)
                                             <tr>
-                                                <th scope="row">{{ $lead_appended_value->destination_append->append_output->label }}</th>
+                                                <th scope="row">{{ $lead_appended_value->destination_append->append_output->name }}</th>
                                                 <td>
                                                     {{ $lead_appended_value->value }}
                                                 </td>

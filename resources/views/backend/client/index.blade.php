@@ -70,23 +70,6 @@
                                                     </a>
                                                 @endcan
 
-                                                @can('client.update')
-                                                    <a href="{{ route('admin.client.edit', $client) }}" data-toggle="tooltip" data-placement="top" title="@lang('buttons.general.crud.edit')" class="btn btn-primary">
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
-                                                @endcan
-
-                                                @can('client.delete')
-                                                    <a href="{{ route('admin.client.delete', $client) }}"
-                                                       data-method="delete"
-                                                       data-trans-button-cancel="@lang('buttons.general.cancel')"
-                                                       data-trans-button-confirm="@lang('buttons.general.crud.delete')"
-                                                       data-trans-title="@lang('strings.backend.general.are_you_sure')"
-                                                       class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="@lang('buttons.general.crud.delete')">
-                                                        <i class="fas fa-trash"></i>
-                                                    </a>
-                                                @endcan
-
                                             </div>
 
                                         </td>

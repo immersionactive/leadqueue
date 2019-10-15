@@ -32,12 +32,14 @@ class DestinationAppendController extends Controller
 
         $destination_appends = DestinationAppend::where('lead_destination_id', $lead_destination->id)->paginate(20);
         $append_outputs_list = AppendOutput::getList();
+        $destination_config_type_classname = $this->getDestinationConfigTypeClassnameByModelClassname($lead_destination->destination_config_type);
 
         return view('backend.client.lead_destination.destination_append.index', [
             'client' => $client,
             'lead_destination' => $lead_destination,
             'destination_appends' => $destination_appends,
-            'append_outputs_list' => $append_outputs_list
+            'append_outputs_list' => $append_outputs_list,
+            'destination_config_type_classname' => $destination_config_type_classname
         ]);
 
     }
@@ -45,7 +47,7 @@ class DestinationAppendController extends Controller
     public function edit(Request $request, Client $client, LeadDestination $lead_destination, DestinationAppend $destination_append = null)
     {
 
-        $this->authorize('client.lead_destination.destination_append.edit'); // TODO: make sure this works as expected
+        $this->authorize('client.lead_destination.destination_append.edit');
 
         $destination_config_type_classname = $this->getDestinationConfigTypeClassnameByModelClassname($lead_destination->destination_config_type);
 
@@ -131,6 +133,19 @@ class DestinationAppendController extends Controller
             'destination_append_config' => $destination_append_config,
             'append_outputs_list' => $append_outputs_list
         ]);
+
+    }
+
+    public function destroy(Client $client, LeadDestination $lead_destination, DestinationAppend $destination_append)
+    {
+
+        $this->authorize('client.lead_destination.destination_append.destroy');
+
+        $destination_append->delete();
+
+        // TODO: Log
+            
+        return redirect()->route('admin.client.lead_destination.destination_append.index', [$client, $lead_destination])->withFlashSuccess('Destination Append deleted.');        
 
     }
 

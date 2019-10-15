@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Backend;
 
 use DB;
+use Log;
+use Validator;
 use App\Http\Controllers\Controller;
 use App\Models\Client;
 use App\Models\Mapping;
@@ -11,9 +13,7 @@ use App\Models\AppendInput;
 use App\SourceConfigTypeRegistry;
 use App\DestinationConfigTypeRegistry;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
-use Validator;
 
 class MappingFieldController extends Controller
 {
@@ -121,7 +121,7 @@ class MappingFieldController extends Controller
                 });
 
                 $user = auth()->user();
-                Log::info('User ' . $user->id . ' (' . $user->email . ') ' . ($is_new ? 'created' : 'updated') . ' mapping field ' . $mapping_field->id . ' for client ' . $client->id . ' (' . $client->name . ')');
+                Log::info('User ' . $user->id . ' (' . $user->email . ') ' . ($is_new ? 'created' : 'updated') . ' mapping field ' . $mapping_field->id . ' for mapping ' . $mapping->id . ' (' . $mapping->name . ') for client ' . $client->id . ' (' . $client->name . ')');
 
                 return redirect()->route('admin.client.mapping.mapping_field.show', [$client, $mapping, $mapping_field])->withFlashSuccess('Field ' . ($is_new ? 'created' : 'updated') . '.');
 
@@ -155,7 +155,7 @@ class MappingFieldController extends Controller
         $mapping_field->delete();
 
         $user = auth()->user();
-        Log::info('User ' . $user->id . ' (' . $user->email . ') deleted mapping field ' . $mapping_field->id . ' for client ' . $client->id . ' (' . $client->name . ')');
+        Log::info('User ' . $user->id . ' (' . $user->email . ') deleted mapping field ' . $mapping_field->id . ' for mapping ' . $mapping->id . ' (' . $mapping->name . ') for client ' . $client->id . ' (' . $client->name . ')');
             
         return redirect()->route('admin.client.mapping.mapping_field.index', [$client, $mapping])->withFlashSuccess('Field deleted.');        
 

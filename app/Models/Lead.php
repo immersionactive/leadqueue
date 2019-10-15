@@ -7,6 +7,26 @@ use Illuminate\Database\Eloquent\Model;
 class Lead extends Model
 {
 
+    public static function getStatusList(bool $include_empty = false): array
+    {
+
+        $statuses = [];
+
+        if ($include_empty) {
+            $statuses[''] = 'All';
+        }
+
+        $statuses += [
+            'new' => 'New',
+            'appended' => 'Appended',
+            'complete' => 'Complete',
+            'append_failed' => 'Append Failed',
+            'destination_failed' => 'Destination Failed'
+        ];
+
+        return $statuses;
+    }
+
     public function lead_source_request()
     {
         return $this->belongsTo('App\Models\LeadSourceRequest');
@@ -25,6 +45,11 @@ class Lead extends Model
     public function lead_appended_values()
     {
         return $this->hasMany('App\Models\LeadAppendedValue');
+    }
+
+    public function isAppended(): bool
+    {
+        return in_array($this->status, ['appended', 'complete', 'destination_failed']);
     }
 
 }

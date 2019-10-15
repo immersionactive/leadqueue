@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Backend;
 
+use Log;
 use App\Http\Controllers\Controller;
 use App\Models\Client;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class ClientController extends Controller
@@ -14,7 +14,7 @@ class ClientController extends Controller
     public function index()
     {
 
-        $this->authorize('client.index'); // TODO: make sure this works as expected
+        $this->authorize('client.index');
 
         // TODO: Log
 
@@ -29,7 +29,7 @@ class ClientController extends Controller
     public function show(Client $client)
     {
 
-        $this->authorize('client.show'); // TODO: make sure this works as expected
+        $this->authorize('client.show');
 
         // TODO: Log
 
@@ -42,7 +42,7 @@ class ClientController extends Controller
     public function edit(Request $request, Client $client = null)
     {
 
-        $this->authorize('client.edit'); // TODO: make sure this works as expected
+        $this->authorize('client.edit');
 
         // Set up the $client object
 
@@ -95,10 +95,10 @@ class ClientController extends Controller
         
     }
 
-    public function delete($client_id)
+    public function destroy(Client $client)
     {
 
-        $this->authorize('client.delete'); // TODO: make sure this works as expected
+        $this->authorize('client.destroy');
 
         $client->delete();
 

@@ -113,6 +113,19 @@ class LeadSourceController extends Controller
 
     }
 
+    public function destroy(Client $client, LeadSource $lead_source)
+    {
+
+        $this->authorize('client.lead_source.destroy');
+
+        $lead_source->delete();
+
+        // TODO: Log
+
+        return redirect()->route('admin.client.lead_source.index', [$client])->withFlashSuccess('Lead Source deleted.');        
+
+    }
+
     protected function getSourceConfigTypeClassnameBySlug(string $slug): string
     {
         $source_config_type_classname = $this->source_config_type_registry->getBySlug($slug);

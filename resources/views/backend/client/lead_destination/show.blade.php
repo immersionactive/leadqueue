@@ -30,16 +30,14 @@
                         @endcan
 
                         @can('client.lead_destination.destroy', $client)
-                            {{--
                             <a href="{{ route('admin.client.lead_destination.destroy', [$client, $lead_destination]) }}"
-                               data-method="delete"
+                               data-method="post"
                                data-trans-button-cancel="@lang('buttons.general.cancel')"
                                data-trans-button-confirm="@lang('buttons.general.crud.delete')"
                                data-trans-title="@lang('strings.backend.general.are_you_sure')"
                                class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="@lang('buttons.general.crud.delete')">
                                 <i class="fas fa-trash"></i>
                             </a>
-                            --}}
                         @endcan
 
                     </div>
@@ -67,7 +65,9 @@
                         <td>{!! nl2br(e($lead_destination->notes)) !!}</td>
                     </tr>
 
-                    {{-- @include($destination_config_type_classname::getShowView()) --}}
+                    {{-- DestinationConfigType-specific fields --}}
+
+                    @include($destination_config_type_classname::getShowView())
 
                 </tbody>
             </table>

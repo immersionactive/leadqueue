@@ -29,10 +29,9 @@
                             <a href="{{ route('admin.client.lead_source.edit', [$client, $lead_source]) }}" class="btn btn-success" data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></a>
                         @endcan
 
-                        {{--
                         @can('client.lead_source.destroy', $client)
                             <a href="{{ route('admin.client.lead_source.destroy', [$client, $lead_source]) }}"
-                               data-method="delete"
+                               data-method="post"
                                data-trans-button-cancel="@lang('buttons.general.cancel')"
                                data-trans-button-confirm="@lang('buttons.general.crud.delete')"
                                data-trans-title="@lang('strings.backend.general.are_you_sure')"
@@ -40,7 +39,6 @@
                                 <i class="fas fa-trash"></i>
                             </a>
                         @endcan
-                        --}}
 
                     </div>
 

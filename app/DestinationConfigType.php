@@ -6,6 +6,7 @@ use App\Models\LeadDestination;
 use App\Models\DestinationConfig;
 use App\Models\DestinationAppend;
 use App\Models\DestinationAppendConfig;
+use App\Models\Lead;
 use App\Models\MappingField;
 use App\Models\DestinationFieldConfig;
 use Illuminate\Http\Request;
@@ -88,6 +89,12 @@ abstract class DestinationConfigType
      * @todo Document this method.
      * @return string
      */
+    abstract public static function getDestinationAppendConfigSummaryView(): string;
+
+    /**
+     * @todo Document this method.
+     * @return string
+     */
     abstract public static function getDestinationAppendConfigCreateView(): string;
 
     /**
@@ -159,5 +166,16 @@ abstract class DestinationConfigType
      * @return void
      */
     abstract public static function patchDestinationFieldConfig(Request $request, MappingField $mapping_field, DestinationFieldConfig $destination_field_config): void;
+
+    /**
+     * @todo Document this method.
+     * @todo Implementing all of this class' methods as static means that
+     *       subclasses will have to perform setup operations (e.g.,
+     *       constructing instances of API clients) for each lead that is
+     *       inserted. That's dumb. We should adjust this to be a singleton
+     *       instead...
+     * @return string The unique identifier of the inserted record (in the remote system).
+     */
+    abstract public static function insert(Lead $lead): string;
 
 }

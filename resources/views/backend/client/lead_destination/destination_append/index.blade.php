@@ -58,7 +58,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    TODO
+                                    @include($destination_config_type_classname::getDestinationAppendConfigSummaryView(), ['destination_append_config' => $destination_append->destination_append_config])
                                 </td>
                                 <td>
 
@@ -72,7 +72,7 @@
 
                                         @can('client.lead_destination.destination_append.destroy')
                                             <a href="{{ route('admin.client.lead_destination.destination_append.destroy', [$client, $lead_destination, $destination_append]) }}"
-                                               data-method="delete"
+                                               data-method="post"
                                                data-trans-button-cancel="@lang('buttons.general.cancel')"
                                                data-trans-button-confirm="@lang('buttons.general.crud.delete')"
                                                data-trans-title="@lang('strings.backend.general.are_you_sure')"
