@@ -22,6 +22,7 @@ class PermissionRoleTableSeeder extends Seeder
          */
 
         Permission::create(['name' => 'view backend']);
+        Permission::create(['name' => 'viewids']);
 
         Permission::create(['name' => 'client.index']);
         Permission::create(['name' => 'client.show']);

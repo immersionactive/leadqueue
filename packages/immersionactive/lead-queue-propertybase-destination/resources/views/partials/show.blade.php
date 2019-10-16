@@ -1,8 +1,8 @@
-{{-- Account Name --}}
+{{-- API Site Domain --}}
 
 <tr>
-    <th scope="row">Account Name</th>
-    <td>{{ $lead_destination->destination_config->account }}</td>
+    <th scope="row">API Site Domain</th>
+    <td>{{ $lead_destination->destination_config->api_site_domain }}</td>
 </tr>
 
 {{-- Token --}}

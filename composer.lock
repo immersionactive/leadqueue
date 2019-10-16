@@ -1259,12 +1259,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:immersionactive/propertybase.git",
-                "reference": "72519dbfa073b20029a3bff3e7e2cd906aeede88"
+                "reference": "64d1a2e371e777da4f6db938c3dbfcae1ce90201"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/immersionactive/propertybase/zipball/72519dbfa073b20029a3bff3e7e2cd906aeede88",
-                "reference": "72519dbfa073b20029a3bff3e7e2cd906aeede88",
+                "url": "https://api.github.com/repos/immersionactive/propertybase/zipball/64d1a2e371e777da4f6db938c3dbfcae1ce90201",
+                "reference": "64d1a2e371e777da4f6db938c3dbfcae1ce90201",
                 "shasum": ""
             },
             "type": "library",
@@ -1287,7 +1287,7 @@
                 "source": "https://github.com/immersionactive/propertybase/tree/master",
                 "issues": "https://github.com/immersionactive/propertybase/issues"
             },
-            "time": "2019-09-30T18:20:02+00:00"
+            "time": "2019-10-16T17:11:48+00:00"
         },
         {
             "name": "immersionactive/usadata-api-client",
@@ -1437,16 +1437,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v6.2.0",
+            "version": "v6.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "cacce5a77fa94793cf25345d67387632134d75dd"
+                "reference": "80914c430fb5e49f492812d704ba6aeec03d80a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/cacce5a77fa94793cf25345d67387632134d75dd",
-                "reference": "cacce5a77fa94793cf25345d67387632134d75dd",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/80914c430fb5e49f492812d704ba6aeec03d80a2",
+                "reference": "80914c430fb5e49f492812d704ba6aeec03d80a2",
                 "shasum": ""
             },
             "require": {
@@ -1579,7 +1579,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2019-10-08T12:50:06+00:00"
+            "time": "2019-10-15T13:38:24+00:00"
         },
         {
             "name": "laravel/socialite",
@@ -1875,16 +1875,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.25.1",
+            "version": "2.25.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "d59c6cea9c4a3547bb6c0dfec451319abdaa4fb1"
+                "reference": "443fe5f1498147e0fbc792142b5dc43e2e8a533f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/d59c6cea9c4a3547bb6c0dfec451319abdaa4fb1",
-                "reference": "d59c6cea9c4a3547bb6c0dfec451319abdaa4fb1",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/443fe5f1498147e0fbc792142b5dc43e2e8a533f",
+                "reference": "443fe5f1498147e0fbc792142b5dc43e2e8a533f",
                 "shasum": ""
             },
             "require": {
@@ -1938,7 +1938,7 @@
                 "datetime",
                 "time"
             ],
-            "time": "2019-10-05T15:52:23+00:00"
+            "time": "2019-10-14T14:18:59+00:00"
         },
         {
             "name": "nyholm/psr7",
@@ -6137,23 +6137,23 @@
         },
         {
             "name": "justinrainbow/json-schema",
-            "version": "5.2.8",
+            "version": "5.2.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/justinrainbow/json-schema.git",
-                "reference": "dcb6e1006bb5fd1e392b4daa68932880f37550d4"
+                "reference": "44c6787311242a979fa15c704327c20e7221a0e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/justinrainbow/json-schema/zipball/dcb6e1006bb5fd1e392b4daa68932880f37550d4",
-                "reference": "dcb6e1006bb5fd1e392b4daa68932880f37550d4",
+                "url": "https://api.github.com/repos/justinrainbow/json-schema/zipball/44c6787311242a979fa15c704327c20e7221a0e4",
+                "reference": "44c6787311242a979fa15c704327c20e7221a0e4",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "~2.2.20",
+                "friendsofphp/php-cs-fixer": "~2.2.20||~2.15.1",
                 "json-schema/json-schema-test-suite": "1.2.0",
                 "phpunit/phpunit": "^4.8.35"
             },
@@ -6199,7 +6199,7 @@
                 "json",
                 "schema"
             ],
-            "time": "2019-01-14T23:55:14+00:00"
+            "time": "2019-09-25T14:49:45+00:00"
         },
         {
             "name": "maximebf/debugbar",

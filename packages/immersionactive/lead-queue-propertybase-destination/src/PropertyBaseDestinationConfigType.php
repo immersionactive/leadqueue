@@ -66,7 +66,7 @@ class PropertybaseDestinationConfigType extends DestinationConfigType
 
     public static function patchDestinationConfig(Request $request, LeadDestination $lead_destination, DestinationConfig $destination_config): void
     {
-        $destination_config->account = $request->input('destination_config.account');
+        $destination_config->api_site_domain = $request->input('destination_config.api_site_domain');
         $destination_config->token = $request->input('destination_config.token');
     }
 
@@ -75,7 +75,7 @@ class PropertybaseDestinationConfigType extends DestinationConfigType
 
         $rules = [
 
-            'destination_config.account' => [
+            'destination_config.api_site_domain' => [
                 'required',
                 'max:255',
             ],

@@ -58,6 +58,7 @@ In chronological order:
 * Make sure that someone (i.e., me) gets notified when a lead fails
 * Make sure that permissions are properly enforced for everything
 * Make sure that the Strategist role has appropriate permissions
+* When a client is deactivated, also skip processing their leads (right now we only honor a deactivated *mapping*)
 
 ### Important
 
@@ -75,15 +76,16 @@ In chronological order:
 
 * Documentation
 * Check out [the throttle middleware](https://laravel.com/docs/6.x/routing#rate-limiting) for rate-limiting
-* Build support for dev vs. prod environments into the application?
+* Build support for dev vs. prod environments into the application? maybe not
 * Carefully consider what will happen if a mapping/source/destination gets modified while a lead is still in the queue
 * UX:
+  * You lose context once you drill too deep into a Client record (e.g., MappingFields and - to a lesser extent - DestinationAppends). How to solve?
   * find a good place for created/updated/deleted timestamps (and make sure they're on all model CRUD pages)
   * when there are no records, don't just show an empty table
   * use color consistently (e.g., for buttons, icons...)
   * Add explanatory text throughout, because this is gonna be unintuitive to everyone except me :/
-  * Treat model IDs consistently throughout (either always show them, or only show them to certain users)
-  * Where can users find a webflow site ID? explain this on the appropriate page
+  * Display model IDs to (only) users with the viewids permission (except for lead IDs, which should always be visible)
+  * Where can users find a Webflow site ID? explain this on the appropriate page
   * Basic branding (e.g., replace logo)
   * Make validation messages clearer
   * Make the messages in delete confirmation modals consistent (I think that some say "Are you sure you want to do this?", while others specifically say "Are you sure you want to delete this record?")

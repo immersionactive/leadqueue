@@ -1,18 +1,18 @@
 <p>Please refer to Propertybase&rsquo;s <a href="https://help.propertybase.com/hc/en-us/articles/360003180752-WebToProspect-REST-API" rel="external">official documentation</a> for instructions on enabling WebToProspect and finding the config values listed below.</p>
 
-{{-- Account name --}}
+{{-- API Site Domain --}}
 
 <div class="form-group row">
     
-    {{ html()->label('Account Name')
+    {{ html()->label('API Site Domain')
         ->class('col-md-2 form-control-label')
-        ->for('destination_config[account]')
+        ->for('destination_config[api_site_domain]')
     }}
 
     <div class="col-md-10">
-        {{ html()->text('destination_config[account]', $destination_config->account)
+        {{ html()->text('destination_config[api_site_domain]', $destination_config->api_site_domain)
             ->class('form-control')
-            ->placeholder('Account Name')
+            ->placeholder('example.secure.force.com')
             ->attribute('maxlength', 255)
             ->required()
             ->autofocus()

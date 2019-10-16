@@ -17,7 +17,7 @@ class CreatePropertybaseWebtoprospectDestinationConfigsTable extends Migration
         Schema::create('propertybase_webtoprospect_destination_configs', function (Blueprint $table) {
             
             $table->bigIncrements('id');
-            $table->string('account', 255);
+            $table->string('api_site_domain', 255);
             $table->string('token', 255);
             $table->timestamps();
             $table->softDeletes();
