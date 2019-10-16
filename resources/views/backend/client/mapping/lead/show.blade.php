@@ -31,27 +31,6 @@
                         </td>
                     </tr>
 
-                    {{-- Status --}}
-
-                    <tr>
-                        <th scope="row">Status</th>
-                        <td>@include('backend.includes.partials.lead-status-badge', ['status' => $lead->status])</td>
-                    </tr>
-
-                    {{-- Append Failures --}}
-
-                    <tr>
-                        <th scope="row">Append Failures</th>
-                        <td>{{ $lead->failed_append_attempts }}</td>
-                    </tr>
-
-                    {{-- Destination Failures --}}
-
-                    <tr>
-                        <th scope="row">Destination Failures</th>
-                        <td>{{ $lead->failed_destination_attempts }}</td>
-                    </tr>
-
                     {{-- Lead Source Request --}}
 
                     @can('client.lead_source.lead_source_request.show')
@@ -64,6 +43,55 @@
                             </td>
                         </tr>
                     @endcan
+
+                    {{-- Status --}}
+
+                    <tr>
+                        <th scope="row">Status</th>
+                        <td>@include('backend.includes.partials.lead-status-badge', ['status' => $lead->status])</td>
+                    </tr>
+
+                    {{-- Appended At --}}
+
+                    <tr>
+                        <th scope="row">Appended At</th>
+                        <td>
+                            @if ($lead->appended_at)
+                                {{ timezone()->convertToLocal($lead->appended_at) }}<br>
+                                <small>({{ $lead->appended_at->diffForHumans() }}</small>)
+                            @else
+                                &mdash;
+                            @endif
+                        </td>
+                    </tr>
+
+                    {{-- Append Failures --}}
+
+                    <tr>
+                        <th scope="row">Append Failures</th>
+                        <td>{{ $lead->failed_append_attempts }}</td>
+                    </tr>
+
+                    {{-- Inserted Into Destination At --}}
+
+                    <tr>
+                        <th scope="row">Inserted Into Destination At</th>
+                        <td>
+                            @if ($lead->destination_at)
+                                {{ timezone()->convertToLocal($lead->destination_at) }}<br>
+                                <small>({{ $lead->destination_at->diffForHumans() }}</small>)
+                            @else
+                                &mdash;
+                            @endif
+                        </td>
+                    </tr>
+
+                    {{-- Destination Failures --}}
+
+                    <tr>
+                        <th scope="row">Destination Failures</th>
+                        <td>{{ $lead->failed_destination_attempts }}</td>
+                    </tr>
 
                     {{-- Inputs --}}
 

@@ -16,6 +16,9 @@ use Illuminate\Validation\Rule;
 use ImmersionActive\LeadQueuePropertybaseDestination\Models\PropertybaseWebToProspectDestinationConfig;
 use ImmersionActive\LeadQueuePropertybaseDestination\Models\PropertybaseLeadDestinationAppendConfig;
 use ImmersionActive\LeadQueuePropertybaseDestination\Models\PropertybaseDestinationFieldConfig;
+use ImmersionActive\PropertyBase\WebToProspect\WebToProspectClient;
+use ImmersionActive\PropertyBase\WebToProspect\Prospect;
+use Illuminate\Support\Collection;
 
 class PropertybaseDestinationConfigType extends DestinationConfigType
 {
@@ -257,12 +260,50 @@ class PropertybaseDestinationConfigType extends DestinationConfigType
         $destination_field_config->contact_field_name = $request->input('destination_field_config.contact_field_name');
     }
 
-    public static function insert(Lead $lead): string
+    public static function insert(LeadDestination $lead_destination, Lead $lead, Collection $lead_inputs, Collection $appended_values): string
     {
-        
-        // throw new \Exception('Unimplemented');
 
-        return '12345';
+        $api_site_domain = $lead_destination->destination_config->api_site_domain;
+        $token = $lead_destination->destination_config->token;
+        
+        $api = new WebToProspectClient($api_site_domain);
+
+        $prospect = new Prospect($token);
+
+        /**
+         * Process input values
+         */
+
+        $mapping_field_ids = $lead_inputs->pluck('mapping_field_id');
+        $mapping_fields = MappingField::whereIn('id', $mapping_field_ids)->get()->keyBy('id');
+
+        foreach ($lead_inputs as $lead_input) {
+            if (!$mapping_fields->has($lead_input->mapping_field_id)) {
+                throw new \Exception('Data integrity error: couldn\'t find MappingField ' . $lead_input->mapping_field_id . ' (for LeadInput ' . $lead_input->id . ')');
+            }
+            $mapping_field = $mapping_fields[$lead_input->mapping_field_id];
+            $prospect->setContactValue($mapping_field->destination_field_config->contact_field_name, $lead_input->value);
+        }
+
+        /**
+         * Process appended values
+         */
+
+        $destination_append_ids = $appended_values->pluck('destination_append_id');
+        $destination_appends = DestinationAppend::whereIn('id', $destination_append_ids)->get()->keyBy('id');
+
+        foreach ($appended_values as $appended_value) {
+            if (!$destination_appends->has($appended_value->destination_append_id)) {
+                throw new \Exception('Data integrity error: couldn\'t find DestinationAppend ' . $appended_value->destination_append_id . ' (for LeadAppendedValue ' . $appended_value->id . ')');
+            }
+            $destination_append = $destination_appends[$appended_value->destination_append_id];
+            $prospect->setContactValue($destination_append->destination_append_config->contact_field_name, $appended_value->value);   
+        }
+
+        echo json_encode($prospect, JSON_PRETTY_PRINT); exit;
+
+        exit;
+        throw new \Exception('Unimplemented');
 
     }
 

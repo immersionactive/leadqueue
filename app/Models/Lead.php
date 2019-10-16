@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Lead extends Model
 {
 
+    protected $dates = [
+        'appended_at',
+        'destination_at'
+    ];
+
     public static function getStatusList(bool $include_empty = false): array
     {
 

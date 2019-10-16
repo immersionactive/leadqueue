@@ -10,6 +10,7 @@ use App\Models\Lead;
 use App\Models\MappingField;
 use App\Models\DestinationFieldConfig;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 abstract class DestinationConfigType
 {
@@ -176,6 +177,6 @@ abstract class DestinationConfigType
      *       instead...
      * @return string The unique identifier of the inserted record (in the remote system).
      */
-    abstract public static function insert(Lead $lead): string;
+    abstract public static function insert(LeadDestination $lead_destination, Lead $lead, Collection $lead_inputs, Collection $appended_values): string;
 
 }

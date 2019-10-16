@@ -7,6 +7,7 @@ use App\Models\Lead;
 use App\Models\LeadAppendedValue;
 use App\Models\LeadInput;
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
 
 /**
  * This class is responsible for inserting appended leads into their
@@ -32,17 +33,17 @@ class DestinationProcessor
         $lead_destination = $lead->mapping->lead_destination;
         $destination_config_type_classname = $this->destination_config_type_registry->getByModelClassname($lead_destination->destination_config_type);
 
-        $input_values = $this->getInputValues($lead);
+        $lead_inputs = $this->getLeadInputs($lead);
         $appended_values = $this->getAppendedValues($lead);
 
         try {
-            $destination_id = $destination_config_type_classname::insert($lead, $input_values, $appended_values);
+            $destination_id = $destination_config_type_classname::insert($lead_destination, $lead, $lead_inputs, $appended_values);
             $lead->status = 'complete';
             $lead->destination_id = $destination_id;
             $lead->destination_at = Carbon::now();
             $lead->save();
         } catch (\Exception $e) {
-            // TODO: something more elegant than this :)
+            throw $e; exit; // TODO: remove this
             $lead->failed_destination_attempts++;
             if ($lead->failed_destination_attempts >= $this->max_attempts) {
                 $lead->status = 'destination_failed';
@@ -57,7 +58,7 @@ class DestinationProcessor
 
     }
 
-    public function getInputValues(Lead $lead) // TODO: type-hint return value
+    public function getLeadInputs(Lead $lead): Collection
     {
         $mapping_field_ids = $lead->mapping->mapping_fields->pluck('id');
         $lead_inputs = LeadInput::where('lead_id', $lead->id)->whereIn('mapping_field_id', $mapping_field_ids)->get();
@@ -65,7 +66,7 @@ class DestinationProcessor
         return $lead_inputs;
     }
 
-    public function getAppendedValues(Lead $lead) // TODO: type-hint return value
+    public function getAppendedValues(Lead $lead): Collection
     {
         $destination_append_ids = $lead->mapping->lead_destination->destination_appends->pluck('id');
         // echo '$destination_append_ids: '; var_dump($destination_append_ids); exit;

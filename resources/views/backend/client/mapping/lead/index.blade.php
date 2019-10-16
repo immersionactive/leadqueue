@@ -55,16 +55,18 @@
                         <tr>
                             <th scope="col">ID</th>
                             <th scope="col">Received</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">
-                                Append Failures
-                            </th>
-                            <th scope="col">
-                                Destination Failures
-                            </th>
                             @can('client.lead_source.lead_source_request.show')
                                 <th scope="col">Lead Source Request</th>
                             @endcan
+                            <th scope="col">Status</th>
+                            <th scope="col">Appended At</th>
+                            <th scope="col">
+                                Append Failures
+                            </th>
+                            <th scope="col">Inserted Into Destination At</th>
+                            <th scope="col">
+                                Destination Failures
+                            </th>
                             <th scope="col">@lang('labels.general.actions')</th>
                         </tr>
                     </thead>
@@ -76,9 +78,6 @@
                                     {{ timezone()->convertToLocal($lead->created_at) }}<br>
                                     <small>({{ $lead->created_at->diffForHumans() }})</small>
                                 </td>
-                                <td>@include('backend.includes.partials.lead-status-badge', ['status' => $lead->status])</td>
-                                <td>{{ $lead->failed_append_attempts }}</td>
-                                <td>{{ $lead->failed_destination_attempts }}</td>
                                 @can('client.lead_source.lead_source_request.show')
                                     <td>
                                         <a href="{{ route('admin.client.lead_source.lead_source_request.show', [$client, $mapping->lead_source_id, $lead->lead_source_request_id]) }}">
@@ -86,6 +85,25 @@
                                         </a>
                                     </td>
                                 @endcan
+                                <td>@include('backend.includes.partials.lead-status-badge', ['status' => $lead->status])</td>
+                                <td>
+                                    @if ($lead->appended_at)
+                                        {{ timezone()->convertToLocal($lead->appended_at) }}<br>
+                                        <small>({{ $lead->appended_at->diffForHumans() }}</small>)
+                                    @else
+                                        &mdash;
+                                    @endif
+                                </td>
+                                <td>{{ $lead->failed_append_attempts }}</td>
+                                <td>
+                                    @if ($lead->destination_at)
+                                        {{ timezone()->convertToLocal($lead->destination_at) }}<br>
+                                        <small>({{ $lead->destination_at->diffForHumans() }}</small>)
+                                    @else
+                                        &mdash;
+                                    @endif
+                                </td>
+                                <td>{{ $lead->failed_destination_attempts }}</td>
                                 <td>
 
                                     <div class="btn-group" role="group" aria-label="@lang('labels.backend.access.users.user_actions')">
