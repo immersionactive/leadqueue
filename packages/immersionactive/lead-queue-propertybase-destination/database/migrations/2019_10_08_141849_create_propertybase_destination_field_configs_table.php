@@ -17,7 +17,7 @@ class CreatePropertybaseDestinationFieldConfigsTable extends Migration
         Schema::create('propertybase_destination_field_configs', function (Blueprint $table) {
             
             $table->bigIncrements('id');
-            $table->string('contact_field_name', 255);
+            $table->string('contact_field_name', 255)->nullable();
             $table->timestamps();
 
         });

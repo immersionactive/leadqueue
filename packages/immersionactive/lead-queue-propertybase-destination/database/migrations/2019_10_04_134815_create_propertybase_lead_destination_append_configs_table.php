@@ -17,7 +17,7 @@ class CreatePropertybaseLeadDestinationAppendConfigsTable extends Migration
         Schema::create('propertybase_lead_destination_append_configs', function (Blueprint $table) {
             
             $table->bigIncrements('id');
-            $table->string('contact_field_name', 255);
+            $table->string('contact_field_name', 255)->nullable();
             $table->timestamps();
 
         });

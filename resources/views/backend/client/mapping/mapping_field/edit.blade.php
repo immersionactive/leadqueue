@@ -100,7 +100,7 @@
 
                         <div class="card-body">
 
-                            <p>Leave blank if you don't want to insert this field into the destination system. (This is useful if you want to configure a field for append only.)</p>
+                            <p>Leave blank if you don't want to insert this field into the destination system.</p>
 
                             @if ($mapping_field->exists)
                                 @include($destination_config_type_classname::getDestinationFieldConfigEditView())

@@ -130,7 +130,7 @@ class PropertybaseDestinationConfigType extends DestinationConfigType
         $rules = [
 
             'destination_append_config.contact_field_name' => [
-                'required',
+                'nullable',
                 'max:255',
 
                 // Make sure that this LeadDestination doesn't have any other
@@ -201,7 +201,7 @@ class PropertybaseDestinationConfigType extends DestinationConfigType
         $rules = [
 
             'destination_field_config.contact_field_name' => [
-                'required',
+                'nullable',
                 'max:255',
 
                 // Make sure that this is the only MappingField in this
