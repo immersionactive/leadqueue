@@ -67,8 +67,8 @@ class TestSeeder extends Seeder
     {
 
         $destination_config = PropertybaseWebToProspectDestinationConfig::create([
-            'account' => 'noblespondhomes--npsandbox',
-            'token' => 'TODO'
+            'api_site_domain' => 'npsandbox-noblespond.cs16.force.com',
+            'token' => 'TODO' // DO NOT PUT REAL TOKENS HERE, OR IN ANY OTHER FILE THAT IS COMMITTED TO THE REPOSITORY!
         ]);
 
         $lead_destination = LeadDestination::create([
@@ -116,21 +116,25 @@ class TestSeeder extends Seeder
 
         $mapping_field_defns = [
             [
+                'name' => 'First Name',
                 'source_field_name' => '3.3',
                 'destination_contact_field_name' => 'FirstName',
                 'append_input_property' => 'FirstName'
             ],
             [
+                'name' => 'Last Name',
                 'source_field_name' => '3.6',
                 'destination_contact_field_name' => 'LastName',
                 'append_input_property' => 'LastName'
             ],
             [
+                'name' => 'Email',
                 'source_field_name' => '4',
                 'destination_contact_field_name' => 'Email',
                 'append_input_property' => 'Email'
             ],
             [
+                'name' => 'Phone',
                 'source_field_name' => '5',
                 'destination_contact_field_name' => 'Phone',
                 'append_input_property' => 'Phone'
@@ -149,6 +153,7 @@ class TestSeeder extends Seeder
 
             $mapping_field = MappingField::create([
                 'mapping_id' => $mapping->id,
+                'name' => $mapping_field_defn['name'],
                 'source_field_config_id' => $source_field_config->id,
                 'source_field_config_type' => GravityFormsSourceFieldConfig::class,
                 'destination_field_config_id' => $destination_field_config->id,
