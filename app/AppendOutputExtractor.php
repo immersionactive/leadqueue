@@ -107,6 +107,25 @@ class AppendOutputExtractor
 
     }
 
+    public static function extractPersonAddressStreetAndUnit(array $documents)
+    {
+        
+        $parts = [];
+
+        $person_address_street = $this->extractPersonAddressStreet($documents);
+        if (mb_strlen($person_address_street)) {
+            $parts[] = $person_address_street;
+        }
+
+        $person_address_unit = $this->extractPersonAddressUnit($documents);
+        if (mb_strlen()) {
+            $parts[] = $person_address_unit;
+        }
+
+        return implode(', ', $parts);
+
+    }
+
     public static function extractPersonAddressCity(array $documents)
     {
         $postal_contacts = self::getValue($documents, 'person', 'postalcontact');

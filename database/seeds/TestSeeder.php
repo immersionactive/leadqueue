@@ -155,39 +155,43 @@ class TestSeeder extends Seeder
         $defns = [
             [
                 'append_output_slug' => 'person_length_of_residence',
-                'contact_field_name' => 'Append_Person_LengthOfResidence'
+                'contact_field_name' => 'Append_Person_LengthOfResidence' // custom field
             ],
             [
                 'append_output_slug' => 'person_recent_home_buyer',
-                'contact_field_name' => 'Append_Person_RecentHomeBuyer'
+                'contact_field_name' => 'Append_Person_RecentHomeBuyer' // custom field
             ],
             [
                 'append_output_slug' => 'household_length_of_residence',
-                'contact_field_name' => 'Append_Household_LengthOfResidence'
+                'contact_field_name' => 'Append_Household_LengthOfResidence' // custom field
             ],
             [
                 'append_output_slug' => 'household_recent_home_buyer',
-                'contact_field_name' => 'Append_Household_RecentHomeBuyer'
+                'contact_field_name' => 'Append_Household_RecentHomeBuyer' // custom field
             ],
             [
                 'append_output_slug' => 'place_property_assessed_value',
-                'contact_field_name' => 'Append_Place_PropertyAssessedValue'
+                'contact_field_name' => 'Append_Place_PropertyAssessedValue' // custom field
             ],
             [
                 'append_output_slug' => 'place_property_market_value',
-                'contact_field_name' => 'Append_Place_PropertyMarketValue'
+                'contact_field_name' => 'Append_Place_PropertyMarketValue' // custom field
             ],
             [
                 'append_output_slug' => 'place_property_market_value_decile',
-                'contact_field_name' => 'Append_Place_PropertyMarketValueDecile'
+                'contact_field_name' => 'Append_Place_PropertyMarketValueDecile' // custom field
             ],
             [
                 'append_output_slug' => 'place_property_market_value_quality_indicator',
-                'contact_field_name' => 'Append_Place_PropertyMarketValueQualityIndicator'
+                'contact_field_name' => 'Append_Place_PropertyMarketValueQualityIndicator' // custom field
             ],
             [
                 'append_output_slug' => 'person_age',
-                'contact_field_name' => 'Append_Person_Age'
+                'contact_field_name' => 'Append_Person_Age' // custom field
+            ],
+            [
+                'append_output_slug' => 'person_gender',
+                'contact_field_name' => 'Append_Person_Gender' // custom field
             ],
             [
                 'append_output_slug' => 'person_estimated_income',
@@ -204,6 +208,22 @@ class TestSeeder extends Seeder
             [
                 'append_output_slug' => 'person_phone',
                 'contact_field_name' => '' // capture, but don't insert into the destination system
+            ],
+            [
+                'append_output_slug' => 'person_address_street_and_unit',
+                'contact_field_name' => 'MailingStreet' // standard field
+            ],
+            [
+                'append_output_slug' => 'person_address_city',
+                'contact_field_name' => 'MailingCity' // standard field
+            ],
+            [
+                'append_output_slug' => 'person_address_state',
+                'contact_field_name' => 'MailingState' // standard field
+            ],
+            [
+                'append_output_slug' => 'person_address_zip',
+                'contact_field_name' => 'MailingPostalCode' // standard field
             ]
         ];
 

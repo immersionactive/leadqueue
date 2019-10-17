@@ -37,6 +37,15 @@ class AppendOutputsTableSeeder extends Seeder
         ]);
 
         AppendOutput::create([
+            'slug' => 'person_address_street_and_unit',
+            'name' => 'Person: Address - Street Address w/ Unit Number',
+            'description' => 'person.postalcontact.(multiple): First and second lines of the person\'s postal address',
+            'uses_person_document' => true,
+            'uses_household_document' => false,
+            'uses_place_document' => false
+        ]);
+
+        AppendOutput::create([
             'slug' => 'person_address_city',
             'name' => 'Person: Address - City',
             'description' => 'person.postalcontact.city: City',
