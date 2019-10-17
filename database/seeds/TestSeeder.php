@@ -28,6 +28,7 @@ class TestSeeder extends Seeder
         $client = $this->createClient();
         $lead_source = $this->createLeadSource($client);
         $lead_destination = $this->createLeadDestination($client);
+        $this->createDestinationAppends($lead_destination);
         $mapping = $this->createMapping($client, $lead_source, $lead_destination);
 
     }
@@ -78,25 +79,6 @@ class TestSeeder extends Seeder
             'destination_config_id' => $destination_config->id,
             'destination_config_type' => PropertybaseWebToProspectDestinationConfig::class
         ]);
-
-        // Create an instance of every type of AppendOutput
-
-        $append_outputs = AppendOutput::all();
-
-        foreach ($append_outputs as $append_output) {
-
-            $destination_append_config = PropertybaseLeadDestinationAppendConfig::create([
-                'contact_field_name' => 'TODO'
-            ]);
-
-            $destination_append = DestinationAppend::create([
-                'lead_destination_id' => $lead_destination->id,
-                'append_output_slug' => $append_output->slug,
-                'destination_append_config_id' => $destination_append_config->id,
-                'destination_append_config_type' => PropertybaseLeadDestinationAppendConfig::class
-            ]);
-
-        }
 
         return $lead_destination;
 
@@ -164,6 +146,65 @@ class TestSeeder extends Seeder
         }
 
         return $mapping;
+
+    }
+
+    protected function createDestinationAppends(LeadDestination $lead_destination): void
+    {
+
+        $defns = [
+            [
+                'append_output_slug' => 'person_length_of_residence',
+                'contact_field_name' => 'Append_Person_LengthOfResidence'
+            ],
+            [
+                'append_output_slug' => 'person_recent_home_buyer',
+                'contact_field_name' => 'Append_Person_RecentHomeBuyer'
+            ],
+            [
+                'append_output_slug' => 'household_length_of_residence',
+                'contact_field_name' => 'Append_Household_LengthOfResidence'
+            ],
+            [
+                'append_output_slug' => 'household_recent_home_buyer',
+                'contact_field_name' => 'Append_Household_RecentHomeBuyer'
+            ],
+            [
+                'append_output_slug' => 'place_property_assessed_value',
+                'contact_field_name' => 'Append_Place_PropertyAssessedValue'
+            ],
+            [
+                'append_output_slug' => 'place_property_market_value',
+                'contact_field_name' => 'Append_Place_PropertyMarketValue'
+            ],
+            [
+                'append_output_slug' => 'place_property_market_value_decile',
+                'contact_field_name' => 'Append_Place_PropertyMarketValueDecile'
+            ],
+            [
+                'append_output_slug' => 'place_property_market_value_quality_indicator',
+                'contact_field_name' => 'Append_Place_PropertyMarketValueQualityIndicator'
+            ],
+            [
+                'append_output_slug' => 'person_age',
+                'contact_field_name' => 'Append_Person_Age'
+            ],
+        ];
+
+        foreach ($defns as $defn) {
+
+            $destination_append_config = PropertybaseLeadDestinationAppendConfig::create([
+                'contact_field_name' => $defn['contact_field_name']
+            ]);
+
+            $destination_append = DestinationAppend::create([
+                'lead_destination_id' => $lead_destination->id,
+                'append_output_slug' => $defn['append_output_slug'],
+                'destination_append_config_id' => $destination_append_config->id,
+                'destination_append_config_type' => PropertybaseLeadDestinationAppendConfig::class
+            ]);
+
+        }
 
     }
 

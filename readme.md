@@ -52,6 +52,9 @@ In chronological order:
 
 ### Essential
 
+* Propertybase (or, at least, Noble's Pond's Propertybase account) doesn't seem to have separate "First Name" and "Last Name" fields - just a "Name" field. Dammit.
+* Create custom fields for appends in Propertybase (done in sandbox; scheduled call with Rob Dudley to discuss for production)
+* Make sure that appends work when a DestinationAppend has a blank contact_field_name, and that insertions work when a MappingField's destination has a blank contact_field_name (may need to tweak the logic)
 * Finish building Propertybase insertion logic (need access to Propertybase first)
 * Don't forget to release a v1 of immersionactive/propertybase (and pin this project to it)
 * Don't forget to release a v1 of *this project* :)
@@ -89,3 +92,16 @@ In chronological order:
   * Basic branding (e.g., replace logo)
   * Make validation messages clearer
   * Make the messages in delete confirmation modals consistent (I think that some say "Are you sure you want to do this?", while others specifically say "Are you sure you want to delete this record?")
+
+### Long-term refactoring
+
+* Capture *all* input data (e.g., Gravity Forms fields) for every lead that enters the system
+* Capture *all* appended data for every lead
+* Don't create SourceFieldConfigs for LeadSources that aren't being pushed into the destination system
+* Don't create DestinationAppendConfigs for DestinationAppends that aren't being pushed into the destination system (actually, there will be no DestinationAppends anyway, once we start capturing all appended data by default)
+* Move SourceFieldConfigs from the Mapping to the LeadSource (maybe? this contradicts the below)
+* Move DestinationAppendConfigs to the Mapping (maybe? this contradicts the above)
+* Lead processing: more intelligent exception handling (differentiate between fatal and non-fatal exceptions)
+* Better permission control: test whether a user has access to view/edit a specific record (e.g., client 73), not just the general type (e.g., clients)
+* Make it (much) easier to configure a standard mapping
+* I've been assuming that each request to the USADATA API will return exactly one Person, Household, or Place. Is that an accurate assumption? Could one Person be associated with multiple Households or Places? Could a single Person request even return multiple documents?
