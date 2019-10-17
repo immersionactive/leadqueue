@@ -53,7 +53,7 @@ In chronological order:
 ### Essential
 
 * Propertybase (or, at least, Noble's Pond's Propertybase account) doesn't seem to have separate "First Name" and "Last Name" fields - just a "Name" field. Dammit.
-* Create custom fields for appends in Propertybase (done in sandbox; scheduled call with Rob Dudley to discuss for production)
+* Create custom fields for appends in Propertybase (done in sandbox [except for gender, if we need a custom field for that]; scheduled call with Rob Dudley to discuss for production)
 * Make sure that appends work when a DestinationAppend has a blank contact_field_name, and that insertions work when a MappingField's destination has a blank contact_field_name (may need to tweak the logic)
 * Finish building Propertybase insertion logic (need access to Propertybase first)
 * Don't forget to release a v1 of immersionactive/propertybase (and pin this project to it)

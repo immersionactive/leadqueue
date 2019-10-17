@@ -189,6 +189,22 @@ class TestSeeder extends Seeder
                 'append_output_slug' => 'person_age',
                 'contact_field_name' => 'Append_Person_Age'
             ],
+            [
+                'append_output_slug' => 'person_estimated_income',
+                'contact_field_name' => '' // capture, but don't insert into the destination system
+            ],
+            [
+                'append_output_slug' => 'household_estimated_income',
+                'contact_field_name' => '' // capture, but don't insert into the destination system
+            ],
+            [
+                'append_output_slug' => 'household_adults_age_range',
+                'contact_field_name' => '' // capture, but don't insert into the destination system
+            ],
+            [
+                'append_output_slug' => 'person_phone',
+                'contact_field_name' => '' // capture, but don't insert into the destination system
+            ]
         ];
 
         foreach ($defns as $defn) {
