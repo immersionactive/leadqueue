@@ -52,6 +52,7 @@ In chronological order:
 
 ### Essential
 
+* IMPORTANT! The route admin.infusionsoft.authorize-destination isn't login-protected (because the middleware causes weird problems). Need to sort this out...
 * Propertybase (or, at least, Noble's Pond's Propertybase account) doesn't seem to have separate "First Name" and "Last Name" fields - just a "Name" field. Dammit.
 * POSSIBLE BIG PROBLEM: If we insert a Contact into Propertybase that already exist, and our insertion has a different/blank value for a standard contact field, will it overwrite/blank out the existing field values? (I think I read that Propertybase intelligently inserts/updates, instead of just doing a blind insert)
 * Create custom fields for appends in Propertybase (done in sandbox [except for gender, if we need a custom field for that]; scheduled call with Rob Dudley to discuss for production)
@@ -66,15 +67,12 @@ In chronological order:
 
 ### Important
 
+* Seems that morphTo() relations don't get deleted when the parent record gets deleted (which makes sense, since this deletion is ordinarily enforced on the MySQL level). This can lead to sensitive info (e.g., API keys on destination_config rows) being left in the DB. Does Laravel offer a way to automatically delete morphTo relations, or must we do it manually?
 * Create .env.example file
 * Don't allow destination_append.append_output_slug to be edited after the destination_append has been created? (I think this could mess things up if a user changes the append_output after a lead has already entered the queue...or something. users should be able to edit the destination field, but not the append_output.)
 * Logging:
   * Make sure that all CRUD operations are logged
   * Create a custom Log class that automatically records the current user ID and email (see my question on Reddit)
-
-### Nice to Have
-
-* Change DestinationConfigType and SourceConfigType to be singletons, not static classes (for the sake of performance - e.g., so destination client APIs only have to be constructed once)
 
 ### Uncategorized
 
@@ -96,8 +94,10 @@ In chronological order:
 
 ### Long-term refactoring
 
-* Capture *all* input data (e.g., Gravity Forms fields) for every lead that enters the system
-* Capture *all* appended data for every lead
+* Change DestinationConfigType and SourceConfigType to be singletons, not static classes (for the sake of performance - e.g., so destination client APIs only have to be constructed once)
+* Refactor the namespacing of the various source/destination packages
+* Refactor the various source/destination packages to have their own composer.json files
+* Capture *all* input data (e.g., Gravity Forms fields) for every lead that enters the system?
 * Don't create SourceFieldConfigs for LeadSources that aren't being pushed into the destination system
 * Don't create DestinationAppendConfigs for DestinationAppends that aren't being pushed into the destination system (actually, there will be no DestinationAppends anyway, once we start capturing all appended data by default)
 * Move SourceFieldConfigs from the Mapping to the LeadSource (maybe? this contradicts the below)
@@ -106,3 +106,5 @@ In chronological order:
 * Better permission control: test whether a user has access to view/edit a specific record (e.g., client 73), not just the general type (e.g., clients)
 * Make it (much) easier to configure a standard mapping
 * I've been assuming that each request to the USADATA API will return exactly one Person, Household, or Place. Is that an accurate assumption? Could one Person be associated with multiple Households or Places? Could a single Person request even return multiple documents?
+* In some situations, we need to ability to push fixed values into certain destination fields. For example, for Noble's Pond's Propertybase account, leads need to be inserted with the "ContactType__c" field set to "Prospect", in order to trigger the appropriate workflows and make the contact show up in the right place.
+* In some cases, I think that some CRMs (such as Propertybase) will overwrite an *existing* contact, instead of creating a new one (e.g., if the email address already exists on a contact record). Need to think about how to account for this.

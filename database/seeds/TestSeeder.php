@@ -9,9 +9,9 @@ use App\Models\Mapping;
 use App\Models\MappingField;
 use ImmersionActive\LeadQueueGravityFormsSource\Models\GravityFormsSourceConfig;
 use ImmersionActive\LeadQueueGravityFormsSource\Models\GravityFormsSourceFieldConfig;
-use ImmersionActive\LeadQueuePropertybaseDestination\Models\PropertybaseWebToProspectDestinationConfig;
-use ImmersionActive\LeadQueuePropertybaseDestination\Models\PropertybaseDestinationFieldConfig;
-use ImmersionActive\LeadQueuePropertybaseDestination\Models\PropertybaseLeadDestinationAppendConfig;
+// use ImmersionActive\LeadQueuePropertybaseDestination\Models\PropertybaseWebToProspectDestinationConfig;
+// use ImmersionActive\LeadQueuePropertybaseDestination\Models\PropertybaseDestinationFieldConfig;
+// use ImmersionActive\LeadQueuePropertybaseDestination\Models\PropertybaseLeadDestinationAppendConfig;
 use Illuminate\Database\Seeder;
 
 class TestSeeder extends Seeder
@@ -27,9 +27,9 @@ class TestSeeder extends Seeder
 
         $client = $this->createClient();
         $lead_source = $this->createLeadSource($client);
-        $lead_destination = $this->createLeadDestination($client);
-        $this->createDestinationAppends($lead_destination);
-        $mapping = $this->createMapping($client, $lead_source, $lead_destination);
+        // $lead_destination = $this->createLeadDestination($client);
+        // $this->createDestinationAppends($lead_destination);
+        // $mapping = $this->createMapping($client, $lead_source, $lead_destination);
 
     }
 

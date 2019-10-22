@@ -17,6 +17,7 @@
         "creativeorange/gravatar": "~1.0",
         "davejamesmiller/laravel-breadcrumbs": "^5.0",
         "fideloper/proxy": "^4.0",
+        "immersionactive/conductor-destination-infusionsoft": "*",
         "immersionactive/propertybase": "dev-master",
         "immersionactive/usadata-api-client": "dev-master",
         "lab404/laravel-impersonate": "^1.4",
@@ -121,6 +122,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/immersionactive/propertybase"
+        },
+        {
+            "type": "path",
+            "url": "packages/immersionactive/conductor-destination-infusionsoft"
         }
     ]
 }

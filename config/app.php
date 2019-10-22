@@ -207,7 +207,8 @@ return [
         ImmersionActive\LeadQueueGravityFormsSource\LeadQueueGravityFormsSourceServiceProvider::class,
 
         // Lead Destinations
-        ImmersionActive\LeadQueuePropertybaseDestination\LeadQueuePropertybaseDestinationServiceProvider::class,
+        // ImmersionActive\LeadQueuePropertybaseDestination\LeadQueuePropertybaseDestinationServiceProvider::class,
+        ImmersionActive\Conductor\Destinations\Infusionsoft\ConductorInfusionsoftDestinationServiceProvider::class,
 
     ],
 
